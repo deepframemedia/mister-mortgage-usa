@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -8,6 +8,8 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,600&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <style>
     :root {
       --navy: #002654;
@@ -85,8 +87,10 @@
     .nav-links { display: flex; align-items: center; gap: .25rem; margin-left: auto; }
     .nav-link { font-size: .88rem; font-weight: 500; color: var(--white); padding: .5rem .85rem; border-radius: 6px; transition: color .2s, background .2s; cursor: none; position: relative; }
     #navbar.scrolled .nav-link { color: var(--navy); }
-    .nav-link:hover, .nav-link.active { color: var(--red); }
-    #navbar.scrolled .nav-link:hover, #navbar.scrolled .nav-link.active { background: var(--red-light); color: var(--red); }
+    .nav-link:hover { color: var(--red); }
+    .nav-link.active { background: var(--red) !important; color: var(--white) !important; border-radius: 6px; }
+    #navbar.scrolled .nav-link:hover { background: var(--red-light); color: var(--red); }
+    #navbar.scrolled .nav-link.active { background: var(--red) !important; color: var(--white) !important; }
     .nav-cta { margin-left: .75rem; font-size: .82rem; padding: .6rem 1.25rem; }
     .nav-hamburger { display: none; flex-direction: column; gap: 5px; cursor: none; padding: .5rem; margin-left: auto; }
     .nav-hamburger span { display: block; width: 24px; height: 2px; background: var(--white); border-radius: 2px; transition: var(--transition); }
@@ -321,6 +325,127 @@
       .about-pillars { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: 1fr; }
     }
+
+    /* ── NAV DROPDOWN ── */
+    .nav-dropdown-wrap { position: relative; }
+    .nav-dropdown { position: absolute; top: calc(100% + 8px); left: 50%; transform: translateX(-50%); background: var(--white); border-radius: var(--radius); box-shadow: 0 20px 60px rgba(0,38,84,.18); padding: .5rem; min-width: 220px; display: none; z-index: 200; border: 1px solid var(--glass-border); }
+    .nav-dropdown-wrap:hover .nav-dropdown { display: block; animation: dropFade .2s ease; }
+    @keyframes dropFade { from { opacity:0; transform: translateX(-50%) translateY(-6px); } to { opacity:1; transform: translateX(-50%) translateY(0); } }
+    .nav-dropdown a { display: block; padding: .55rem 1rem; color: var(--navy); font-size: .84rem; font-weight: 500; border-radius: 6px; transition: background .15s, color .15s; white-space: nowrap; cursor: none; }
+    .nav-dropdown a:hover { background: var(--red-light); color: var(--red); }
+    .nav-dropdown-arrow { font-size: .7rem; margin-left: .25rem; display: inline-block; transition: transform .2s; }
+    .nav-dropdown-wrap:hover .nav-dropdown-arrow { transform: rotate(180deg); }
+
+    /* ── WHATSAPP BUTTON ── */
+    .whatsapp-btn { position: fixed; bottom: 2rem; right: 2rem; width: 60px; height: 60px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,.45); z-index: 9000; transition: transform .25s, box-shadow .25s; cursor: pointer; text-decoration: none; }
+    .whatsapp-btn:hover { transform: scale(1.12); box-shadow: 0 10px 32px rgba(37,211,102,.6); }
+    .whatsapp-btn svg { width: 30px; height: 30px; fill: #fff; }
+    .whatsapp-btn::before { content: 'Chat with us!'; position: absolute; right: 72px; background: var(--navy); color: #fff; font-size: .78rem; font-weight: 600; padding: .4rem .9rem; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; font-family: 'DM Sans', sans-serif; }
+    .whatsapp-btn:hover::before { opacity: 1; }
+    @keyframes waPulse { 0%,100%{box-shadow:0 6px 24px rgba(37,211,102,.45);} 50%{box-shadow:0 6px 32px rgba(37,211,102,.8);} }
+    .whatsapp-btn { animation: waPulse 2.5s ease infinite; }
+
+    /* ── PRE-QUAL MODAL ── */
+    .modal-overlay { position: fixed; inset: 0; background: rgba(0,22,60,.75); backdrop-filter: blur(6px); z-index: 10000; display: none; align-items: center; justify-content: center; padding: 1.5rem; }
+    .modal-overlay.open { display: flex; }
+    .modal-box { background: var(--white); border-radius: var(--radius-lg); padding: 2.5rem; max-width: 580px; width: 100%; position: relative; max-height: 90vh; overflow-y: auto; }
+    .modal-close { position: absolute; top: 1.25rem; right: 1.25rem; width: 36px; height: 36px; border-radius: 50%; background: var(--bg-light); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; color: var(--text-muted); transition: background .2s; cursor: pointer; border: none; font-family: inherit; }
+    .modal-close:hover { background: var(--red-light); color: var(--red); }
+    .modal-progress-bar { height: 4px; background: var(--bg-cream); border-radius: 2px; margin-bottom: 1.75rem; overflow: hidden; }
+    .modal-progress-fill { height: 100%; background: var(--red); border-radius: 2px; transition: width .4s ease; }
+    .modal-step-label { font-size: .78rem; font-weight: 600; color: var(--text-muted); letter-spacing: .1em; text-transform: uppercase; margin-bottom: .5rem; }
+    .modal-question { font-family: 'Playfair Display', serif; font-size: 1.4rem; font-weight: 700; color: var(--navy); margin-bottom: 1.75rem; line-height: 1.3; }
+    .modal-options { display: grid; grid-template-columns: 1fr 1fr; gap: .85rem; margin-bottom: 2rem; }
+    .modal-options.cols-1 { grid-template-columns: 1fr; }
+    .modal-option { border: 2px solid rgba(0,38,84,.12); border-radius: var(--radius); padding: 1rem 1.25rem; text-align: center; cursor: pointer; transition: border-color .2s, background .2s, transform .15s; font-weight: 500; color: var(--text); font-size: .93rem; background: var(--white); font-family: inherit; }
+    .modal-option:hover { border-color: var(--red); background: var(--red-light); transform: translateY(-2px); }
+    .modal-option.selected { border-color: var(--red); background: var(--red-light); color: var(--red); font-weight: 700; }
+    .modal-option span { display: block; font-size: .8rem; color: var(--text-muted); font-weight: 400; margin-top: .2rem; }
+    .modal-nav { display: flex; gap: 1rem; justify-content: space-between; align-items: center; }
+    .modal-btn-back { background: var(--bg-light); color: var(--text-muted); border: none; padding: .75rem 1.5rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: inherit; font-size: .93rem; transition: background .2s; }
+    .modal-btn-back:hover { background: var(--bg-cream); }
+    .modal-btn-next { background: var(--red); color: var(--white); border: none; padding: .75rem 2rem; border-radius: 6px; font-weight: 600; cursor: pointer; font-family: inherit; font-size: .93rem; transition: background .2s, transform .15s; }
+    .modal-btn-next:hover { background: var(--red-dark); transform: translateY(-1px); }
+    .modal-form { display: flex; flex-direction: column; gap: 1rem; }
+    .modal-form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .modal-form .form-group label { font-size: .82rem; font-weight: 600; color: var(--navy); letter-spacing: .04em; display: block; margin-bottom: .35rem; }
+    .modal-form .form-group input { width: 100%; padding: .8rem 1rem; border: 1.5px solid rgba(0,38,84,.12); border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: .93rem; color: var(--text); outline: none; transition: border-color .2s; }
+    .modal-form .form-group input:focus { border-color: var(--red); box-shadow: 0 0 0 3px rgba(215,42,49,.08); }
+    .modal-success { text-align: center; padding: 2rem 0; }
+    .modal-success-icon { width: 72px; height: 72px; background: #d1fae5; border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.5rem; }
+    .modal-success-icon svg { width: 36px; height: 36px; stroke: #059669; fill: none; stroke-width: 2.5; }
+    .modal-success h3 { font-family: 'Playfair Display', serif; font-size: 1.6rem; color: var(--navy); margin-bottom: .75rem; }
+    .modal-success p { color: var(--text-muted); line-height: 1.7; }
+
+    /* ── CALCULATOR SECTION ── */
+    #calculator { padding: 7rem 0; background: var(--navy-deep); position: relative; overflow: hidden; }
+    #calculator::before { content: ''; position: absolute; top: -80px; right: -80px; width: 400px; height: 400px; background: radial-gradient(circle, rgba(215,42,49,.10) 0%, transparent 70%); pointer-events: none; }
+    #calculator::after { content: ''; position: absolute; bottom: -60px; left: -60px; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255,255,255,.03) 0%, transparent 70%); pointer-events: none; }
+    .calc-inner { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+    #calculator .section-label { color: rgba(255,150,150,.9); }
+    #calculator .section-title { color: var(--white); }
+    #calculator .section-title em { color: #ff9090; }
+    .calc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 3rem; }
+    .calc-controls { display: flex; flex-direction: column; gap: 2rem; }
+    .calc-field label { display: flex; justify-content: space-between; align-items: center; font-size: .85rem; font-weight: 600; color: rgba(255,255,255,.7); letter-spacing: .06em; text-transform: uppercase; margin-bottom: .75rem; }
+    .calc-field label span { font-family: 'Playfair Display', serif; font-size: 1.15rem; color: var(--white); font-weight: 700; text-transform: none; letter-spacing: 0; }
+    input[type=range] { -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 3px; background: rgba(255,255,255,.15); outline: none; cursor: pointer; }
+    input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; width: 22px; height: 22px; border-radius: 50%; background: var(--red); border: 3px solid var(--white); box-shadow: 0 2px 8px rgba(0,0,0,.3); cursor: pointer; transition: transform .15s; }
+    input[type=range]::-webkit-slider-thumb:hover { transform: scale(1.2); }
+    input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--red); border: 3px solid var(--white); cursor: pointer; }
+    .calc-term-toggle { display: flex; gap: .5rem; }
+    .calc-term-btn { flex: 1; padding: .6rem; border: 2px solid rgba(255,255,255,.2); border-radius: 8px; background: transparent; color: rgba(255,255,255,.6); font-weight: 600; font-size: .9rem; cursor: pointer; transition: all .2s; font-family: inherit; }
+    .calc-term-btn.active { border-color: var(--red); background: var(--red); color: var(--white); }
+    .calc-results { display: flex; flex-direction: column; gap: 1.25rem; }
+    .calc-monthly { background: var(--red); border-radius: var(--radius-lg); padding: 2rem; text-align: center; }
+    .calc-monthly-label { font-size: .8rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.75); margin-bottom: .5rem; }
+    .calc-monthly-value { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 900; color: var(--white); line-height: 1; }
+    .calc-monthly-sub { font-size: .8rem; color: rgba(255,255,255,.65); margin-top: .35rem; }
+    .calc-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .calc-card { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1); border-radius: var(--radius); padding: 1.25rem; text-align: center; }
+    .calc-card-label { font-size: .73rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.5); margin-bottom: .4rem; }
+    .calc-card-value { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--white); }
+    .calc-cta { text-align: center; margin-top: 1.5rem; }
+    @media (max-width: 900px) { .calc-grid { grid-template-columns: 1fr; gap: 2.5rem; } }
+
+    /* ── PHOTO GALLERY STRIP ── */
+    .photo-strip { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; height: 260px; overflow: hidden; }
+    .photo-strip-item { overflow: hidden; position: relative; }
+    .photo-strip-item img { width: 100%; height: 100%; object-fit: cover; transition: transform .5s ease; }
+    .photo-strip-item:hover img { transform: scale(1.08); }
+    .photo-strip-item::after { content: ''; position: absolute; inset: 0; background: rgba(0,38,84,.25); transition: background .3s; }
+    .photo-strip-item:hover::after { background: rgba(0,38,84,.1); }
+    @media (max-width: 768px) { .photo-strip { grid-template-columns: repeat(2,1fr); height: 320px; } }
+
+    /* ── INDIVIDUAL LOAN PAGES ── */
+    .loan-detail-content { padding: 6rem 0; background: var(--bg-light); }
+    .loan-detail-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; }
+    .loan-detail-copy p { color: var(--text-muted); line-height: 1.85; font-size: .97rem; margin-bottom: 1.25rem; }
+    .loan-benefits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin: 2rem 0; }
+    .loan-benefit { display: flex; gap: .75rem; align-items: flex-start; background: var(--white); border-radius: var(--radius); padding: 1rem 1.25rem; box-shadow: var(--shadow); }
+    .loan-benefit-check { width: 24px; height: 24px; background: var(--red-light); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; }
+    .loan-benefit-check svg { width: 13px; height: 13px; stroke: var(--red); fill: none; stroke-width: 2.5; }
+    .loan-benefit p { font-size: .88rem; color: var(--text); font-weight: 500; line-height: 1.5; margin: 0; }
+    .loan-qualify { background: var(--white); border-radius: var(--radius-lg); padding: 2rem; box-shadow: var(--shadow); margin-top: 2rem; }
+    .loan-qualify h4 { font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--navy); margin-bottom: 1rem; }
+    .loan-qualify ul { display: flex; flex-direction: column; gap: .6rem; }
+    .loan-qualify ul li { font-size: .9rem; color: var(--text-muted); padding-left: 1.25rem; position: relative; }
+    .loan-qualify ul li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+    .loan-detail-aside img { width: 100%; height: 360px; object-fit: cover; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); }
+    .loan-faq { padding: 5rem 0; background: var(--white); }
+    .loan-faq-list { display: flex; flex-direction: column; gap: 1rem; max-width: 800px; margin: 0 auto; }
+    .faq-item { border: 1.5px solid rgba(0,38,84,.1); border-radius: var(--radius); overflow: hidden; }
+    .faq-q { padding: 1.25rem 1.5rem; font-weight: 600; color: var(--navy); cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: .95rem; transition: background .2s; }
+    .faq-q:hover { background: var(--bg-light); }
+    .faq-q span { color: var(--red); font-size: 1.2rem; }
+    .faq-a { padding: 0 1.5rem 1.25rem; font-size: .9rem; color: var(--text-muted); line-height: 1.75; display: none; }
+    .faq-item.open .faq-a { display: block; }
+    .faq-item.open .faq-q { background: var(--bg-light); }
+    .loan-detail-cta { background: var(--navy); padding: 5rem 0; text-align: center; }
+    .loan-detail-cta h2 { font-family: 'Playfair Display', serif; font-size: clamp(1.6rem,3vw,2.4rem); color: var(--white); margin-bottom: 1rem; }
+    .loan-detail-cta p { color: rgba(255,255,255,.65); margin-bottom: 2rem; }
+    @media (max-width: 1024px) { .loan-detail-grid { grid-template-columns: 1fr; } .loan-detail-aside { display: none; } }
+    @media (max-width: 768px) { .loan-benefits-grid { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -328,6 +453,20 @@
   <!-- CUSTOM CURSOR -->
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
+
+  <!-- WHATSAPP FLOATING BUTTON -->
+  <a href="https://wa.me/13056151515" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="Chat on WhatsApp">
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+  </a>
+
+  <!-- PRE-QUALIFICATION MODAL -->
+  <div class="modal-overlay" id="prequal-modal">
+    <div class="modal-box" id="modal-box">
+      <button class="modal-close" onclick="closePrequalModal()" aria-label="Close">&#215;</button>
+      <div class="modal-progress-bar"><div class="modal-progress-fill" id="modal-progress"></div></div>
+      <div id="modal-content"></div>
+    </div>
+  </div>
 
   <!-- NAVBAR -->
   <nav id="navbar" aria-label="Main navigation">
@@ -337,11 +476,25 @@
       </a>
       <div class="nav-links">
         <a class="nav-link active" href="#" data-page="home" onclick="navigate('home');return false;">Home</a>
-        <a class="nav-link" href="#" data-page="loans" onclick="navigate('loans');return false;">Loan Options</a>
+        <div class="nav-dropdown-wrap">
+          <a class="nav-link" href="#" data-page="loans" onclick="navigate('loans');return false;">Loan Options <span class="nav-dropdown-arrow">▾</span></a>
+          <div class="nav-dropdown">
+            <a href="#" onclick="navigate('loan-fixed');return false;">Fixed Rate Mortgage</a>
+            <a href="#" onclick="navigate('loan-fha');return false;">FHA Home Loan</a>
+            <a href="#" onclick="navigate('loan-low-down');return false;">Low Down Payment</a>
+            <a href="#" onclick="navigate('loan-rehab');return false;">Rehab Loans (203k)</a>
+            <a href="#" onclick="navigate('loan-usda');return false;">USDA Loan</a>
+            <a href="#" onclick="navigate('loan-jumbo');return false;">Jumbo Loans</a>
+            <a href="#" onclick="navigate('loan-va');return false;">VA Home Loan</a>
+            <a href="#" onclick="navigate('loan-first-time');return false;">First-Time Homebuyer</a>
+            <a href="#" onclick="navigate('loan-investment');return false;">Investment Property</a>
+            <a href="#" onclick="navigate('loan-refinance');return false;">Refinance</a>
+          </div>
+        </div>
         <a class="nav-link" href="#" data-page="about" onclick="navigate('about');return false;">About Us</a>
         <a class="nav-link" href="#" data-page="team" onclick="navigate('team');return false;">Team</a>
         <a class="nav-link" href="#" data-page="contact" onclick="navigate('contact');return false;">Contact Us</a>
-        <a class="btn btn-red nav-cta" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank" rel="noopener">GET PRE-QUALIFIED NOW</a>
+        <a class="btn btn-red nav-cta" href="#" onclick="openPrequalModal();return false;">GET PRE-QUALIFIED NOW</a>
       </div>
       <button class="nav-hamburger" id="hamburger" aria-label="Open menu">
         <span></span><span></span><span></span>
@@ -357,7 +510,7 @@
     <a class="nav-link" href="#" data-page="about" onclick="navigate('about');closeMobileMenu();return false;">About Us</a>
     <a class="nav-link" href="#" data-page="team" onclick="navigate('team');closeMobileMenu();return false;">Team</a>
     <a class="nav-link" href="#" data-page="contact" onclick="navigate('contact');closeMobileMenu();return false;">Contact Us</a>
-    <a class="btn btn-red" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank" rel="noopener">GET PRE-QUALIFIED NOW</a>
+    <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">GET PRE-QUALIFIED NOW</a>
   </div>
 
   <!-- ============================
@@ -380,7 +533,7 @@
           <h1 class="hero-h1">Get the best<br/><em>mortgage rates</em><br/>today</h1>
           <p class="hero-sub">Before you start looking for your first home — let us assist you in getting prequalified for your mortgage. Expert guidance, fast approvals, and personalized service.</p>
           <div class="hero-actions">
-            <a class="btn btn-red" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">GET PRE-QUALIFIED NOW <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+            <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">GET PRE-QUALIFIED NOW <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
             <a class="btn btn-outline-white" href="#" onclick="navigate('loans');return false;">Explore Loan Options</a>
           </div>
           <div class="hero-trust">
@@ -457,6 +610,57 @@
       </div>
     </section>
 
+    <!-- MORTGAGE CALCULATOR -->
+    <section id="calculator" aria-label="Mortgage Calculator">
+      <div class="calc-inner">
+        <div class="section-header" style="margin-bottom:0;">
+          <span class="section-label reveal">Free Tool</span>
+          <h2 class="section-title reveal reveal-delay-1">Mortgage <em>Calculator</em></h2>
+          <div class="red-line" style="margin:1.25rem auto;background:rgba(215,42,49,.6);"></div>
+          <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;color:rgba(255,255,255,.6);">Estimate your monthly payment in seconds. Drag the sliders to explore your options.</p>
+        </div>
+        <div class="calc-grid">
+          <div class="calc-controls">
+            <div class="calc-field">
+              <label>Home Price <span id="lbl-price">$450,000</span></label>
+              <input type="range" id="calc-price" min="50000" max="2000000" step="5000" value="450000" oninput="updateCalc()" />
+            </div>
+            <div class="calc-field">
+              <label>Down Payment <span id="lbl-dp">20%</span></label>
+              <input type="range" id="calc-dp" min="3" max="50" step="0.5" value="20" oninput="updateCalc()" />
+            </div>
+            <div class="calc-field">
+              <label>Interest Rate <span id="lbl-rate">6.5%</span></label>
+              <input type="range" id="calc-rate" min="2.5" max="12" step="0.1" value="6.5" oninput="updateCalc()" />
+            </div>
+            <div class="calc-field">
+              <label style="margin-bottom:.6rem;">Loan Term</label>
+              <div class="calc-term-toggle">
+                <button class="calc-term-btn active" id="btn-30" onclick="setTerm(30)">30 Years</button>
+                <button class="calc-term-btn" id="btn-15" onclick="setTerm(15)">15 Years</button>
+              </div>
+            </div>
+          </div>
+          <div class="calc-results">
+            <div class="calc-monthly">
+              <div class="calc-monthly-label">Monthly Payment</div>
+              <div class="calc-monthly-value" id="calc-monthly">$2,528</div>
+              <div class="calc-monthly-sub">Principal + Interest</div>
+            </div>
+            <div class="calc-cards">
+              <div class="calc-card"><div class="calc-card-label">Loan Amount</div><div class="calc-card-value" id="calc-principal">$360,000</div></div>
+              <div class="calc-card"><div class="calc-card-label">Down Payment</div><div class="calc-card-value" id="calc-dp-amt">$90,000</div></div>
+              <div class="calc-card"><div class="calc-card-label">Total Interest</div><div class="calc-card-value" id="calc-interest">$550,078</div></div>
+              <div class="calc-card"><div class="calc-card-label">Total Cost</div><div class="calc-card-value" id="calc-total">$910,078</div></div>
+            </div>
+            <div class="calc-cta">
+              <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now &rarr;</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- ABOUT SNIPPET -->
     <section id="about-snippet" aria-label="About us">
       <div class="section-inner">
@@ -520,6 +724,14 @@
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- PHOTO GALLERY STRIP -->
+    <div class="photo-strip" aria-label="Miami real estate gallery">
+      <div class="photo-strip-item"><img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=600&q=80" alt="Miami home" loading="lazy" /></div>
+      <div class="photo-strip-item"><img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=600&q=80" alt="Luxury property" loading="lazy" /></div>
+      <div class="photo-strip-item"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=600&q=80" alt="Modern home" loading="lazy" /></div>
+      <div class="photo-strip-item"><img src="https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=600&q=80" alt="Beautiful house" loading="lazy" /></div>
     </div>
 
     <!-- TESTIMONIALS -->
@@ -595,7 +807,7 @@
         <h2>Secure Your Mortgage <em>with Ease!</em></h2>
         <p>Talk to an expert at Mister Mortgage USA Inc. — we'll help you get pre-qualified and on your way to homeownership.</p>
         <div class="cta-band-actions">
-          <a class="btn btn-red" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">GET PRE-QUALIFIED NOW</a>
+          <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">GET PRE-QUALIFIED NOW</a>
           <a class="btn btn-outline-white" href="#" onclick="navigate('contact');return false;">Contact Us</a>
         </div>
       </div>
@@ -625,7 +837,10 @@
             <div class="loan-full-body">
               <h3>Fixed Rate Mortgage</h3>
               <p>Interest rates on Fixed Rate Mister Mortgage USA Inc. are still very low! Lock in a consistent payment that never changes for the life of your loan. Whether you choose a 15-year or 30-year mortgage, you'll enjoy the stability of knowing exactly what your payment will be each month.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-fixed');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -634,7 +849,10 @@
             <div class="loan-full-body">
               <h3>FHA Home Loan</h3>
               <p>An FHA Home Loan can help you get into your dream home with a low down payment, as little as 3.5%. Backed by the U.S. Federal Housing Administration, these loans offer flexible qualifying requirements making homeownership accessible to more buyers.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-fha');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -643,7 +861,10 @@
             <div class="loan-full-body">
               <h3>Low Down Payment Purchase Options</h3>
               <p>Deciding on how much money to use as a down payment can be confusing. Mister Mortgage USA Inc. is here to help you navigate your options and achieve homeownership with as little as 3% down, removing financial barriers for qualifying buyers.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-low-down');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -652,7 +873,10 @@
             <div class="loan-full-body">
               <h3>Rehab Loans (203k)</h3>
               <p>Turn a fixer-upper into your dream home with a Rehab Loan. Finance both the purchase and renovation costs in one single mortgage at a low rate. Ideal for buyers who want to customize their home or purchase properties that need work.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-rehab');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -661,7 +885,10 @@
             <div class="loan-full-body">
               <h3>USDA Loan</h3>
               <p>USDA Loans make homeownership accessible with 0% down payment options and no monthly PMI. Available for eligible rural and suburban properties, these government-backed loans are ideal for buyers who qualify based on income and location.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-usda');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -670,7 +897,10 @@
             <div class="loan-full-body">
               <h3>Jumbo Loans</h3>
               <p>Jumbo Loans provide great rates and flexible options for high-end home purchases that exceed traditional loan limits. Tailored solutions for South Florida's luxury real estate market, with competitive terms for qualified borrowers.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-jumbo');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -679,7 +909,10 @@
             <div class="loan-full-body">
               <h3>VA Home Loan</h3>
               <p>VA Loans offer military service members and veterans the chance to purchase a home with low or zero down payment. No private mortgage insurance required, competitive interest rates, and flexible credit guidelines as a thank you for your service.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-va');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -688,7 +921,10 @@
             <div class="loan-full-body">
               <h3>First-Time Homebuyer</h3>
               <p>Buying your first home is exciting, and we're here to guide you every step of the way! From free pre-qualification to connecting you with trusted agents, our specialists provide educational support and specialized loan programs including down payment assistance.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-first-time');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -697,7 +933,10 @@
             <div class="loan-full-body">
               <h3>Investment Property Loans</h3>
               <p>Ready to reach financial independence through real estate? Whether you are looking for an investment property or vacation home, Mister Mortgage USA Inc. offers competitive loan programs designed to help you build wealth through real estate.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-investment');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -706,7 +945,10 @@
             <div class="loan-full-body">
               <h3>Refinance</h3>
               <p>A mortgage refinance is the replacement of an existing mortgage with another mortgage under different terms. Whether you want to lower your monthly payment, reduce your interest rate, or access your home's equity, we'll find the best refinance option for your goals.</p>
-              <a class="btn btn-outline" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">Apply Now</a>
+              <div style="display:flex;gap:.5rem;flex-wrap:wrap;">
+                <a class="btn btn-outline" href="#" onclick="openPrequalModal();return false;">Apply Now</a>
+                <a class="btn btn-navy" href="#" onclick="navigate('loan-refinance');return false;">Learn More</a>
+              </div>
             </div>
           </div>
 
@@ -717,7 +959,7 @@
       <div class="container">
         <h2>Ready to Find Your Perfect Loan?</h2>
         <p>Our expert loan officers are here to help you navigate every option.</p>
-        <a class="btn btn-red" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">GET PRE-QUALIFIED NOW</a>
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">GET PRE-QUALIFIED NOW</a>
       </div>
     </div>
   </div><!-- /page-loans -->
@@ -825,9 +1067,7 @@
         <div class="team-grid">
 
           <div class="team-card reveal reveal-delay-1">
-            <div class="team-photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
+            <img class="team-photo" src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" alt="Hislay Conesa" loading="lazy" />
             <div class="team-info">
               <h3>Hislay Conesa</h3>
               <span class="role">President / CEO</span>
@@ -853,9 +1093,7 @@
           </div>
 
           <div class="team-card reveal reveal-delay-3">
-            <div class="team-photo-placeholder">
-              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            </div>
+            <img class="team-photo" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" alt="Luisa Taylor" loading="lazy" />
             <div class="team-info">
               <h3>Luisa Taylor</h3>
               <span class="role">Loan Officer</span>
@@ -878,7 +1116,7 @@
         <h2>Ready to Work With Our Team?</h2>
         <p>Our loan officers are standing by to help you find the perfect mortgage solution.</p>
         <div class="cta-band-actions">
-          <a class="btn btn-red" href="https://mistermortgageusa.com/what-type-of-property-you-are-refinancing/" target="_blank">GET PRE-QUALIFIED NOW</a>
+          <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">GET PRE-QUALIFIED NOW</a>
           <a class="btn btn-outline-white" href="#" onclick="navigate('contact');return false;">Contact Us</a>
         </div>
       </div>
@@ -1018,6 +1256,490 @@
       </div>
     </section>
   </div><!-- /page-contact -->
+
+  <!-- ============================
+       INDIVIDUAL LOAN PAGES
+  ============================ -->
+
+  <!-- FIXED RATE MORTGAGE -->
+  <div id="page-loan-fixed" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>Fixed Rate Mortgage</h1>
+        <p>Lock in your rate today and enjoy the same predictable payment for the life of your loan — 15 or 30 years.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Stability &amp; Peace of Mind</span>
+        <h2 class="section-title reveal reveal-delay-1">The Most Popular <em>Loan in America</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">A Fixed Rate Mortgage offers homebuyers the ultimate peace of mind — a set interest rate and monthly payment that never changes. Whether you choose a 15-year or 30-year term, you'll always know exactly what you owe each month, making budgeting simple and stress-free.</p>
+        <p class="reveal reveal-delay-3">At Mister Mortgage USA, we shop multiple lenders to secure the most competitive fixed rates available. With over 20 years of experience in South Florida, we know what it takes to get you approved quickly and at the best possible terms.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Predictable monthly payments forever</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Protection from rising interest rates</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>15-year or 30-year term options</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Ideal for long-term homeowners</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Build equity consistently over time</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Competitive rates for qualified buyers</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Credit score of 620 or higher</li>
+            <li>Stable employment history (2+ years)</li>
+            <li>Debt-to-income ratio under 45%</li>
+            <li>Down payment of 3%–20%</li>
+            <li>Primary residence, second home, or investment property</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=800&q=80" alt="Fixed rate mortgage home" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the difference between a 15-year and 30-year fixed mortgage?<span>+</span></div><div class="faq-a">A 15-year mortgage has higher monthly payments but you pay far less interest and own your home sooner. A 30-year mortgage offers lower monthly payments with more flexibility, though you pay more interest overall. Both lock in your rate permanently.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I pay off my fixed-rate mortgage early?<span>+</span></div><div class="faq-a">Yes! Most fixed-rate mortgages allow early payoff without penalty. Making extra principal payments reduces the life of your loan and saves you significant interest.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What credit score do I need for the best rates?<span>+</span></div><div class="faq-a">Generally, a credit score of 740 or above qualifies you for the most competitive rates. Scores between 620-739 still qualify for fixed-rate loans, though at slightly higher rates. We work with all credit profiles.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Ready to Lock In Your Rate?</h2><p>Speak with one of our expert loan officers today — no obligation, no pressure.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-fixed -->
+
+  <!-- FHA HOME LOAN -->
+  <div id="page-loan-fha" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>FHA Home Loan</h1>
+        <p>Government-backed financing with low down payments starting at 3.5%. Your path to homeownership starts here.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Accessible Homeownership</span>
+        <h2 class="section-title reveal reveal-delay-1">FHA Loans Make <em>Homeownership Possible</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">The Federal Housing Administration (FHA) loan program was designed to make homeownership accessible to Americans who might not qualify for conventional financing. With a down payment as low as 3.5% and flexible credit requirements, FHA loans open the door to homeownership for millions of buyers each year.</p>
+        <p class="reveal reveal-delay-3">Mister Mortgage USA is an FHA-approved lender with deep expertise in South Florida's market. We guide first-time buyers and those with less-than-perfect credit through the entire FHA process, from pre-qualification to closing.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Down payment as low as 3.5%</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Flexible credit score requirements (580+)</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Gift funds allowed for down payment</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Competitive interest rates</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Higher debt-to-income allowances</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Great for first-time homebuyers</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Credit score 580+ for 3.5% down; 500–579 for 10% down</li>
+            <li>Steady employment history (2+ years preferred)</li>
+            <li>Property must be your primary residence</li>
+            <li>Property must meet FHA minimum standards</li>
+            <li>Mortgage Insurance Premium (MIP) required</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="FHA home loan" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the FHA loan limit in Miami-Dade County?<span>+</span></div><div class="faq-a">FHA loan limits are updated annually and vary by county. In Miami-Dade County, limits are among the highest in Florida due to the area's home prices. Contact us for the current year's specific limits.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I have to pay mortgage insurance with an FHA loan?<span>+</span></div><div class="faq-a">Yes, FHA loans require both an upfront Mortgage Insurance Premium (UFMIP) of 1.75% of the loan amount and an annual MIP paid monthly. This protects the lender but does add to your monthly cost.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I refinance out of an FHA loan later?<span>+</span></div><div class="faq-a">Absolutely. Once you've built sufficient equity (typically 20%), you can refinance into a conventional loan to eliminate the mortgage insurance premium and potentially get a better rate.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Start Your FHA Loan Today</h2><p>Low down payment, flexible credit — let's get you pre-qualified in minutes.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-fha -->
+
+  <!-- LOW DOWN PAYMENT -->
+  <div id="page-loan-low-down" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1582407947304-fd86f28f3d14?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>Low Down Payment Options</h1>
+        <p>Don't let a large down payment hold you back. Buy your home with as little as 3% down.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Remove the Barriers</span>
+        <h2 class="section-title reveal reveal-delay-1">Own Your Home With <em>Less Upfront</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">Saving for a down payment is one of the biggest challenges for homebuyers today — especially in South Florida's competitive market. Our low down payment programs are designed to help qualified buyers get into homes sooner, without waiting years to accumulate a 20% down payment.</p>
+        <p class="reveal reveal-delay-3">From conventional loans with 3% down to programs with down payment assistance grants, we have options to match every financial situation. Our loan officers will help you identify all available programs you qualify for.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Conventional loans from 3% down</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Down payment assistance programs</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Gift funds accepted from family</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Multiple program options available</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Faster path to homeownership</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Keep cash reserves for emergencies</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Credit score 620+ for conventional 3% down</li>
+            <li>Income within program limits for assistance grants</li>
+            <li>Primary residence requirement for most programs</li>
+            <li>Homebuyer education course may be required</li>
+            <li>First-time or repeat buyers (varies by program)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1582407947304-fd86f28f3d14?w=800&q=80" alt="Low down payment home" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the minimum down payment for a conventional loan?<span>+</span></div><div class="faq-a">Conventional loans through Fannie Mae and Freddie Mac allow as little as 3% down for qualified first-time buyers and 5% for repeat buyers. Private Mortgage Insurance (PMI) is required until you reach 20% equity.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are there down payment assistance grants available in Florida?<span>+</span></div><div class="faq-a">Yes! Florida offers several programs including the Florida Assist, Florida Homeownership Loan Program (FL HLP), and various county-specific programs. Many are forgivable after a certain period. Ask us which you qualify for.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Will I pay more with a lower down payment?<span>+</span></div><div class="faq-a">Your monthly payment will be higher due to PMI and a larger loan balance. However, staying liquid with cash reserves often outweighs the cost of PMI — especially when home values are appreciating rapidly in South Florida.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Don't Wait — Buy Now With Less Down</h2><p>Find out which down payment programs you qualify for today.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-low-down -->
+
+  <!-- REHAB LOANS -->
+  <div id="page-loan-rehab" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>Rehab Loans (203k)</h1>
+        <p>Finance your home purchase and renovation costs in one single mortgage. Turn any fixer-upper into your dream home.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Buy &amp; Renovate</span>
+        <h2 class="section-title reveal reveal-delay-1">One Loan for Purchase <em>and Renovation</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">The FHA 203(k) Rehabilitation Loan combines the purchase price of a home with the cost of its rehabilitation — all in one convenient mortgage. This makes it easier to buy a fixer-upper or update an existing home without taking out a separate construction or home improvement loan.</p>
+        <p class="reveal reveal-delay-3">South Florida has many properties that need updating or renovation, and the 203k loan lets you buy these homes at a lower price and invest the difference into improvements that can significantly increase the property's value.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Purchase + renovation in one loan</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Down payment as low as 3.5%</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Covers structural &amp; cosmetic repairs</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Instant equity potential</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Customize the home to your needs</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Single closing saves time and money</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Credit score 580+ (FHA guidelines apply)</li>
+            <li>Minimum $5,000 in renovation costs required</li>
+            <li>Primary residence only</li>
+            <li>HUD-approved consultant required for standard 203k</li>
+            <li>Renovation must be completed within 6 months</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=800&q=80" alt="Home renovation" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What types of renovations can be financed with a 203k loan?<span>+</span></div><div class="faq-a">The Standard 203k covers major renovations including structural repairs, room additions, roofing, and HVAC. The Limited 203k (Streamline) covers cosmetic improvements like kitchens, bathrooms, flooring, and painting — up to $35,000.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does the 203k loan process take?<span>+</span></div><div class="faq-a">The 203k loan process typically takes 60–90 days from application to closing due to the additional appraisal and consultant requirements. Renovation funds are released in draws as work is completed and inspected.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I choose my own contractor?<span>+</span></div><div class="faq-a">Yes, you choose your own licensed, bonded contractor. The contractor must be approved by the lender and submit a detailed scope of work and cost estimate. The lender ensures funds are used appropriately.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Transform Your Fixer-Upper Today</h2><p>Buy and renovate with one simple loan. Let's explore your options.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-rehab -->
+
+  <!-- USDA LOAN -->
+  <div id="page-loan-usda" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>USDA Loan</h1>
+        <p>100% financing for eligible rural and suburban properties. No down payment required for qualifying borrowers.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Zero Down Payment</span>
+        <h2 class="section-title reveal reveal-delay-1">100% Financing in <em>Eligible Areas</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">The USDA Rural Development Loan program offers 100% financing with no down payment for buyers in eligible rural and suburban areas. Backed by the U.S. Department of Agriculture, these loans offer below-market interest rates and no private mortgage insurance (PMI).</p>
+        <p class="reveal reveal-delay-3">Many areas in and around South Florida qualify — more than most buyers realize. Our team can quickly determine if a property you're interested in falls within a USDA-eligible zone and whether your income meets the program requirements.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Zero down payment required</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>No private mortgage insurance (PMI)</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Below-market interest rates</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Flexible credit requirements</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>30-year fixed rate term</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Closing costs can be rolled in</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Property must be in a USDA-eligible rural/suburban area</li>
+            <li>Household income must not exceed 115% of area median income</li>
+            <li>Credit score of 640+ preferred</li>
+            <li>U.S. citizenship or permanent residency required</li>
+            <li>Primary residence only — no investment properties</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=800&q=80" alt="USDA rural property" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Do I have to be a farmer to get a USDA loan?<span>+</span></div><div class="faq-a">Absolutely not! The USDA loan program is for any homebuyer purchasing in an eligible area. The property just needs to be in a designated rural or suburban zone — not an agricultural or farming property.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How do I know if a property is USDA-eligible?<span>+</span></div><div class="faq-a">You can check the USDA's eligibility map online, or simply share a property address with our team and we'll verify eligibility within minutes. Many suburban Florida communities qualify — including some surprising areas near urban centers.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is there a USDA loan fee?<span>+</span></div><div class="faq-a">Yes, USDA loans have a guarantee fee (upfront, currently 1% of the loan) and an annual fee (0.35% of the loan balance). These are much lower than FHA's MIP and can often be rolled into the loan amount.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Buy With Zero Down Payment</h2><p>Check your eligibility for a USDA loan today — it takes just minutes.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-usda -->
+
+  <!-- JUMBO LOANS -->
+  <div id="page-loan-jumbo" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1613977257363-707ba9348227?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>Jumbo Loans</h1>
+        <p>Tailored financing for high-value properties in South Florida's luxury real estate market.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Luxury Financing</span>
+        <h2 class="section-title reveal reveal-delay-1">Finance Your <em>Dream Home</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">Jumbo loans are mortgages that exceed the conforming loan limits set by Fannie Mae and Freddie Mac — in most areas, that's anything above $766,550. In South Florida's high-demand luxury market, jumbo loans are common and require specialized expertise to navigate effectively.</p>
+        <p class="reveal reveal-delay-3">At Mister Mortgage USA, we work with multiple jumbo lenders to secure the most competitive rates for high-value purchases. Whether you're buying a Miami Beach penthouse, a Coral Gables estate, or a Brickell condo, we have the connections and experience to close your deal.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Loan amounts up to $5M+</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Competitive interest rates</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Fixed and adjustable rate options</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Primary, second home &amp; investment</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Flexible underwriting options</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Personalized service from start to close</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Credit score typically 700+ (720+ for best rates)</li>
+            <li>Down payment typically 10–20%+</li>
+            <li>Strong income documentation required</li>
+            <li>Low debt-to-income ratio (under 43% preferred)</li>
+            <li>Cash reserves of 6–12 months of payments</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1613977257363-707ba9348227?w=800&q=80" alt="Luxury home jumbo loan" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is the jumbo loan limit in South Florida?<span>+</span></div><div class="faq-a">The conforming loan limit in most Florida counties is $766,550 for 2024. Any mortgage above this amount is considered a jumbo loan and must meet different underwriting standards set by private lenders rather than Fannie/Freddie.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Are jumbo loan rates higher than conventional rates?<span>+</span></div><div class="faq-a">Historically yes, but in recent years jumbo rates have been very competitive — sometimes even lower than conforming rates for highly qualified borrowers. The key is working with a broker who has access to multiple jumbo lenders, like Mister Mortgage USA.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I get a jumbo loan for an investment property?<span>+</span></div><div class="faq-a">Yes, jumbo loans are available for primary residences, second homes, and investment properties. Requirements for investment properties are typically stricter, with higher down payment requirements and stronger financial documentation.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Finance Your Luxury Property</h2><p>Access high-value financing with expert guidance from Miami's trusted mortgage broker.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-jumbo -->
+
+  <!-- VA HOME LOAN -->
+  <div id="page-loan-va" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>VA Home Loan</h1>
+        <p>Exclusive homeownership benefits for veterans, active-duty service members, and surviving spouses. No down payment, no PMI.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Honoring Your Service</span>
+        <h2 class="section-title reveal reveal-delay-1">You Served Us — <em>Now We Serve You</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">The VA Home Loan benefit is one of the most powerful homeownership tools available. Guaranteed by the U.S. Department of Veterans Affairs, VA loans offer eligible military borrowers the ability to purchase a home with zero down payment, no monthly PMI, and competitive interest rates — without the strict credit requirements of conventional loans.</p>
+        <p class="reveal reveal-delay-3">At Mister Mortgage USA, we are proud to serve those who served our country. Our VA loan specialists understand the unique needs of military families and work quickly to get your pre-approval and close your loan.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Zero down payment required</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>No private mortgage insurance (PMI)</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Competitive, below-market interest rates</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Flexible credit guidelines</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>No prepayment penalties</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Reusable benefit — use it multiple times</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Veterans with honorable discharge</li>
+            <li>Active-duty service members (90+ days service)</li>
+            <li>National Guard &amp; Reserve members (6+ years)</li>
+            <li>Surviving spouses of fallen service members</li>
+            <li>Certificate of Eligibility (COE) required — we can obtain this for you</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1569982175971-d92b01cf8694?w=800&q=80" alt="VA home loan" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Is there a VA funding fee?<span>+</span></div><div class="faq-a">Yes, most VA borrowers pay a funding fee (typically 2.15%–3.3% of the loan for first use) which helps sustain the program. However, veterans with service-connected disabilities are exempt from this fee, and it can be rolled into the loan.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I use my VA loan benefit more than once?<span>+</span></div><div class="faq-a">Yes! Your VA loan benefit is reusable. Once you've paid off your previous VA loan (or in some cases, even while keeping it), you can use the benefit again for your next home purchase.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does VA loan approval take?<span>+</span></div><div class="faq-a">VA loans typically close in 40–50 days, similar to conventional loans. With an experienced VA lender like Mister Mortgage USA, we streamline the process and can often close faster by preparing your Certificate of Eligibility upfront.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>You've Earned This Benefit</h2><p>Let us help you use your VA loan benefit to achieve the homeownership you deserve.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-va -->
+
+  <!-- FIRST-TIME HOMEBUYER -->
+  <div id="page-loan-first-time" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>First-Time Homebuyer</h1>
+        <p>Expert guidance, specialized programs, and down payment assistance for buyers entering the market for the first time.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Your First Step</span>
+        <h2 class="section-title reveal reveal-delay-1">We Guide You Every <em>Step of the Way</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">Buying your first home is one of the most exciting — and sometimes overwhelming — experiences of your life. At Mister Mortgage USA, we specialize in guiding first-time buyers through the entire process, from understanding your budget to handing you the keys.</p>
+        <p class="reveal reveal-delay-3">We connect you with the best first-time homebuyer programs available in Florida, including down payment assistance grants, low down payment options, and educational resources that empower you to make confident decisions.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Down payment assistance programs</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Free homebuyer education resources</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Low down payment options (3%–3.5%)</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Dedicated loan officer support</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Connection to trusted real estate agents</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Fast free pre-qualification</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>First-time buyer (no ownership in last 3 years)</li>
+            <li>Credit score 580+ (varies by program)</li>
+            <li>Income within program limits for assistance grants</li>
+            <li>Completion of homebuyer education course (some programs)</li>
+            <li>Primary residence only</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=800&q=80" alt="First time homebuyer" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is a first-time homebuyer exactly?<span>+</span></div><div class="faq-a">Most programs define a first-time homebuyer as someone who hasn't owned a primary residence in the past three years. This means if you owned a home years ago but have been renting, you may still qualify as a "first-time" buyer.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What first-time buyer programs are available in Florida?<span>+</span></div><div class="faq-a">Florida offers several programs through the Florida Housing Finance Corporation, including the Florida Homeownership Loan Program (FL HLP), Florida Assist ($10,000 deferred loan), and various county-specific programs with grants of $5,000–$25,000.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does it take to get pre-approved?<span>+</span></div><div class="faq-a">At Mister Mortgage USA, we can typically issue a pre-qualification letter within 24 hours of receiving your basic financial information. A full pre-approval with verified documents usually takes 2–3 business days.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Start Your Homeownership Journey</h2><p>Your dream home is closer than you think. Let's take the first step together.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-first-time -->
+
+  <!-- INVESTMENT PROPERTY -->
+  <div id="page-loan-investment" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>Investment Property Loans</h1>
+        <p>Build wealth through South Florida real estate. Competitive financing for investment properties and vacation homes.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Build Your Portfolio</span>
+        <h2 class="section-title reveal reveal-delay-1">Smart Financing for <em>Real Estate Investors</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">South Florida is one of America's top real estate investment markets, with strong rental demand, rising property values, and a growing population. Whether you're buying your first rental property or expanding a portfolio, Mister Mortgage USA offers competitive financing options designed specifically for investors.</p>
+        <p class="reveal reveal-delay-3">From conventional investment loans to DSCR (Debt Service Coverage Ratio) loans that qualify based on rental income rather than personal income, we have the creative solutions that sophisticated investors need to grow their real estate wealth.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Single-family and multi-family properties</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>DSCR loans — qualify on rental income</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Vacation home financing available</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Fixed and adjustable rate options</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Portfolio loan options available</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Experienced investor-focused team</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Credit score 680+ (conventional) or 640+ (DSCR)</li>
+            <li>Down payment 15%–25% depending on property type</li>
+            <li>Cash reserves of 6+ months required</li>
+            <li>Strong rental income potential for DSCR loans</li>
+            <li>No limit on number of financed properties (some programs)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1560448204-603b3fc33ddc?w=800&q=80" alt="Investment property" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">What is a DSCR loan and how does it work?<span>+</span></div><div class="faq-a">A DSCR (Debt Service Coverage Ratio) loan qualifies you based on the property's rental income rather than your personal income. If the rental income covers the mortgage payment (DSCR of 1.0+), you can qualify — making these ideal for self-employed investors or those with complex tax returns.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How much down payment is needed for an investment property?<span>+</span></div><div class="faq-a">Conventional investment property loans typically require 15–25% down depending on the property type (single-family vs. multi-unit) and whether it's a vacation home or pure investment. DSCR and other non-QM loans may have different requirements.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">Can I use rental income to qualify for the loan?<span>+</span></div><div class="faq-a">Yes, with conventional loans you can typically use 75% of the projected rental income to offset the mortgage payment in your debt-to-income calculation. With DSCR loans, the rental income is the primary qualifying factor.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Invest in South Florida Real Estate</h2><p>Let our investor-focused team help you finance your next property at competitive rates.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get Pre-Qualified Now</a></div></div>
+  </div><!-- /page-loan-investment -->
+
+  <!-- REFINANCE -->
+  <div id="page-loan-refinance" class="page">
+    <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=1600&q=80');background-size:cover;background-position:center;">
+      <div class="container"><div class="page-hero-content">
+        <span class="section-label">Loan Options</span>
+        <h1>Refinance</h1>
+        <p>Lower your rate, reduce your payment, or access your home's equity. We find the best refinance option for your goals.</p>
+      </div></div>
+    </div>
+    <section class="loan-detail-content"><div class="container"><div class="loan-detail-grid">
+      <div class="loan-detail-copy">
+        <span class="section-label reveal">Optimize Your Mortgage</span>
+        <h2 class="section-title reveal reveal-delay-1">Make Your Mortgage <em>Work Harder</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2">Refinancing replaces your existing mortgage with a new one — ideally at better terms. Whether your goal is to lower your monthly payment, shorten your loan term, switch from an adjustable to a fixed rate, or tap into your home's equity for renovations or debt consolidation, we have the right refinance solution for you.</p>
+        <p class="reveal reveal-delay-3">With South Florida home values significantly elevated, many homeowners are sitting on substantial equity. A cash-out refinance can unlock that equity to fund home improvements, education, or investment opportunities — often at lower rates than personal loans or credit cards.</p>
+        <div class="loan-benefits-grid reveal reveal-delay-3">
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Lower your interest rate</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Reduce your monthly payment</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Cash-out equity for any purpose</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Shorten your loan term</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Eliminate PMI (mortgage insurance)</p></div>
+          <div class="loan-benefit"><div class="loan-benefit-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><p>Switch from ARM to fixed rate</p></div>
+        </div>
+        <div class="loan-qualify reveal reveal-delay-4">
+          <h4>Who Qualifies?</h4>
+          <ul>
+            <li>Current homeowner with existing mortgage</li>
+            <li>Credit score 620+ (conventional) or per loan type</li>
+            <li>Sufficient home equity (typically 20%+ for cash-out)</li>
+            <li>Stable income and employment history</li>
+            <li>Mortgage in good standing (no recent late payments)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="loan-detail-aside reveal reveal-delay-2"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=80" alt="Mortgage refinance" loading="lazy" /></div>
+    </div></div></section>
+    <section class="loan-faq"><div class="container">
+      <div class="section-header"><span class="section-label reveal">FAQ</span><h2 class="section-title reveal reveal-delay-1">Common <em>Questions</em></h2><div class="red-line" style="margin:1.25rem auto;"></div></div>
+      <div class="loan-faq-list">
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">When does it make sense to refinance?<span>+</span></div><div class="faq-a">A refinance generally makes sense if you can lower your rate by at least 0.5–1%, if you plan to stay in the home long enough to recoup closing costs (break-even point), if you want to access equity, or if you need to change your loan terms to better fit your financial situation.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How much does it cost to refinance?<span>+</span></div><div class="faq-a">Refinancing typically costs 2–5% of the loan amount in closing costs. However, some lenders offer no-closing-cost refinances where costs are rolled into the rate or loan balance. We'll show you all options so you can choose what makes the most financial sense.</div></div>
+        <div class="faq-item"><div class="faq-q" onclick="toggleFaq(this)">How long does a refinance take?<span>+</span></div><div class="faq-a">Most refinances close in 30–45 days. Streamline refinances (FHA or VA) can close faster since they require less documentation. Having your paperwork organized and responding promptly to requests helps keep the timeline on track.</div></div>
+      </div>
+    </div></section>
+    <div class="loan-detail-cta"><div class="container"><h2>Is It Time to Refinance?</h2><p>Find out in minutes if refinancing makes financial sense for you — no obligation analysis.</p><a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">Get My Refinance Analysis</a></div></div>
+  </div><!-- /page-loan-refinance -->
 
   <!-- ============================
        FOOTER
@@ -1183,6 +1905,258 @@
 
     // Init on load
     initReveal();
+
+    // ─── GSAP INIT ───
+    gsap.registerPlugin(ScrollTrigger);
+
+    function initGSAP() {
+      // Hero animations (only on home page load)
+      if (document.getElementById('page-home').classList.contains('active')) {
+        gsap.from('.hero-badge', { opacity: 0, y: 24, duration: 0.7, delay: 0.2, ease: 'power2.out' });
+        gsap.from('.hero-h1', { opacity: 0, y: 36, duration: 0.8, delay: 0.4, ease: 'power2.out' });
+        gsap.from('.hero-sub', { opacity: 0, y: 20, duration: 0.7, delay: 0.65, ease: 'power2.out' });
+        gsap.from('.hero-actions', { opacity: 0, y: 20, duration: 0.7, delay: 0.85, ease: 'power2.out' });
+        gsap.from('.hero-trust', { opacity: 0, y: 16, duration: 0.7, delay: 1.0, ease: 'power2.out' });
+        gsap.from('.hero-right', { opacity: 0, x: 48, duration: 1.0, delay: 0.5, ease: 'power2.out' });
+      }
+
+      // Stats counter animation
+      gsap.utils.toArray('.stat-num').forEach(function(el) {
+        const text = el.textContent;
+        const num = parseFloat(text.replace(/[^0-9.]/g, ''));
+        if (isNaN(num) || num === 0) return;
+        const prefix = text.match(/^[^0-9]*/)[0];
+        const suffix = text.match(/[^0-9.]*$/)[0];
+        gsap.fromTo(el, { innerText: 0 }, {
+          innerText: num,
+          duration: 1.8,
+          ease: 'power2.out',
+          snap: { innerText: num > 100 ? 1 : 0.1 },
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true },
+          onUpdate: function() {
+            el.textContent = prefix + Math.round(parseFloat(el.innerText || 0)) + suffix;
+          }
+        });
+      });
+
+      // Calc section entrance
+      gsap.from('#calculator .section-label', { opacity: 0, y: 20, duration: 0.6, scrollTrigger: { trigger: '#calculator', start: 'top 80%' } });
+      gsap.from('#calculator .calc-controls', { opacity: 0, x: -40, duration: 0.8, delay: 0.2, scrollTrigger: { trigger: '#calculator .calc-grid', start: 'top 80%' } });
+      gsap.from('#calculator .calc-results', { opacity: 0, x: 40, duration: 0.8, delay: 0.3, scrollTrigger: { trigger: '#calculator .calc-grid', start: 'top 80%' } });
+    }
+
+    window.addEventListener('load', initGSAP);
+
+    // ─── MORTGAGE CALCULATOR ───
+    var calcTerm = 30;
+
+    function setTerm(t) {
+      calcTerm = t;
+      document.getElementById('btn-30').classList.toggle('active', t === 30);
+      document.getElementById('btn-15').classList.toggle('active', t === 15);
+      updateCalc();
+    }
+
+    function fmtDollar(n) {
+      return '$' + Math.round(n).toLocaleString('en-US');
+    }
+
+    function animateValue(elId, newVal) {
+      var el = document.getElementById(elId);
+      if (!el) return;
+      gsap.to(el, { duration: 0.4, ease: 'power2.out', innerText: 0,
+        onUpdate: function() { el.textContent = fmtDollar(newVal); }
+      });
+    }
+
+    function updateCalc() {
+      var price = parseFloat(document.getElementById('calc-price').value);
+      var dpPct = parseFloat(document.getElementById('calc-dp').value);
+      var annualRate = parseFloat(document.getElementById('calc-rate').value);
+      var n = calcTerm * 12;
+      var dp = price * dpPct / 100;
+      var principal = price - dp;
+      var r = annualRate / 100 / 12;
+      var monthly = r > 0 ? principal * r * Math.pow(1 + r, n) / (Math.pow(1 + r, n) - 1) : principal / n;
+      var totalCost = monthly * n;
+      var totalInterest = totalCost - principal;
+
+      document.getElementById('lbl-price').textContent = fmtDollar(price);
+      document.getElementById('lbl-dp').textContent = dpPct.toFixed(1) + '%';
+      document.getElementById('lbl-rate').textContent = annualRate.toFixed(1) + '%';
+      document.getElementById('calc-monthly').textContent = fmtDollar(monthly);
+      document.getElementById('calc-principal').textContent = fmtDollar(principal);
+      document.getElementById('calc-dp-amt').textContent = fmtDollar(dp);
+      document.getElementById('calc-interest').textContent = fmtDollar(totalInterest);
+      document.getElementById('calc-total').textContent = fmtDollar(totalCost);
+    }
+
+    updateCalc();
+
+    // ─── FAQ ACCORDION ───
+    function toggleFaq(el) {
+      var item = el.parentElement;
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item.open').forEach(function(i) { i.classList.remove('open'); });
+      if (!wasOpen) item.classList.add('open');
+    }
+
+    // ─── PRE-QUAL MODAL ───
+    var modalStep = 1;
+    var modalAnswers = {};
+    var totalSteps = 7;
+
+    var modalSteps = [
+      {
+        q: 'What are you looking to do?',
+        options: [
+          { label: 'Purchase a Home', sub: 'Buy a new property' },
+          { label: 'Refinance My Home', sub: 'Improve my current mortgage' }
+        ]
+      },
+      {
+        q: 'What type of property?',
+        options: [
+          { label: 'Primary Residence', sub: 'I will live here full-time' },
+          { label: 'Investment Property', sub: 'Rental / income-generating' },
+          { label: 'Vacation Home', sub: 'Second home / seasonal use' },
+          { label: 'Multi-Family', sub: '2–4 unit property' }
+        ]
+      },
+      {
+        q: 'Estimated property value?',
+        options: [
+          { label: 'Under $300K', sub: '' },
+          { label: '$300K – $500K', sub: '' },
+          { label: '$500K – $800K', sub: '' },
+          { label: '$800K – $1.2M', sub: '' },
+          { label: 'Over $1.2M', sub: '' }
+        ]
+      },
+      {
+        q: 'Estimated down payment?',
+        options: [
+          { label: 'Less than 3.5%', sub: 'Min for FHA loans' },
+          { label: '3.5% – 10%', sub: 'Low down payment' },
+          { label: '10% – 20%', sub: 'Standard range' },
+          { label: 'Over 20%', sub: 'Avoid PMI' }
+        ]
+      },
+      {
+        q: 'How would you describe your credit?',
+        options: [
+          { label: 'Excellent', sub: '740+ credit score' },
+          { label: 'Good', sub: '700–739 credit score' },
+          { label: 'Fair', sub: '660–699 credit score' },
+          { label: 'Below Average', sub: 'Under 660' }
+        ]
+      },
+      {
+        q: 'What is your employment status?',
+        options: [
+          { label: 'Employed (W-2)', sub: 'Traditional employee' },
+          { label: 'Self-Employed', sub: 'Business owner / freelance' },
+          { label: 'Retired', sub: 'On pension or fixed income' },
+          { label: 'Other', sub: 'Investor / other income' }
+        ]
+      },
+      { q: 'contact' }
+    ];
+
+    function openPrequalModal() {
+      modalStep = 1;
+      modalAnswers = {};
+      document.getElementById('prequal-modal').classList.add('open');
+      document.body.style.overflow = 'hidden';
+      renderModalStep();
+      gsap.from('#modal-box', { opacity: 0, y: 30, duration: 0.4, ease: 'power2.out' });
+    }
+
+    function closePrequalModal() {
+      document.getElementById('prequal-modal').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.getElementById('prequal-modal').addEventListener('click', function(e) {
+      if (e.target === this) closePrequalModal();
+    });
+
+    function renderModalStep() {
+      var pct = ((modalStep - 1) / totalSteps) * 100;
+      document.getElementById('modal-progress').style.width = pct + '%';
+      var data = modalSteps[modalStep - 1];
+      var html = '';
+
+      if (data.q === 'contact') {
+        html = '<div class="modal-step-label">Step ' + modalStep + ' of ' + totalSteps + '</div>';
+        html += '<div class="modal-question">Almost there! Let\'s connect you with an expert.</div>';
+        html += '<form class="modal-form" onsubmit="submitPrequal(event)">';
+        html += '<div class="modal-form-row"><div class="form-group"><label>First Name *</label><input type="text" name="fname" placeholder="John" required /></div><div class="form-group"><label>Last Name *</label><input type="text" name="lname" placeholder="Doe" required /></div></div>';
+        html += '<div class="modal-form-row"><div class="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="(305) 000-0000" required /></div><div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="john@email.com" required /></div></div>';
+        html += '<div class="modal-nav" style="margin-top:1rem;">';
+        html += '<button type="button" class="modal-btn-back" onclick="prevStep()">← Back</button>';
+        html += '<button type="submit" class="modal-btn-next">Get My Free Consultation →</button>';
+        html += '</div></form>';
+      } else {
+        html = '<div class="modal-step-label">Step ' + modalStep + ' of ' + totalSteps + '</div>';
+        html += '<div class="modal-question">' + data.q + '</div>';
+        var cols = data.options.length > 3 ? '' : ' cols-1';
+        html += '<div class="modal-options' + cols + '">';
+        data.options.forEach(function(opt, i) {
+          var sel = modalAnswers[modalStep] === opt.label ? ' selected' : '';
+          html += '<button class="modal-option' + sel + '" onclick="selectOption(this, \'' + opt.label.replace(/'/g, "\\'") + '\')">' + opt.label;
+          if (opt.sub) html += '<span>' + opt.sub + '</span>';
+          html += '</button>';
+        });
+        html += '</div>';
+        html += '<div class="modal-nav">';
+        if (modalStep > 1) html += '<button class="modal-btn-back" onclick="prevStep()">← Back</button>';
+        else html += '<div></div>';
+        html += '<button class="modal-btn-next" onclick="nextStep()">Next →</button>';
+        html += '</div>';
+      }
+
+      document.getElementById('modal-content').innerHTML = html;
+      gsap.from('#modal-content', { opacity: 0, x: 20, duration: 0.3, ease: 'power2.out' });
+    }
+
+    function selectOption(el, val) {
+      document.querySelectorAll('#modal-content .modal-option').forEach(function(b) { b.classList.remove('selected'); });
+      el.classList.add('selected');
+      modalAnswers[modalStep] = val;
+    }
+
+    function nextStep() {
+      if (!modalAnswers[modalStep]) {
+        gsap.to('#modal-content', { x: -6, duration: 0.05, yoyo: true, repeat: 5, ease: 'power2.inOut' });
+        return;
+      }
+      // Skip step 4 (down payment) if refinancing
+      if (modalStep === 3 && modalAnswers[1] === 'Refinance My Home') {
+        modalStep = 5;
+      } else {
+        modalStep++;
+      }
+      renderModalStep();
+    }
+
+    function prevStep() {
+      if (modalStep === 5 && modalAnswers[1] === 'Refinance My Home') {
+        modalStep = 3;
+      } else {
+        modalStep--;
+      }
+      if (modalStep < 1) modalStep = 1;
+      renderModalStep();
+    }
+
+    function submitPrequal(e) {
+      e.preventDefault();
+      document.getElementById('modal-progress').style.width = '100%';
+      document.getElementById('modal-content').innerHTML = '<div class="modal-success"><div class="modal-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><h3>You\'re All Set!</h3><p>Thank you! A Mister Mortgage USA loan expert will contact you within 24 hours to discuss your options.<br><br><strong>Call us anytime: <a href="tel:3056151515" style="color:var(--red)">(305) 615-1515</a></strong></p></div>';
+      gsap.from('.modal-success', { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' });
+      setTimeout(closePrequalModal, 5000);
+    }
   </script>
 </body>
 </html>
