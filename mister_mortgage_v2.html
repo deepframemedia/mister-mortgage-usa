@@ -10,7 +10,13 @@
   <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <style>
+  <!-- CSS extracted to separate files (Phase 1) -->
+  <link rel="stylesheet" href="css/base.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/components.css" />
+  <link rel="stylesheet" href="css/pages.css" />
+  <link rel="stylesheet" href="css/responsive.css" />
+  <style>/* LEGACY INLINE — remove after verifying external CSS works */
     :root {
       --navy: #002654;
       --navy-deep: #011a3d;
@@ -2160,7 +2166,14 @@
     </div>
   </footer>
 
-  <script>
+  <!-- JS extracted to separate files (Phase 2) -->
+  <script src="js/nav.js" defer></script>
+  <script src="js/ui.js" defer></script>
+  <script src="js/modal-prequal.js" defer></script>
+  <script src="js/calculator.js" defer></script>
+  <script src="js/carousel.js" defer></script>
+  <script src="js/animations.js" defer></script>
+  <script>/* LEGACY INLINE — kept temporarily for reference */
     // ─── PAGE NAVIGATION ───
     function navigate(page) {
       const pages = document.querySelectorAll('.page');

@@ -1,0 +1,41 @@
+/* ============================================================
+   RESPONSIVE.CSS — All media queries
+   ============================================================ */
+
+@media (max-width: 1024px) {
+  .hero-content { grid-template-columns: 1fr; }
+  .hero-right { display: none; }
+  .about-grid, .about-full-grid { grid-template-columns: 1fr; }
+  .about-img-wrap, .about-visual { display: none; }
+  .loans-full-grid { grid-template-columns: 1fr; }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 3rem; }
+  .process-grid { grid-template-columns: repeat(2,1fr); }
+  .process-step::after { display: none; }
+  .loan-detail-grid { grid-template-columns: 1fr; }
+  .loan-detail-aside { display: none; }
+}
+
+@media (max-width: 900px) {
+  .calc-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .loan-slide { flex: 0 0 calc(50% - .75rem); }
+}
+
+@media (max-width: 768px) {
+  .loans-grid { grid-template-columns: 1fr; }
+  .team-grid { grid-template-columns: 1fr; }
+  .testimonials-grid { grid-template-columns: 1fr; }
+  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .form-row { grid-template-columns: 1fr; }
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  .footer-top { grid-template-columns: 1fr; }
+  .about-pillars { grid-template-columns: 1fr; }
+  .process-grid { grid-template-columns: 1fr; }
+  .photo-strip { grid-template-columns: repeat(2,1fr); height: 320px; }
+  .loan-benefits-grid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 600px) {
+  .loan-slide { flex: 0 0 85%; }
+}

@@ -1,0 +1,65 @@
+/* ============================================================
+   BASE.CSS — Variables, reset, typography, buttons, reveal
+   ============================================================ */
+
+:root {
+  --navy: #002654;
+  --navy-deep: #011a3d;
+  --navy-mid: #003580;
+  --red: #D72A31;
+  --red-dark: #b01f25;
+  --red-light: rgba(215, 42, 49, 0.1);
+  --red-glow: rgba(215, 42, 49, 0.25);
+  --white: #FFFFFF;
+  --bg-light: #F7F8FA;
+  --bg-cream: #F2F4F8;
+  --text: #1A1A2E;
+  --text-muted: #6B7280;
+  --text-light: #9CA3AF;
+  --glass: rgba(255,255,255,0.92);
+  --glass-border: rgba(0,38,84,0.12);
+  --shadow: 0 8px 32px rgba(0,38,84,0.10);
+  --shadow-lg: 0 20px 60px rgba(0,38,84,0.16);
+  --radius: 12px;
+  --radius-lg: 20px;
+  --transition: 0.35s cubic-bezier(0.4,0,0.2,1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; }
+body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; cursor: none; }
+body.menu-open { overflow: hidden; }
+img { max-width: 100%; height: auto; display: block; }
+a { text-decoration: none; color: inherit; }
+ul { list-style: none; }
+button { border: none; background: none; cursor: none; font-family: inherit; }
+
+/* TYPOGRAPHY */
+.display-font { font-family: 'Raleway', sans-serif; }
+.section-label { display: inline-block; font-size: .75rem; font-weight: 600; letter-spacing: .18em; text-transform: uppercase; color: var(--red); margin-bottom: 1rem; }
+.section-title { font-family: 'Raleway', sans-serif; font-size: clamp(1.8rem,3.5vw,2.75rem); font-weight: 700; color: var(--navy); line-height: 1.2; margin-bottom: 1rem; }
+.section-title em { font-style: italic; color: var(--red); }
+.section-subtitle { font-size: 1.05rem; color: var(--text-muted); line-height: 1.7; max-width: 580px; }
+.accent { color: var(--red); }
+.red-line { width: 48px; height: 3px; background: var(--red); border-radius: 2px; margin: 1.25rem 0; }
+
+/* BUTTONS */
+.btn { display: inline-flex; align-items: center; gap: .5rem; padding: .85rem 2rem; border-radius: 6px; font-size: .95rem; font-weight: 600; transition: var(--transition); cursor: pointer; white-space: nowrap; }
+.btn-red { background: var(--red); color: var(--white); box-shadow: 0 4px 20px rgba(215,42,49,.3); }
+.btn-red:hover { background: var(--red-dark); box-shadow: 0 8px 32px rgba(215,42,49,.45); transform: translateY(-2px); }
+.btn-outline { border: 1.5px solid var(--red); color: var(--red); background: transparent; }
+.btn-outline:hover { background: var(--red-light); transform: translateY(-2px); }
+.btn-outline-white { border: 1.5px solid rgba(255,255,255,.7); color: var(--white); background: transparent; }
+.btn-outline-white:hover { background: rgba(255,255,255,.1); transform: translateY(-2px); }
+.btn-white { background: var(--white); color: var(--navy); }
+.btn-white:hover { background: var(--bg-light); transform: translateY(-2px); }
+.btn-navy { background: var(--navy); color: var(--white); }
+.btn-navy:hover { background: var(--navy-mid); transform: translateY(-2px); }
+
+/* REVEAL ANIMATION */
+.reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s cubic-bezier(.4,0,.2,1), transform .7s cubic-bezier(.4,0,.2,1); }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: .1s; }
+.reveal-delay-2 { transition-delay: .2s; }
+.reveal-delay-3 { transition-delay: .3s; }
+.reveal-delay-4 { transition-delay: .4s; }
