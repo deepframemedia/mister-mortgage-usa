@@ -79,7 +79,8 @@ body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: var(--
 #navbar.scrolled { background: var(--glass); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); box-shadow: 0 2px 24px rgba(0,38,84,.1); padding: .75rem 0; border-bottom: 1px solid var(--glass-border); }
 .nav-inner { max-width: 1200px; margin: 0 auto; padding: 0 2rem; display: flex; align-items: center; gap: 2rem; }
 .nav-logo { flex-shrink: 0; cursor: none; }
-.nav-logo img { height: 52px; width: auto; object-fit: contain; }
+.nav-logo img { height: 52px; width: auto; object-fit: contain; filter: brightness(0) invert(1); transition: filter .4s; }
+#navbar.scrolled .nav-logo img { filter: none; }
 .nav-links { display: flex; align-items: center; gap: .25rem; margin-left: auto; }
 .nav-link { font-size: .88rem; font-weight: 500; color: var(--white); padding: .5rem .85rem; border-radius: 6px; transition: color .2s, background .2s; cursor: none; position: relative; }
 #navbar.scrolled .nav-link { color: var(--navy); }
@@ -174,7 +175,8 @@ body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: var(--
 /* ── HOME: HERO ── */
 #hero { position: relative; min-height: 100vh; display: flex; align-items: center; overflow: hidden; }
 .hero-bg { position: absolute; inset: 0; }
-.hero-bg img { width: 100%; height: 100%; object-fit: cover; }
+.hero-bg .hero-slide { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.2s ease; }
+.hero-bg .hero-slide.active { opacity: 1; }
 .hero-overlay { position: absolute; inset: 0; background: linear-gradient(120deg, rgba(0,22,60,.92) 0%, rgba(0,38,84,.80) 55%, rgba(0,22,60,.65) 100%); }
 .hero-content { position: relative; z-index: 1; max-width: 1200px; margin: 0 auto; padding: 8rem 2rem 5rem; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
 .hero-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(215,42,49,.15); border: 1px solid rgba(215,42,49,.4); border-radius: 100px; padding: .4rem 1rem; font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: #ff8a8a; margin-bottom: 1.75rem; }
@@ -489,7 +491,8 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   box-shadow: var(--shadow-lg);
   border-color: var(--red);
 }
-.loan-grid-icon { font-size: 2rem; }
+.loan-grid-icon { width: 48px; height: 48px; background: var(--red-light); border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.loan-grid-icon svg { width: 24px; height: 24px; stroke: var(--red); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .loan-grid-card h3 { font-size: 1.1rem; font-weight: 700; color: var(--navy); }
 .loan-grid-card p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; flex: 1; }
 .loan-grid-cta { font-size: 0.85rem; font-weight: 600; color: var(--red); margin-top: 4px; }
@@ -525,7 +528,8 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
   flex-direction: column;
   gap: 12px;
 }
-.benefit-icon { font-size: 2rem; }
+.benefit-icon { width: 48px; height: 48px; background: rgba(215,42,49,.15); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+.benefit-icon svg { width: 24px; height: 24px; stroke: var(--red); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .benefit-card h3 { font-size: 1rem; font-weight: 700; color: var(--white); }
 .benefit-card p { font-size: 0.875rem; color: rgba(255,255,255,0.6); line-height: 1.6; }
 
@@ -560,7 +564,8 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
    ============================================================ */
 .contact-info-list { display: flex; flex-direction: column; gap: 24px; }
 .contact-info-item { display: flex; gap: 16px; align-items: flex-start; }
-.contact-icon { font-size: 1.5rem; flex-shrink: 0; margin-top: 2px; }
+.contact-icon { width: 44px; height: 44px; background: var(--red-light); border-radius: 10px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.contact-icon svg { width: 20px; height: 20px; stroke: var(--red); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
 .contact-info-item strong { display: block; font-weight: 700; color: var(--navy); margin-bottom: 4px; }
 .contact-info-item p { font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; }
 .contact-info-item a { color: var(--navy-mid); text-decoration: none; }
@@ -594,4 +599,82 @@ input[type=range]::-moz-range-thumb { width: 22px; height: 22px; border-radius: 
 @media (max-width: 768px) {
   .about-split-inner { grid-template-columns: 1fr; }
   .benefits-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   INNER PAGE HERO (about, team, contact, loan-options)
+   ============================================================ */
+.loan-hero {
+  position: relative;
+  min-height: 480px;
+  display: flex;
+  align-items: center;
+  background-size: cover;
+  background-position: center;
+  padding-top: 90px;
+}
+.loan-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(0,22,60,.88) 0%, rgba(0,38,84,.75) 100%);
+}
+.loan-hero-content {
+  position: relative;
+  z-index: 1;
+  padding: 4rem 2rem;
+}
+.loan-hero-content .section-label { color: rgba(255,150,150,.9); }
+.loan-hero-content h1 {
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  color: var(--white);
+  line-height: 1.15;
+  margin-bottom: 1rem;
+}
+.loan-hero-content h1 em { color: #ff9090; font-style: italic; }
+.loan-hero-content p {
+  color: rgba(255,255,255,.75);
+  font-size: 1.05rem;
+  max-width: 560px;
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+/* Generic section wrapper */
+.section { padding: 80px 0; }
+
+/* Stats band (inner pages — different structure) */
+.stats-band-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  text-align: center;
+}
+.stat-item { display: flex; flex-direction: column; align-items: center; gap: .4rem; }
+.stat-item .stat-num {
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: var(--white);
+}
+.stat-item .stat-plus { color: var(--red); }
+.stat-item .stat-star { color: var(--red); }
+.stat-item .stat-label {
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+}
+
+/* CTA band (inner pages) */
+.cta-band-bg { background: url('https://images.unsplash.com/photo-1560185127-6a7b527e7b8f?w=1600&q=80') center/cover no-repeat; }
+
+@media (max-width: 768px) {
+  .stats-band-inner { grid-template-columns: repeat(2,1fr); }
+  .loan-hero { min-height: 360px; }
 }

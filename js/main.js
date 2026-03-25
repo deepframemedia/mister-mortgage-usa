@@ -344,14 +344,14 @@ function getCarouselVisible() {
   if (window.innerWidth <= 900) return 2;
   return 3;
 }
-function getMaxIndex() { return Math.ceil(carouselTotal / getCarouselVisible()) - 1; }
+function getMaxIndex() { return carouselTotal - getCarouselVisible(); }
 
 function buildCarouselDots() {
   var dots = document.getElementById('carousel-dots');
   if (!dots) return;
-  var pages = getMaxIndex() + 1;
+  var max = getMaxIndex() + 1;
   var html = '';
-  for (var i = 0; i < pages; i++) {
+  for (var i = 0; i < max; i++) {
     html += '<button class="carousel-dot' + (i === 0 ? ' active' : '') + '" onclick="carouselGoTo(' + i + ')"></button>';
   }
   dots.innerHTML = html;
@@ -368,7 +368,7 @@ function carouselGoTo(idx) {
   var slide = track.querySelector('.loan-slide');
   if (!slide) return;
   var slideW = slide.offsetWidth + 24;
-  var offset = carouselIndex * getCarouselVisible() * slideW;
+  var offset = carouselIndex * slideW;
   if (typeof gsap !== 'undefined') {
     gsap.to(track, { x: -offset, duration: 0.55, ease: 'power2.inOut' });
   } else {
@@ -407,4 +407,16 @@ window.addEventListener('load', initCarousel);
     var diff = startX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 40) { if (diff > 0) { carouselNext(); } else { carouselPrev(); } }
   }, { passive: true });
+})();
+
+// ─── HERO SLIDESHOW ───
+(function() {
+  var slides = document.querySelectorAll('.hero-slide');
+  if (!slides.length) return;
+  var current = 0;
+  setInterval(function() {
+    slides[current].classList.remove('active');
+    current = (current + 1) % slides.length;
+    slides[current].classList.add('active');
+  }, 5000);
 })();
