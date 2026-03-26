@@ -420,3 +420,38 @@ window.addEventListener('load', initCarousel);
     slides[current].classList.add('active');
   }, 5000);
 })();
+
+// ─── TESTIMONIALS CAROUSEL ───
+(function() {
+  var current = 0;
+  var track = document.getElementById('testimonials-track');
+  if (!track) return;
+  var total = track.children.length;
+  var dots = document.querySelectorAll('.testimonial-dot');
+
+  function goTo(idx) {
+    current = ((idx % total) + total) % total;
+    track.style.transform = 'translateX(-' + (current * 100) + '%)';
+    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+  }
+
+  window.testimonialsNext = function() { goTo(current + 1); };
+  window.testimonialsPrev = function() { goTo(current - 1); };
+  window.testimonialsGoTo = goTo;
+
+  // Auto-advance every 6s, pause on hover
+  var timer = setInterval(function() { goTo(current + 1); }, 6000);
+  var viewport = track.closest('.testimonials-carousel-viewport');
+  if (viewport) {
+    viewport.addEventListener('mouseenter', function() { clearInterval(timer); });
+    viewport.addEventListener('mouseleave', function() { timer = setInterval(function() { goTo(current + 1); }, 6000); });
+  }
+
+  // Touch/swipe support
+  var startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { if (diff > 0) { goTo(current + 1); } else { goTo(current - 1); } }
+  }, { passive: true });
+})();

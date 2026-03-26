@@ -122,6 +122,7 @@ var I18N = {
     'testimonials.t2.role': 'Satisfied Investor',
     'testimonials.t3.body': '"The staff is absolutely wonderful—friendly, patient, and always ready to help. Their professionalism and warm approach create a welcoming atmosphere, making the entire experience smooth and enjoyable. Highly recommended!"',
     'testimonials.t3.role': 'Delighted Seller',
+    'testimonials.reviewBtn': 'Leave a Review on Google',
     'test.label':        'Client Reviews',
     'test.title':        'What Our Clients <em>Say About Us</em>',
     /* ---- LOAN OPTIONS PAGE ---- */
@@ -657,6 +658,7 @@ var I18N = {
     'testimonials.t2.role': 'Inversor Satisfecho',
     'testimonials.t3.body': '"El personal es absolutamente maravilloso — amable, paciente y siempre listo para ayudar. Su profesionalismo y cálido enfoque crean un ambiente acogedor, haciendo que toda la experiencia sea fluida y agradable. ¡Muy recomendado!"',
     'testimonials.t3.role': 'Vendedor Satisfecho',
+    'testimonials.reviewBtn': 'Dejar una Reseña en Google',
     'test.label':        'Reseñas de Clientes',
     'test.title':        'Lo Que Dicen Nuestros <em>Clientes</em>',
     /* ---- LOAN OPTIONS PAGE ---- */
@@ -1112,12 +1114,8 @@ var I18N = {
     /* Update toggle button appearance */
     var btn = document.getElementById('lang-toggle');
     if (btn) {
-      var isEs = lang === 'es';
-      btn.innerHTML = isEs
-        ? '<span class="lang-flag">🇺🇸</span><span class="lang-code">EN</span>'
-        : '<span class="lang-flag">🇪🇸</span><span class="lang-code">ES</span>';
       btn.setAttribute('data-current-lang', lang);
-      btn.setAttribute('aria-label', isEs ? 'Switch to English' : 'Cambiar a Español');
+      btn.setAttribute('aria-label', lang === 'es' ? 'Switch to English' : 'Cambiar a Español');
     }
 
     /* Update <html lang> attribute */
