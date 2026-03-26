@@ -169,48 +169,58 @@ function updateCalc() {
 
 if (document.getElementById('calc-price')) updateCalc();
 
+// ─── TRANSLATION HELPER ───
+function tr(key) {
+  var lang = document.documentElement.lang || 'en';
+  return (window.I18N && window.I18N[lang] && window.I18N[lang][key] !== undefined)
+    ? window.I18N[lang][key]
+    : (window.I18N && window.I18N['en'] && window.I18N['en'][key]) || key;
+}
+
 // ─── PRE-QUAL MODAL ───
 var modalStep = 1;
 var modalAnswers = {};
 var totalSteps = 7;
 
+/* label = English value stored in modalAnswers (used for logic comparisons)
+   qKey / subKey = i18n keys for display text */
 var modalSteps = [
-  { q: 'What are you looking to do?', options: [
-    { label: 'Purchase a Home', sub: 'Buy a new property' },
-    { label: 'Refinance My Home', sub: 'Improve my current mortgage' }
+  { qKey: 'modal.q1', options: [
+    { label: 'Purchase a Home',   key: 'modal.q1.opt1', subKey: 'modal.q1.opt1.sub' },
+    { label: 'Refinance My Home', key: 'modal.q1.opt2', subKey: 'modal.q1.opt2.sub' }
   ]},
-  { q: 'What type of property?', options: [
-    { label: 'Primary Residence', sub: 'I will live here full-time' },
-    { label: 'Investment Property', sub: 'Rental / income-generating' },
-    { label: 'Vacation Home', sub: 'Second home / seasonal use' },
-    { label: 'Multi-Family', sub: '2–4 unit property' }
+  { qKey: 'modal.q2', options: [
+    { label: 'Primary Residence',   key: 'modal.q2.opt1', subKey: 'modal.q2.opt1.sub' },
+    { label: 'Investment Property', key: 'modal.q2.opt2', subKey: 'modal.q2.opt2.sub' },
+    { label: 'Vacation Home',       key: 'modal.q2.opt3', subKey: 'modal.q2.opt3.sub' },
+    { label: 'Multi-Family',        key: 'modal.q2.opt4', subKey: 'modal.q2.opt4.sub' }
   ]},
-  { q: 'Estimated property value?', options: [
-    { label: 'Under $300K', sub: '' },
-    { label: '$300K – $500K', sub: '' },
-    { label: '$500K – $800K', sub: '' },
-    { label: '$800K – $1.2M', sub: '' },
-    { label: 'Over $1.2M', sub: '' }
+  { qKey: 'modal.q3', options: [
+    { label: 'Under $300K',    key: 'modal.q3.opt1', subKey: '' },
+    { label: '$300K – $500K',  key: 'modal.q3.opt2', subKey: '' },
+    { label: '$500K – $800K',  key: 'modal.q3.opt3', subKey: '' },
+    { label: '$800K – $1.2M',  key: 'modal.q3.opt4', subKey: '' },
+    { label: 'Over $1.2M',     key: 'modal.q3.opt5', subKey: '' }
   ]},
-  { q: 'Estimated down payment?', options: [
-    { label: 'Less than 3.5%', sub: 'Min for FHA loans' },
-    { label: '3.5% – 10%', sub: 'Low down payment' },
-    { label: '10% – 20%', sub: 'Standard range' },
-    { label: 'Over 20%', sub: 'Avoid PMI' }
+  { qKey: 'modal.q4', options: [
+    { label: 'Less than 3.5%', key: 'modal.q4.opt1', subKey: 'modal.q4.opt1.sub' },
+    { label: '3.5% – 10%',     key: 'modal.q4.opt2', subKey: 'modal.q4.opt2.sub' },
+    { label: '10% – 20%',      key: 'modal.q4.opt3', subKey: 'modal.q4.opt3.sub' },
+    { label: 'Over 20%',       key: 'modal.q4.opt4', subKey: 'modal.q4.opt4.sub' }
   ]},
-  { q: 'How would you describe your credit?', options: [
-    { label: 'Excellent', sub: '740+ credit score' },
-    { label: 'Good', sub: '700–739 credit score' },
-    { label: 'Fair', sub: '660–699 credit score' },
-    { label: 'Below Average', sub: 'Under 660' }
+  { qKey: 'modal.q5', options: [
+    { label: 'Excellent',      key: 'modal.q5.opt1', subKey: 'modal.q5.opt1.sub' },
+    { label: 'Good',           key: 'modal.q5.opt2', subKey: 'modal.q5.opt2.sub' },
+    { label: 'Fair',           key: 'modal.q5.opt3', subKey: 'modal.q5.opt3.sub' },
+    { label: 'Below Average',  key: 'modal.q5.opt4', subKey: 'modal.q5.opt4.sub' }
   ]},
-  { q: 'What is your employment status?', options: [
-    { label: 'Employed (W-2)', sub: 'Traditional employee' },
-    { label: 'Self-Employed', sub: 'Business owner / freelance' },
-    { label: 'Retired', sub: 'On pension or fixed income' },
-    { label: 'Other', sub: 'Investor / other income' }
+  { qKey: 'modal.q6', options: [
+    { label: 'Employed (W-2)',  key: 'modal.q6.opt1', subKey: 'modal.q6.opt1.sub' },
+    { label: 'Self-Employed',   key: 'modal.q6.opt2', subKey: 'modal.q6.opt2.sub' },
+    { label: 'Retired',         key: 'modal.q6.opt3', subKey: 'modal.q6.opt3.sub' },
+    { label: 'Other',           key: 'modal.q6.opt4', subKey: 'modal.q6.opt4.sub' }
   ]},
-  { q: 'contact' }
+  { qKey: 'contact' }
 ];
 
 function openPrequalModal() {
@@ -238,28 +248,31 @@ function renderModalStep() {
   document.getElementById('modal-progress').style.width = pct + '%';
   var data = modalSteps[modalStep - 1];
   var html = '';
-  if (data.q === 'contact') {
-    html  = '<div class="modal-step-label">Step ' + modalStep + ' of ' + totalSteps + '</div>';
-    html += '<div class="modal-question">Almost there! Let\'s connect you with an expert.</div>';
+  var stepLabel = tr('modal.step.label') + ' ' + modalStep + ' ' + tr('modal.step.of') + ' ' + totalSteps;
+  if (data.qKey === 'contact') {
+    html  = '<div class="modal-step-label">' + stepLabel + '</div>';
+    html += '<div class="modal-question">' + tr('modal.contact.title') + '</div>';
     html += '<form class="modal-form" onsubmit="submitPrequal(event)">';
-    html += '<div class="modal-form-row"><div class="form-group"><label>First Name *</label><input type="text" name="fname" placeholder="John" required /></div><div class="form-group"><label>Last Name *</label><input type="text" name="lname" placeholder="Doe" required /></div></div>';
-    html += '<div class="modal-form-row"><div class="form-group"><label>Phone *</label><input type="tel" name="phone" placeholder="(305) 000-0000" required /></div><div class="form-group"><label>Email *</label><input type="email" name="email" placeholder="john@email.com" required /></div></div>';
-    html += '<div class="modal-nav" style="margin-top:1rem;"><button type="button" class="modal-btn-back" onclick="prevStep()">← Back</button><button type="submit" class="modal-btn-next">Get My Free Consultation →</button></div></form>';
+    html += '<div class="modal-form-row"><div class="form-group"><label>' + tr('modal.form.fname') + '</label><input type="text" name="fname" placeholder="' + tr('modal.form.fname.ph') + '" required /></div><div class="form-group"><label>' + tr('modal.form.lname') + '</label><input type="text" name="lname" placeholder="' + tr('modal.form.lname.ph') + '" required /></div></div>';
+    html += '<div class="modal-form-row"><div class="form-group"><label>' + tr('modal.form.phone') + '</label><input type="tel" name="phone" placeholder="' + tr('modal.form.phone.ph') + '" required /></div><div class="form-group"><label>' + tr('modal.form.email') + '</label><input type="email" name="email" placeholder="' + tr('modal.form.email.ph') + '" required /></div></div>';
+    html += '<div class="modal-nav" style="margin-top:1rem;"><button type="button" class="modal-btn-back" onclick="prevStep()">' + tr('modal.btn.back') + '</button><button type="submit" class="modal-btn-next">' + tr('modal.btn.submit') + '</button></div></form>';
   } else {
-    html  = '<div class="modal-step-label">Step ' + modalStep + ' of ' + totalSteps + '</div>';
-    html += '<div class="modal-question">' + data.q + '</div>';
+    html  = '<div class="modal-step-label">' + stepLabel + '</div>';
+    html += '<div class="modal-question">' + tr(data.qKey) + '</div>';
     var cols = data.options.length > 3 ? '' : ' cols-1';
     html += '<div class="modal-options' + cols + '">';
     data.options.forEach(function(opt) {
       var sel = modalAnswers[modalStep] === opt.label ? ' selected' : '';
-      html += '<button class="modal-option' + sel + '" onclick="selectOption(this,\'' + opt.label.replace(/'/g, "\\'") + '\')">' + opt.label;
-      if (opt.sub) html += '<span>' + opt.sub + '</span>';
+      var displayLabel = tr(opt.key);
+      var displaySub   = opt.subKey ? tr(opt.subKey) : '';
+      html += '<button class="modal-option' + sel + '" onclick="selectOption(this,\'' + opt.label.replace(/'/g, "\\'") + '\')">' + displayLabel;
+      if (displaySub) html += '<span>' + displaySub + '</span>';
       html += '</button>';
     });
     html += '</div><div class="modal-nav">';
-    if (modalStep > 1) html += '<button class="modal-btn-back" onclick="prevStep()">← Back</button>';
+    if (modalStep > 1) html += '<button class="modal-btn-back" onclick="prevStep()">' + tr('modal.btn.back') + '</button>';
     else html += '<div></div>';
-    html += '<button class="modal-btn-next" onclick="nextStep()">Next →</button></div>';
+    html += '<button class="modal-btn-next" onclick="nextStep()">' + tr('modal.btn.next') + '</button></div>';
   }
   document.getElementById('modal-content').innerHTML = html;
   if (typeof gsap !== 'undefined') gsap.from('#modal-content', { opacity: 0, x: 20, duration: 0.3, ease: 'power2.out' });
@@ -291,7 +304,7 @@ function prevStep() {
 function submitPrequal(e) {
   e.preventDefault();
   document.getElementById('modal-progress').style.width = '100%';
-  document.getElementById('modal-content').innerHTML = '<div class="modal-success"><div class="modal-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><h3>You\'re All Set!</h3><p>Thank you! A Mister Mortgage USA loan expert will contact you within 24 hours to discuss your options.<br><br><strong>Call us anytime: <a href="tel:3056151515" style="color:var(--red)">(305) 615-1515</a></strong></p></div>';
+  document.getElementById('modal-content').innerHTML = '<div class="modal-success"><div class="modal-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg></div><h3>' + tr('modal.success.title') + '</h3><p>' + tr('modal.success.body') + '<br><br><strong>' + tr('modal.success.call') + ' <a href="tel:3056151515" style="color:var(--red)">(305) 615-1515</a></strong></p></div>';
   if (typeof gsap !== 'undefined') gsap.from('.modal-success', { opacity: 0, y: 20, duration: 0.5, ease: 'power2.out' });
   setTimeout(closePrequalModal, 5000);
 }
@@ -321,8 +334,8 @@ function openLoanModal(idx) {
     '<div class="loan-info-desc">' + loan.desc + '</div>' +
     '<div class="loan-info-benefits">' + bHTML + '</div>' +
     '<div class="loan-info-actions">' +
-      '<a class="btn btn-red" href="' + loan.page + '">View Full Details &rarr;</a>' +
-      '<a class="btn btn-outline" href="#" onclick="closeLoanModal();openPrequalModal();return false;">Apply Now</a>' +
+      '<a class="btn btn-red" href="' + loan.page + '">' + tr('modal.loan.details') + '</a>' +
+      '<a class="btn btn-outline" href="#" onclick="closeLoanModal();openPrequalModal();return false;">' + tr('modal.loan.apply') + '</a>' +
     '</div>';
   document.getElementById('loan-info-modal').classList.add('open');
   document.body.style.overflow = 'hidden';
@@ -421,37 +434,100 @@ window.addEventListener('load', initCarousel);
   }, 5000);
 })();
 
-// ─── TESTIMONIALS CAROUSEL ───
+// ─── TESTIMONIALS CAROUSEL (3 visible, advance 1 at a time) ───
 (function() {
   var current = 0;
+  var timer;
+  var GAP = 24; // 1.5rem in px
+
   var track = document.getElementById('testimonials-track');
   if (!track) return;
+
   var total = track.children.length;
-  var dots = document.querySelectorAll('.testimonial-dot');
+
+  function getVisible() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
+
+  function getCardWidth() {
+    var viewport = track.closest('.testimonials-carousel-viewport');
+    var containerW = viewport ? viewport.offsetWidth : track.offsetWidth;
+    var vis = getVisible();
+    return (containerW - GAP * (vis - 1)) / vis;
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, total - getVisible());
+  }
+
+  function setCardWidths() {
+    var w = getCardWidth();
+    Array.prototype.forEach.call(track.children, function(c) {
+      c.style.width    = w + 'px';
+      c.style.minWidth = w + 'px';
+      c.style.flexShrink = '0';
+    });
+  }
+
+  function buildDots() {
+    var dotsEl = document.getElementById('testimonials-dots');
+    if (!dotsEl) return;
+    var maxIdx = getMaxIndex();
+    var html = '';
+    for (var i = 0; i <= maxIdx; i++) {
+      html += '<button class="testimonial-dot' + (i === current ? ' active' : '') + '" onclick="testimonialsGoTo(' + i + ')" aria-label="Testimonial ' + (i + 1) + '"></button>';
+    }
+    dotsEl.innerHTML = html;
+  }
 
   function goTo(idx) {
-    current = ((idx % total) + total) % total;
-    track.style.transform = 'translateX(-' + (current * 100) + '%)';
-    dots.forEach(function(d, i) { d.classList.toggle('active', i === current); });
+    var maxIdx = getMaxIndex();
+    current = ((idx % (maxIdx + 1)) + (maxIdx + 1)) % (maxIdx + 1);
+    var cardW = getCardWidth();
+    track.style.transform = 'translateX(-' + (current * (cardW + GAP)) + 'px)';
+    document.querySelectorAll('.testimonial-dot').forEach(function(d, i) {
+      d.classList.toggle('active', i === current);
+    });
   }
 
   window.testimonialsNext = function() { goTo(current + 1); };
   window.testimonialsPrev = function() { goTo(current - 1); };
   window.testimonialsGoTo = goTo;
 
-  // Auto-advance every 6s, pause on hover
-  var timer = setInterval(function() { goTo(current + 1); }, 6000);
+  function startTimer() { timer = setInterval(function() { goTo(current + 1); }, 6000); }
+  function stopTimer()  { clearInterval(timer); }
+
   var viewport = track.closest('.testimonials-carousel-viewport');
   if (viewport) {
-    viewport.addEventListener('mouseenter', function() { clearInterval(timer); });
-    viewport.addEventListener('mouseleave', function() { timer = setInterval(function() { goTo(current + 1); }, 6000); });
+    viewport.addEventListener('mouseenter', stopTimer);
+    viewport.addEventListener('mouseleave', startTimer);
   }
 
-  // Touch/swipe support
   var startX = 0;
   track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', function(e) {
+  track.addEventListener('touchend',   function(e) {
     var diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) { if (diff > 0) { goTo(current + 1); } else { goTo(current - 1); } }
+    if (Math.abs(diff) > 40) { diff > 0 ? testimonialsNext() : testimonialsPrev(); }
   }, { passive: true });
+
+  function init() {
+    setCardWidths();
+    buildDots();
+    goTo(0);
+    startTimer();
+  }
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('load', init);
+  } else {
+    init();
+  }
+
+  window.addEventListener('resize', function() {
+    setCardWidths();
+    buildDots();
+    goTo(current);
+  });
 })();

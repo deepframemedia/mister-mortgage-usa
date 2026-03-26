@@ -258,7 +258,7 @@ body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: var(--
 #testimonials { padding: 7rem 0; background: var(--bg-cream); }
 .testimonials-carousel-wrap { display: flex; align-items: center; gap: 1.5rem; margin-top: 3rem; }
 .testimonials-carousel-viewport { flex: 1; overflow: hidden; border-radius: var(--radius-lg); }
-.testimonials-track { display: flex; transition: transform .5s cubic-bezier(.4,0,.2,1); }
+.testimonials-track { display: flex; gap: 1.5rem; transition: transform .5s cubic-bezier(.4,0,.2,1); }
 .testimonials-arrow { width: 44px; height: 44px; border-radius: 50%; border: 1.5px solid var(--border); background: var(--white); display: flex; align-items: center; justify-content: center; flex-shrink: 0; cursor: pointer; transition: var(--transition); box-shadow: var(--shadow); }
 .testimonials-arrow:hover { border-color: var(--red); color: var(--red); transform: scale(1.08); }
 .testimonials-arrow svg { width: 18px; height: 18px; color: var(--navy); transition: color .2s; }
@@ -269,7 +269,7 @@ body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: var(--
 .testimonial-dot.active { background: var(--red); width: 24px; border-radius: 4px; }
 .google-review-btn { display: inline-flex; align-items: center; gap: .6rem; padding: .65rem 1.4rem; border: 1.5px solid var(--border); border-radius: 8px; font-size: .85rem; font-weight: 600; color: var(--navy); background: var(--white); transition: var(--transition); box-shadow: 0 2px 8px rgba(0,38,84,.07); cursor: pointer; }
 .google-review-btn:hover { border-color: #4285F4; color: #4285F4; box-shadow: 0 4px 16px rgba(66,133,244,.15); transform: translateY(-2px); }
-.testimonial-card { background: var(--white); border-radius: var(--radius-lg); padding: 2.5rem 3rem; box-shadow: var(--shadow); position: relative; min-width: 100%; }
+.testimonial-card { background: var(--white); border-radius: var(--radius-lg); padding: 2rem 2rem; box-shadow: var(--shadow); position: relative; flex-shrink: 0; }
 .testimonial-card::before { content: '\201C'; font-family: 'Raleway', sans-serif; font-size: 5rem; color: var(--red); line-height: 1; position: absolute; top: 1rem; right: 1.5rem; opacity: .15; }
 .testimonial-stars { display: flex; gap: .2rem; margin-bottom: 1.25rem; }
 .testimonial-stars svg { width: 16px; height: 16px; fill: var(--red); }
