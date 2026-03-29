@@ -113,6 +113,10 @@ var I18N = {
     'about.pillar4.title': 'Trust &amp; Transparency',
     'about.pillar4.body':  'Honest guidance at every step',
     'about.btn':           'Learn More About Us',
+    /* ---- INDEX — SCROLL GALLERY ---- */
+    'gallery.label': 'Our Portfolio',
+    'gallery.title': 'Miami <em>Properties</em>',
+    'gallery.sub':   'From luxury waterfront condos to family homes — we finance them all.',
     /* ---- INDEX — TESTIMONIALS ---- */
     'testimonials.label':  'Testimonials',
     'testimonials.title':  'What They\'re <em>Saying</em>',
@@ -764,6 +768,10 @@ var I18N = {
     'about.pillar4.title': 'Confianza y Transparencia',
     'about.pillar4.body':  'Orientación honesta en cada paso',
     'about.btn':           'Conoce Más Sobre Nosotros',
+    /* ---- INDEX — SCROLL GALLERY ---- */
+    'gallery.label': 'Nuestro Portafolio',
+    'gallery.title': 'Propiedades en <em>Miami</em>',
+    'gallery.sub':   'Desde condominios de lujo frente al mar hasta casas familiares — los financiamos todos.',
     /* ---- INDEX — TESTIMONIALS ---- */
     'testimonials.label':  'Testimonios',
     'testimonials.title':  'Lo Que Dicen <em>Nuestros Clientes</em>',
