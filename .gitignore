@@ -1,0 +1,15 @@
+# Local Netlify folder
+.netlify
+
+# Desktop / OS files (no son parte del proyecto)
+desktop.ini
+*.url
+.mcp.json
+.claude/
+
+# Carpetas de Desktop que no son parte del proyecto
+Accesos Directos/
+editor-pro-max/
+gdrive-oauth-setup/
+login-app/
+mister-mortgage-deploy/
