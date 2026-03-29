@@ -632,6 +632,27 @@ var I18N = {
     'modal.success.call':  'Call us anytime:',
     'modal.loan.details':  'View Full Details →',
     'modal.loan.apply':    'Apply Now',
+    /* ---- LOAN PROCESS TIMELINE ---- */
+    'timeline.label':      'How It Works',
+    'timeline.title':      'Your Path to <em>Homeownership</em>',
+    'timeline.subtitle':   'From first call to closing day — we guide you through every step of the mortgage process.',
+    'timeline.step1.label': 'Step 1',
+    'timeline.step1.title': 'Pre-Qualification',
+    'timeline.step1.body':  'We assess your financial profile and tell you exactly what you qualify for — no surprises.',
+    'timeline.step2.label': 'Step 2',
+    'timeline.step2.title': 'Application',
+    'timeline.step2.body':  'Submit your application with our guided process. We make it simple and stress-free.',
+    'timeline.step3.label': 'Step 3',
+    'timeline.step3.title': 'Fast Approval',
+    'timeline.step3.body':  'Our underwriting team works quickly. Most clients receive approval within days.',
+    'timeline.step4.label': 'Step 4',
+    'timeline.step4.title': 'Closing Day',
+    'timeline.step4.body':  'Sign the papers and get the keys. We\'ll be by your side until you\'re officially a homeowner.',
+    'timeline.cta':         'Start Your Journey Today',
+    /* ---- NEIGHBORHOODS MAP ---- */
+    'neighborhoods.label':    'Service Area',
+    'neighborhoods.title':    'Neighborhoods We <em>Serve</em>',
+    'neighborhoods.subtitle': 'We know South Florida — from Brickell condos to Homestead first-time buyers, we have a loan for every neighborhood.',
   },
 
   es: {
@@ -1262,6 +1283,27 @@ var I18N = {
     'modal.success.call':  'Llámanos en cualquier momento:',
     'modal.loan.details':  'Ver Detalles Completos →',
     'modal.loan.apply':    'Aplicar Ahora',
+    /* ---- LOAN PROCESS TIMELINE ---- */
+    'timeline.label':      'Cómo Funciona',
+    'timeline.title':      'Tu Camino hacia la <em>Vivienda Propia</em>',
+    'timeline.subtitle':   'Desde la primera llamada hasta el cierre — te guiamos en cada paso del proceso hipotecario.',
+    'timeline.step1.label': 'Paso 1',
+    'timeline.step1.title': 'Pre-Calificación',
+    'timeline.step1.body':  'Evaluamos tu perfil financiero y te decimos exactamente para qué calificas — sin sorpresas.',
+    'timeline.step2.label': 'Paso 2',
+    'timeline.step2.title': 'Solicitud',
+    'timeline.step2.body':  'Presenta tu solicitud con nuestro proceso guiado. Lo hacemos simple y sin estrés.',
+    'timeline.step3.label': 'Paso 3',
+    'timeline.step3.title': 'Aprobación Rápida',
+    'timeline.step3.body':  'Nuestro equipo trabaja con rapidez. La mayoría de los clientes reciben aprobación en días.',
+    'timeline.step4.label': 'Paso 4',
+    'timeline.step4.title': 'Día de Cierre',
+    'timeline.step4.body':  'Firma los documentos y recibe las llaves. Estaremos contigo hasta que seas oficialmente dueño.',
+    'timeline.cta':         'Comienza Tu Camino Hoy',
+    /* ---- NEIGHBORHOODS MAP ---- */
+    'neighborhoods.label':    'Área de Servicio',
+    'neighborhoods.title':    'Vecindarios que <em>Servimos</em>',
+    'neighborhoods.subtitle': 'Conocemos el Sur de Florida — desde condos en Brickell hasta compradores de primera vivienda en Homestead.',
   }
 };
 
