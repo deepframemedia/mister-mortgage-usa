@@ -531,3 +531,83 @@ window.addEventListener('load', initCarousel);
     goTo(current);
   });
 })();
+
+// ─── BRAND NAME NO-WRAP ───
+// Ensures "Mister Mortgage USA" never wraps across lines
+(function() {
+  function wrapBrandName(root) {
+    var walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, null, false);
+    var nodes = [];
+    var node;
+    while ((node = walker.nextNode())) nodes.push(node);
+    nodes.forEach(function(n) {
+      if (n.nodeValue && n.nodeValue.indexOf('Mister Mortgage USA') !== -1) {
+        var span = document.createElement('span');
+        span.style.whiteSpace = 'nowrap';
+        var parts = n.nodeValue.split('Mister Mortgage USA');
+        var frag = document.createDocumentFragment();
+        parts.forEach(function(part, i) {
+          if (i > 0) {
+            var brand = document.createElement('span');
+            brand.style.whiteSpace = 'nowrap';
+            brand.textContent = 'Mister Mortgage USA';
+            frag.appendChild(brand);
+          }
+          if (part) frag.appendChild(document.createTextNode(part));
+        });
+        n.parentNode.replaceChild(frag, n);
+      }
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() { wrapBrandName(document.body); });
+  } else {
+    wrapBrandName(document.body);
+  }
+})();
+
+// ─── AUTO-LINK PHONE & ADDRESS ───
+(function() {
+  var PHONE_RE = /\(305\)\s*615-1515/g;
+  var ADDR_RE  = /6030 Bird Rd[,\s]*/g;
+  var PHONE_HREF = 'tel:+13056151515';
+  var MAPS_HREF  = 'https://maps.google.com/?q=6030+Bird+Rd,+Miami,+FL+33155';
+
+  function linkifyNode(node) {
+    if (node.nodeType === 3) { // text node
+      var val = node.nodeValue;
+      if (!PHONE_RE.test(val) && !ADDR_RE.test(val)) return;
+      PHONE_RE.lastIndex = 0;
+      ADDR_RE.lastIndex = 0;
+      var span = document.createElement('span');
+      var html = val
+        .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+        .replace(PHONE_RE, '<a href="' + PHONE_HREF + '" style="color:inherit;text-decoration:underline dotted;text-underline-offset:3px;">$&</a>')
+        .replace(ADDR_RE, '<a href="' + MAPS_HREF + '" target="_blank" rel="noopener" style="color:inherit;text-decoration:underline dotted;text-underline-offset:3px;">$&</a>');
+      if (html !== val) {
+        span.innerHTML = html;
+        node.parentNode.replaceChild(span, node);
+      }
+    } else if (node.nodeType === 1 && node.tagName !== 'A' && node.tagName !== 'SCRIPT' && node.tagName !== 'STYLE') {
+      Array.from(node.childNodes).forEach(linkifyNode);
+    }
+  }
+
+  function run() { linkifyNode(document.body); }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', run);
+  else run();
+  // Re-run after i18n updates the DOM
+  document.addEventListener('i18nApplied', run);
+})();
+
+// ─── TICKER DUPLICATE FOR SEAMLESS LOOP ───
+(function() {
+  function initTicker() {
+    var track = document.getElementById('ticker-track');
+    if (!track) return;
+    var clone = track.innerHTML;
+    track.innerHTML = clone + clone; // duplicate for seamless loop
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initTicker);
+  else initTicker();
+})();
