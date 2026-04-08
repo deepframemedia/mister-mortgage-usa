@@ -13,10 +13,68 @@
   <link rel="stylesheet" href="css/main.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
 </head>
-<body>
+<body class="has-ticker">
 
   <div id="cursor-dot"></div>
   <div id="cursor-ring"></div>
+
+  <!-- CONTACT TICKER (top bar) -->
+  <div class="contact-ticker" id="contact-ticker">
+    <div class="ticker-track" id="ticker-track">
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.65A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:+13056151515">(305) 615-1515</a>
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <a href="https://maps.google.com/?q=6030+Bird+Rd,+Miami,+FL+33155" target="_blank" rel="noopener">6030 Bird Rd, Miami, FL 33155</a>
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:info@mistermortgageusa.com">info@mistermortgageusa.com</a>
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        NMLS #2572035
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        Mon–Fri: 9AM–6PM &nbsp;|&nbsp; Sat: 10AM–3PM
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
+        <a href="https://wa.me/13056151515" target="_blank" rel="noopener">WhatsApp Us</a>
+      </span>
+      <!-- duplicate for seamless loop -->
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.65A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+        <a href="tel:+13056151515">(305) 615-1515</a>
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+        <a href="https://maps.google.com/?q=6030+Bird+Rd,+Miami,+FL+33155" target="_blank" rel="noopener">6030 Bird Rd, Miami, FL 33155</a>
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        <a href="mailto:info@mistermortgageusa.com">info@mistermortgageusa.com</a>
+      </span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">NMLS #2572035</span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">Mon–Fri: 9AM–6PM &nbsp;|&nbsp; Sat: 10AM–3PM</span>
+      <span class="ticker-sep">|</span>
+      <span class="ticker-item">
+        <a href="https://wa.me/13056151515" target="_blank" rel="noopener">WhatsApp Us</a>
+      </span>
+    </div>
+  </div>
 
   <a href="https://wa.me/13056151515" target="_blank" rel="noopener" class="whatsapp-btn" aria-label="Chat on WhatsApp">
     <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
@@ -44,19 +102,22 @@
       </a>
       <div class="nav-links">
         <a class="nav-link" href="index.html" data-page="index.html"><span data-i18n="nav.home">Home</span></a>
-        <div class="nav-dropdown-wrap">
+        <div class="nav-mega-wrap">
           <a class="nav-link" href="loan-options.html" data-page="loan-options.html"><span data-i18n="nav.loans">Loan Options</span> <span class="nav-dropdown-arrow">▾</span></a>
-          <div class="nav-dropdown">
-            <a href="fixed-rate-mortgage-miami.html"><span data-i18n="loan.fixed">Fixed Rate Mortgage</span></a>
-            <a href="fha-home-loan-miami.html"><span data-i18n="loan.fha">FHA Home Loan</span></a>
-            <a href="low-down-payment-mortgage.html"><span data-i18n="loan.lowdown">Low Down Payment</span></a>
-            <a href="rehab-loan-203k.html"><span data-i18n="loan.rehab">Rehab Loans (203k)</span></a>
-            <a href="usda-loan-florida.html"><span data-i18n="loan.usda">USDA Loan</span></a>
-            <a href="jumbo-loans-miami.html"><span data-i18n="loan.jumbo">Jumbo Loans</span></a>
-            <a href="va-home-loan-miami.html"><span data-i18n="loan.va">VA Home Loan</span></a>
-            <a href="first-time-homebuyer-miami.html"><span data-i18n="loan.ftb">First-Time Homebuyer</span></a>
-            <a href="investment-property-loans-miami.html"><span data-i18n="loan.invest">Investment Property</span></a>
-            <a href="mortgage-refinance-miami.html"><span data-i18n="loan.refi">Refinance</span></a>
+          <div class="nav-mega">
+            <div class="nav-mega-cols">
+              <a href="fixed-rate-mortgage-miami.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><span data-i18n="loan.fixed">Fixed Rate Mortgage</span></a>
+              <a href="va-home-loan-miami.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><span data-i18n="loan.va">VA Home Loan</span></a>
+              <a href="fha-home-loan-miami.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V21H15v-6H9v6H3V10.5z"/></svg></div><span data-i18n="loan.fha">FHA Home Loan</span></a>
+              <a href="first-time-homebuyer-miami.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><span data-i18n="loan.ftb">First-Time Homebuyer</span></a>
+              <a href="low-down-payment-mortgage.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><span data-i18n="loan.lowdown">Low Down Payment</span></a>
+              <a href="investment-property-loans-miami.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg></div><span data-i18n="loan.invest">Investment Property</span></a>
+              <a href="rehab-loan-203k.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><span data-i18n="loan.rehab">Rehab Loans (203k)</span></a>
+              <a href="mortgage-refinance-miami.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.61"/></svg></div><span data-i18n="loan.refi">Refinance</span></a>
+              <a href="usda-loan-florida.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><span data-i18n="loan.usda">USDA Loan</span></a>
+              <a href="jumbo-loans-miami.html" class="nav-mega-item"><div class="nav-mega-item-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><span data-i18n="loan.jumbo">Jumbo Loans</span></a>
+            </div>
+            <div class="nav-mega-footer"><a href="loan-options.html" data-i18n="nav.mega.all">View All Loan Options →</a></div>
           </div>
         </div>
         <a class="nav-link" href="about-us.html" data-page="about-us.html"><span data-i18n="nav.about">About Us</span></a>
@@ -95,7 +156,7 @@
         <p class="hero-sub" data-i18n="hero.sub">Before you start looking for your first home — let us assist you in getting prequalified for your mortgage. Expert guidance, fast approvals, and personalized service.</p>
         <div class="hero-actions">
           <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="hero.btn.prequal">GET PRE-QUALIFIED NOW</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
-          <a class="btn btn-outline-white" href="loan-options.html"><span data-i18n="hero.btn.explore">Explore Loan Options</span></a>
+          <a class="btn btn-outline" href="loan-options.html"><span data-i18n="hero.btn.explore">Explore Loan Options</span></a>
         </div>
         <div class="hero-trust">
           <div class="hero-trust-item"><div class="hero-trust-num">20+</div><div class="hero-trust-label" data-i18n="hero.trust.exp">Years Experience</div></div>
@@ -111,41 +172,6 @@
       </div>
     </div>
   </section>
-
-  <!-- CONTACT TICKER -->
-  <div class="contact-ticker" id="contact-ticker">
-    <div class="ticker-track" id="ticker-track">
-      <span class="ticker-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 10.8a19.79 19.79 0 01-3.07-8.65A2 2 0 012 0h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
-        <a href="tel:+13056151515">(305) 615-1515</a>
-      </span>
-      <span class="ticker-sep">|</span>
-      <span class="ticker-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-        <a href="https://maps.google.com/?q=6030+Bird+Rd,+Miami,+FL+33155" target="_blank" rel="noopener">6030 Bird Rd, Miami, FL 33155</a>
-      </span>
-      <span class="ticker-sep">|</span>
-      <span class="ticker-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        <a href="mailto:info@mistermortgageusa.com">info@mistermortgageusa.com</a>
-      </span>
-      <span class="ticker-sep">|</span>
-      <span class="ticker-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
-        NMLS #2572035
-      </span>
-      <span class="ticker-sep">|</span>
-      <span class="ticker-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        Mon–Fri: 9AM–6PM &nbsp;|&nbsp; Sat: 10AM–3PM
-      </span>
-      <span class="ticker-sep">|</span>
-      <span class="ticker-item">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413z"/></svg>
-        <a href="https://wa.me/13056151515" target="_blank" rel="noopener">WhatsApp Us</a>
-      </span>
-    </div>
-  </div>
 
   <!-- LOANS CAROUSEL -->
   <section id="loans-preview" aria-label="Loan programs">
@@ -166,9 +192,9 @@
             <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(4)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=75&fit=crop" alt="Jumbo Loan - luxury home Miami" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.luxury">Luxury</span><div class="loan-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3 data-i18n="loans.card.jumbo.title">Jumbo Loans Miami</h3><p data-i18n="loan.short.jumbo">Financing for high-value properties exceeding conventional loan limits. Tailored for South Florida's luxury market.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
             <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(5)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1582268611958-ebfd161ef9cf?w=400&q=75&fit=crop" alt="First Time Homebuyer" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.ftb">First-Time Buyers</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3 data-i18n="loans.card.ftb.title">First-Time Homebuyer</h3><p data-i18n="loan.short.ftb">Specialized guidance and programs for first-time buyers, including down payment assistance.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
             <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(6)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=400&q=75&fit=crop" alt="Low Down Payment mortgage" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.3down">As Low as 3% Down</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg></div><h3 data-i18n="loans.card.lowdown.title">Low Down Payment</h3><p data-i18n="loan.short.lowdown">Purchase options with as little as 3% down. We help you navigate all available programs.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
-            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(7)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1504307651254-35680f356dbd?w=400&q=75&fit=crop" alt="Rehab 203k renovation loan" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.renovate">Buy &amp; Renovate</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3 data-i18n="loans.card.rehab.title">Rehab Loans (203k)</h3><p data-i18n="loan.short.rehab">Finance your home purchase and renovation costs in one single mortgage. Turn any fixer-upper into your dream home.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(7)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1590856029826-c7a73142bbf1?w=400&q=75&fit=crop" alt="Rehab 203k renovation loan" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.renovate">Buy &amp; Renovate</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3 data-i18n="loans.card.rehab.title">Rehab Loans (203k)</h3><p data-i18n="loan.short.rehab">Finance your home purchase and renovation costs in one single mortgage. Turn any fixer-upper into your dream home.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
             <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(8)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=400&q=75&fit=crop" alt="Investment Property Loans Miami" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.wealth">Build Wealth</span><div class="loan-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3 data-i18n="loans.card.invest.title">Investment Property Loans</h3><p data-i18n="loan.short.invest">Build financial independence through South Florida real estate. Competitive rates for rental properties.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
-            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(9)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1554995207-c5f54d27ccd5?w=400&q=75&fit=crop" alt="Mortgage Refinance" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.rate">Lower Your Rate</span><div class="loan-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.61"/></svg></div><h3 data-i18n="loans.card.refi.title">Mortgage Refinance</h3><p data-i18n="loan.short.refi">Lower your payment, access equity, or shorten your term. We find the best refinance option for your goals.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(9)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=75&fit=crop" alt="Mortgage Refinance" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.rate">Lower Your Rate</span><div class="loan-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.61"/></svg></div><h3 data-i18n="loans.card.refi.title">Mortgage Refinance</h3><p data-i18n="loan.short.refi">Lower your payment, access equity, or shorten your term. We find the best refinance option for your goals.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Learn more</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
           </div>
         </div>
         <div class="carousel-nav">
@@ -183,7 +209,6 @@
     </div>
   </section>
 
-  <div class="section-divider-dots"></div>
   <!-- LOAN PROCESS TIMELINE -->
   <section id="loan-timeline" aria-label="Loan Process">
     <div class="section-inner">
@@ -349,7 +374,6 @@
     <div class="gallery-lb-counter" id="gallery-lb-counter"></div>
   </div>
 
-  <div class="section-divider-dots"></div>
   <!-- TESTIMONIALS -->
   <section id="testimonials" aria-label="Client testimonials">
     <div class="section-inner">

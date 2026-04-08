@@ -12,6 +12,7 @@ var I18N = {
     'nav.team':        'Team',
     'nav.contact':     'Contact Us',
     'nav.cta':         'GET PRE-QUALIFIED NOW',
+    'nav.mega.all':    'View All Loan Options →',
     /* Loan dropdown */
     'loan.fixed':      'Fixed Rate Mortgage',
     'loan.fha':        'FHA Home Loan',
@@ -664,6 +665,7 @@ var I18N = {
     'nav.team':        'Equipo',
     'nav.contact':     'Contáctenos',
     'nav.cta':         'PRECALIFÍQUESE AHORA',
+    'nav.mega.all':    'Ver Todas las Opciones →',
     /* Loan dropdown */
     'loan.fixed':      'Hipoteca a Tasa Fija',
     'loan.fha':        'Préstamo FHA',
