@@ -21,9 +21,9 @@
   <div class="modal-overlay" id="loan-info-modal"><div class="modal-box loan-info-box" id="loan-info-box"><button class="modal-close" onclick="closeLoanModal()" aria-label="Close">&#215;</button><div id="loan-modal-content"></div></div></div>
   <nav id="navbar" aria-label="Main navigation">
     <div class="nav-inner">
-      <a href="index.html" class="nav-logo"><img src="https://mistermortgageusa.com/wp-content/uploads/2025/05/PNG-02.webp" alt="Mister Mortgage USA" /></a>
+      <a href="/" class="nav-logo"><img src="https://mistermortgageusa.com/wp-content/uploads/2025/05/PNG-02.webp" alt="Mister Mortgage USA" /></a>
       <div class="nav-links">
-        <a class="nav-link" href="index.html" data-page="index.html"><span data-i18n="nav.home">Home</span></a>
+        <a class="nav-link" href="/" data-page="index.html"><span data-i18n="nav.home">Home</span></a>
         <div class="nav-mega-wrap">
           <a class="nav-link" href="loan-options.html" data-page="loan-options.html"><span data-i18n="nav.loans">Loan Options</span> <span class="nav-dropdown-arrow">&#9662;</span></a>
           <div class="nav-mega">
@@ -51,14 +51,44 @@
       <button class="nav-hamburger" id="hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
     </div>
   </nav>
-  <div class="nav-mobile" id="mobile-menu">
-    <button class="nav-mobile-close" id="mobile-close" aria-label="Close menu">&#215;</button>
-    <a class="nav-link" href="index.html"><span data-i18n="nav.home">Home</span></a>
-    <a class="nav-link" href="loan-options.html"><span data-i18n="nav.loans">Loan Options</span></a>
-    <a class="nav-link" href="about-us.html"><span data-i18n="nav.about">About Us</span></a>
-    <a class="nav-link" href="our-team.html"><span data-i18n="nav.team">Team</span></a>
-    <a class="nav-link" href="contact-us.html"><span data-i18n="nav.contact">Contact Us</span></a>
-    <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+  <div class="nav-mobile-overlay" id="mobile-overlay"></div>
+  <div class="nav-mobile" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Mobile navigation">
+    <div class="nav-mobile-header">
+      <a href="/" class="nav-mobile-logo">
+        <img src="https://mistermortgageusa.com/wp-content/uploads/2025/05/PNG-02.webp" alt="Mister Mortgage USA" />
+      </a>
+      <button class="nav-mobile-close" id="mobile-close" aria-label="Close menu">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+    <div class="nav-mobile-body">
+      <a class="nav-mobile-link" href="/" data-page="index.html"><span data-i18n="nav.home">Home</span></a>
+      <div class="nav-mobile-submenu-wrap">
+        <button class="nav-mobile-link nav-mobile-submenu-btn" aria-expanded="false"><span data-i18n="nav.loans">Loan Options</span><span class="nav-mobile-arrow">&#9662;</span></button>
+        <div class="nav-mobile-submenu">
+          <div class="nav-mobile-submenu-inner">
+            <a href="fixed-rate-mortgage-miami.html"><span data-i18n="loan.fixed">Fixed Rate Mortgage</span></a>
+            <a href="fha-home-loan-miami.html"><span data-i18n="loan.fha">FHA Home Loan</span></a>
+            <a href="va-home-loan-miami.html"><span data-i18n="loan.va">VA Home Loan</span></a>
+            <a href="usda-loan-florida.html"><span data-i18n="loan.usda">USDA Loan</span></a>
+            <a href="jumbo-loans-miami.html"><span data-i18n="loan.jumbo">Jumbo Loans</span></a>
+            <a href="low-down-payment-mortgage.html"><span data-i18n="loan.lowdown">Low Down Payment</span></a>
+            <a href="first-time-homebuyer-miami.html"><span data-i18n="loan.ftb">First-Time Homebuyer</span></a>
+            <a href="investment-property-loans-miami.html"><span data-i18n="loan.invest">Investment Property</span></a>
+            <a href="mortgage-refinance-miami.html"><span data-i18n="loan.refi">Refinance</span></a>
+            <a href="rehab-loan-203k.html"><span data-i18n="loan.rehab">Rehab Loans (203k)</span></a>
+          </div>
+        </div>
+      </div>
+      <hr class="nav-mobile-divider" />
+      <a class="nav-mobile-link" href="about-us.html" data-page="about-us.html"><span data-i18n="nav.about">About Us</span></a>
+      <a class="nav-mobile-link" href="our-team.html" data-page="our-team.html"><span data-i18n="nav.team">Team</span></a>
+      <a class="nav-mobile-link" href="contact-us.html" data-page="contact-us.html"><span data-i18n="nav.contact">Contact Us</span></a>
+    </div>
+    <div class="nav-mobile-footer">
+      <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+      <button id="mobile-lang-toggle" onclick="toggleLang()" data-current-lang="en" aria-label="Toggle Language"><span class="lang-opt" data-lang="en">EN</span><span class="lang-opt" data-lang="es">ES</span></button>
+    </div>
   </div>
   <div class="page-hero" style="background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('https://images.unsplash.com/photo-1449158743715-0a90ebb6d2d8?w=1600&q=80');background-size:cover;background-position:center;">
     <div class="container"><div class="page-hero-content">
@@ -112,7 +142,7 @@
           <li><a href="mortgage-refinance-miami.html"><span data-i18n="loan.refi">Refinance</span></a></li>
         </ul></div>
         <div class="footer-col"><h4><span data-i18n="footer.col.company">Company</span></h4><ul>
-          <li><a href="index.html"><span data-i18n="footer.link.home">Home</span></a></li>
+          <li><a href="/"><span data-i18n="footer.link.home">Home</span></a></li>
           <li><a href="about-us.html"><span data-i18n="footer.link.about">About Us</span></a></li>
           <li><a href="our-team.html"><span data-i18n="footer.link.team">Team</span></a></li>
           <li><a href="https://mistermortgageusa.com/blog/" target="_blank">Blog</a></li>
