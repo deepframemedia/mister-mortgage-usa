@@ -1,7 +1,8 @@
 /* ============================================================
-   RESPONSIVE.CSS — All media queries
+   RESPONSIVE.CSS — All media queries (comprehensive)
    ============================================================ */
 
+/* ── LARGE TABLETS / SMALL DESKTOPS (≤ 1024px) ── */
 @media (max-width: 1024px) {
   .hero-content { grid-template-columns: 1fr; }
   .hero-right { display: none; }
@@ -16,26 +17,123 @@
   .loan-detail-aside { display: none; }
 }
 
+/* ── TABLET (≤ 900px) ── */
 @media (max-width: 900px) {
   .calc-grid { grid-template-columns: 1fr; gap: 2.5rem; }
   .loan-slide { flex: 0 0 calc(50% - .75rem); }
 }
 
+/* ── MOBILE (≤ 768px) — primary mobile breakpoint ── */
 @media (max-width: 768px) {
+  /* Containers */
+  .container,
+  .section-inner { padding: 0 1.25rem; }
+  .nav-inner { padding: 0 1.25rem; }
+
+  /* Text alignment — left-aligned on mobile for readability */
+  .section-header { text-align: left; }
+  .section-header .section-subtitle { max-width: 100%; }
+  .section-header .red-line { margin: .9rem 0 1.25rem; }
+
+  /* Navigation */
+  .nav-links { display: none; }
+  .nav-hamburger { display: flex; }
+  #lang-toggle { display: none; } /* lang toggle in mobile menu */
+
+  /* Grids */
   .loans-grid { grid-template-columns: 1fr; }
   .team-grid { grid-template-columns: 1fr; }
   .testimonials-grid { grid-template-columns: 1fr; }
-  .contact-grid { grid-template-columns: 1fr; gap: 3rem; }
+  .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
   .form-row { grid-template-columns: 1fr; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
-  .footer-top { grid-template-columns: 1fr; }
   .about-pillars { grid-template-columns: 1fr; }
   .process-grid { grid-template-columns: 1fr; }
-  .photo-strip { grid-template-columns: repeat(2,1fr); height: 320px; }
   .loan-benefits-grid { grid-template-columns: 1fr; }
+  .photo-strip { grid-template-columns: repeat(2,1fr); height: 320px; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 2rem; }
+  .footer-bottom { flex-direction: column; text-align: center; gap: .65rem; }
+  .footer-legal { justify-content: center; }
+  .footer-eho { justify-content: center; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 1.75rem; }
+
+  /* Page hero (inner pages) */
+  .page-hero { padding: 7.5rem 0 3rem; }
+  .page-hero h1 { font-size: clamp(1.8rem,6vw,2.6rem); }
+  .page-hero p { font-size: .93rem; max-width: 100%; }
+
+  /* CTA Band */
+  .cta-band { padding: 5rem 0; text-align: left; }
+  .cta-band-content h2 { font-size: clamp(1.6rem,5vw,2rem); text-align: left; max-width: 100%; margin: 0 0 .85rem; }
+  .cta-band-content p { text-align: left; margin: 0 0 2rem; max-width: 100%; }
+  .cta-band-actions { justify-content: flex-start; }
+
+  /* Testimonials */
+  .testimonial-card { padding: 1.75rem; }
+
+  /* Loan qualify list */
+  .loan-qualify ul li { font-size: .9rem; }
+
+  /* Hero trust strip */
+  .hero-trust { gap: 1.25rem; flex-wrap: wrap; }
 }
 
-@media (max-width: 600px) {
-  .loan-slide { flex: 0 0 85%; }
+/* ── SMALL MOBILE (≤ 480px) ── */
+@media (max-width: 480px) {
+  .container,
+  .section-inner { padding: 0 1rem; }
+  .nav-inner { padding: 0 1rem; }
+
+  /* Section titles */
+  .section-title { font-size: clamp(1.45rem,5.5vw,1.9rem); }
+
+  /* Hero */
+  .hero-actions { flex-direction: column; gap: .65rem; }
+  .hero-actions .btn { width: 100%; justify-content: center; }
+  .hero-trust { gap: 1rem; }
+  .hero-trust-num { font-size: 1.5rem; }
+
+  /* Carousel */
+  .loan-slide { flex: 0 0 86%; }
+
+  /* Stats */
+  .stats-grid { grid-template-columns: repeat(2,1fr); gap: 1.25rem; }
+  .stat-num { font-size: 1.8rem; }
+
+  /* CTA band */
+  .cta-band-actions { flex-direction: column; align-items: flex-start; gap: .75rem; }
+  .cta-band-actions .btn { width: 100%; justify-content: center; }
+
+  /* Calculator */
+  .calc-result-row { flex-direction: column; gap: .4rem; }
+
+  /* Forms */
+  .contact-grid { gap: 1.5rem; }
+  .form-row { gap: .75rem; }
+
+  /* Footer */
+  .footer-top { gap: 1.75rem; }
+  .footer-brand p { font-size: .84rem; }
+
+  /* Testimonials */
+  .testimonial-card { padding: 1.35rem; }
+  .testimonial-card p { font-size: .88rem; }
+
+  /* Team cards */
+  .team-card { padding: 1.75rem 1.25rem; }
+
+  /* Page hero */
+  .page-hero { padding: 7rem 0 2.5rem; }
+
+  /* Nav logo size on mobile */
+  .nav-logo img { height: 42px; }
+}
+
+/* ── TOUCH / COARSE POINTER — hide custom cursor ── */
+@media (hover: none), (pointer: coarse) {
+  #cursor-dot, #cursor-ring { display: none !important; }
+  body, button, .btn, a, .nav-link, .loan-card, .footer-social a, .nav-logo { cursor: auto !important; }
 }
