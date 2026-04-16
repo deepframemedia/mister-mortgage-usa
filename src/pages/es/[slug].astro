@@ -1,0 +1,15 @@
+---
+import LoanLayout from '../../layouts/LoanLayout.astro';
+import { loans } from '../../data/loans';
+
+export function getStaticPaths() {
+  return loans.map(loan => ({
+    params: { slug: loan.slugEs },
+    props: { loan },
+  }));
+}
+
+const { loan } = Astro.props;
+---
+
+<LoanLayout loan={loan} lang="es" />

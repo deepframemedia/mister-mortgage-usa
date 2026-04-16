@@ -1,0 +1,132 @@
+---
+import MainLayout from './MainLayout.astro';
+import type { Loan } from '../data/loans';
+import type { Lang } from '../data/nav';
+
+export interface Props {
+  loan: Loan;
+  lang: Lang;
+}
+
+const { loan, lang } = Astro.props;
+const isEs = lang === 'es';
+
+const name       = isEs ? loan.nameEs       : loan.name;
+const heroBody   = isEs ? loan.heroBodyEs   : loan.heroBody;
+const label      = isEs ? loan.detailLabelEs : loan.detailLabel;
+const title      = isEs ? loan.detailTitleEs : loan.detailTitle;
+const p1         = isEs ? loan.detailP1Es   : loan.detailP1;
+const p2         = isEs ? loan.detailP2Es   : loan.detailP2;
+const benefits   = isEs ? loan.pageBenefitsEs : loan.pageBenefits;
+const qTitle     = isEs ? loan.qualifyTitleEs : loan.qualifyTitle;
+const qualify    = isEs ? loan.qualifyEs    : loan.qualify;
+const faqs       = isEs ? loan.faqsEs       : loan.faqs;
+const ctaTitle   = isEs ? loan.ctaTitleEs   : loan.ctaTitle;
+const ctaBody    = isEs ? loan.ctaBodyEs    : loan.ctaBody;
+const metaTitle  = isEs ? loan.metaTitleEs  : loan.metaTitle;
+const metaDesc   = isEs ? loan.metaDescEs   : loan.metaDesc;
+
+const canonical  = isEs
+  ? `https://mistermortgageusa.com/es/${loan.slugEs}`
+  : `https://mistermortgageusa.com/${loan.slug}`;
+const altLang    = isEs ? `/${loan.slug}` : `/es/${loan.slugEs}`;
+
+const faqLabel = isEs ? 'Preguntas Frecuentes' : 'FAQ';
+const faqTitle = isEs ? 'Preguntas <em>Comunes</em>' : 'Common <em>Questions</em>';
+const ctaBtn   = isEs ? 'Precalificarme Ahora' : 'Get Pre-Qualified Now';
+---
+
+<MainLayout
+  title={metaTitle}
+  description={metaDesc}
+  lang={lang}
+  canonical={canonical}
+  altLang={altLang}
+>
+
+  <!-- Hero -->
+  <div
+    class="page-hero"
+    style={`background-image:linear-gradient(135deg,rgba(0,22,60,.88) 0%,rgba(0,38,84,.75) 100%),url('${loan.heroImg}?w=1600&q=80');background-size:cover;background-position:center;`}
+  >
+    <div class="container">
+      <div class="page-hero-content">
+        <span class="section-label" data-i18n="loan.pg.hero.label">Loan Options</span>
+        <h1>{name}</h1>
+        <p>{heroBody}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detail -->
+  <section class="loan-detail-content">
+    <div class="container">
+      <div class="loan-detail-grid">
+        <div class="loan-detail-copy">
+          <span class="section-label reveal">{label}</span>
+          <h2 class="section-title reveal reveal-delay-1" set:html={title} />
+          <div class="red-line reveal reveal-delay-2"></div>
+          <p class="reveal reveal-delay-2">{p1}</p>
+          <p class="reveal reveal-delay-3">{p2}</p>
+
+          <div class="loan-benefits-grid reveal reveal-delay-3">
+            {benefits.map(b => (
+              <div class="loan-benefit">
+                <div class="loan-benefit-check">
+                  <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg>
+                </div>
+                <p>{b}</p>
+              </div>
+            ))}
+          </div>
+
+          <div class="loan-qualify reveal reveal-delay-4">
+            <h4>{qTitle}</h4>
+            <ul>
+              {qualify.map(li => <li>{li}</li>)}
+            </ul>
+          </div>
+        </div>
+
+        <div class="loan-detail-aside reveal reveal-delay-2">
+          <img
+            src={`${loan.heroImg}?w=800&q=80`}
+            alt={name}
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="loan-faq">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-label reveal">{faqLabel}</span>
+        <h2 class="section-title reveal reveal-delay-1" set:html={faqTitle} />
+        <div class="red-line" style="margin:1.25rem auto;"></div>
+      </div>
+      <div class="loan-faq-list">
+        {faqs.map(faq => (
+          <div class="faq-item">
+            <div class="faq-q" onclick="toggleFaq(this)">
+              {faq.q}<span>+</span>
+            </div>
+            <div class="faq-a">{faq.a}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA band -->
+  <div class="loan-detail-cta">
+    <div class="container">
+      <h2>{ctaTitle}</h2>
+      <p>{ctaBody}</p>
+      <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">{ctaBtn}</a>
+    </div>
+  </div>
+
+</MainLayout>

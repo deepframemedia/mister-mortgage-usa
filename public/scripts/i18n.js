@@ -1376,7 +1376,12 @@ var I18N = {
   }
 
   function getSavedLang() {
-    try { return localStorage.getItem(STORAGE_KEY) || DEFAULT_LANG; } catch (e) { return DEFAULT_LANG; }
+    try {
+      var stored = localStorage.getItem(STORAGE_KEY);
+      if (stored && I18N[stored]) return stored;
+    } catch (e) {}
+    var htmlLang = document.documentElement.lang;
+    return (htmlLang && I18N[htmlLang]) ? htmlLang : DEFAULT_LANG;
   }
 
   /* Expose globally */

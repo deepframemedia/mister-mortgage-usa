@@ -1,0 +1,79 @@
+---
+import type { Lang } from '../data/nav';
+
+export interface Props {
+  title: string;
+  description: string;
+  lang?: Lang;
+  canonical?: string;
+  ogImage?: string;
+  altLang?: string;   // hreflang alternate URL
+  hasTicker?: boolean;
+}
+
+const {
+  title,
+  description,
+  lang = 'en',
+  canonical,
+  ogImage = 'https://mistermortgageusa.com/wp-content/uploads/2025/05/PNG-02.webp',
+  altLang,
+  hasTicker = true,
+} = Astro.props;
+
+const site = 'https://mistermortgageusa.com';
+const canonicalURL = canonical ?? `${site}${Astro.url.pathname}`;
+const altLangFull  = altLang ? `${site}${altLang}` : null;
+const selfLang     = lang === 'en' ? 'en' : 'es';
+const otherLang    = lang === 'en' ? 'es' : 'en';
+---
+<!DOCTYPE html>
+<html lang={lang}>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content={description} />
+  <meta name="keywords" content="mortgage broker miami, home loans miami, FHA loan miami, VA loan miami, mortgage rates miami, NMLS 2572035" />
+  <title>{title}</title>
+
+  <link rel="canonical" href={canonicalURL} />
+  {altLangFull && <link rel="alternate" hreflang={otherLang} href={altLangFull} />}
+  <link rel="alternate" hreflang={selfLang} href={canonicalURL} />
+  <link rel="alternate" hreflang="x-default" href={`${site}/`} />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:url"         content={canonicalURL} />
+  <meta property="og:title"       content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:image"       content={ogImage} />
+  <meta property="og:site_name"   content="Mister Mortgage USA" />
+  <meta name="twitter:card"       content="summary_large_image" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,700&family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="/styles/main.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+  <slot name="head" />
+</head>
+<body class:list={[{ 'has-ticker': hasTicker }]}>
+  <div id="cursor-dot"></div>
+  <div id="cursor-ring"></div>
+
+  <slot />
+
+  <!-- Scripts -->
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script is:inline src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <script is:inline src="/scripts/i18n.js"></script>
+  <script is:inline src="/scripts/main.js"></script>
+  <script is:inline src="/scripts/nav.js"></script>
+
+  <slot name="scripts" />
+</body>
+</html>

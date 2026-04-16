@@ -1,0 +1,66 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+import { loans } from '../data/loans';
+---
+
+<MainLayout
+  title="Mortgage Loan Options Miami | Mister Mortgage USA | NMLS #2572035"
+  description="Explore all mortgage loan options at Mister Mortgage USA — FHA, VA, USDA, Jumbo, Fixed Rate, Rehab, and more. Miami's trusted mortgage broker. NMLS #2572035."
+  lang="en"
+  canonical="https://mistermortgageusa.com/loan-options"
+  altLang="/es/opciones-de-prestamo"
+>
+
+  <section class="loan-hero" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80')">
+    <div class="loan-hero-overlay"></div>
+    <div class="loan-hero-content section-inner reveal">
+      <span class="section-label" data-i18n="loans.hero.label">Our Programs</span>
+      <h1 data-i18n="loans.hero.h1">Mortgage Loan Options<br /><em>Tailored for You</em></h1>
+      <p data-i18n="loans.hero.body">From first-time buyers to seasoned investors, we have the perfect loan program for every stage of your journey. Explore all options below.</p>
+      <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+    </div>
+  </section>
+
+  <section class="section" style="padding:80px 0;">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="loans.grid.label">All Programs</span>
+      <h2 class="section-title reveal" data-i18n="loans.grid.title">Find the Right Loan<br /><em>for Your Situation</em></h2>
+      <div class="loan-grid reveal" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px;margin-top:48px;">
+        {loans.map(loan => (
+          <a href={`/${loan.slug}`} class="loan-grid-card">
+            <div class="loan-grid-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={loan.icon} />
+            </div>
+            <h3><span data-i18n={`loan.${loan.slug.split('-')[0]}`}>{loan.name}</span></h3>
+            <p>{loan.desc}</p>
+            <span class="loan-grid-cta" data-i18n="loans.card.cta">Learn More →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band reveal">
+    <div class="stats-band-inner">
+      <div class="stat-item"><span class="stat-num">500<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.families">Families Helped</span></div>
+      <div class="stat-item"><span class="stat-num">10<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.programs">Loan Programs</span></div>
+      <div class="stat-item"><span class="stat-num">15<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.experience">Years Experience</span></div>
+      <div class="stat-item"><span class="stat-num">5<span class="stat-star">★</span></span><span class="stat-label" data-i18n="stats.rating">Google Rating</span></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="cta-band-overlay"></div>
+    <div class="cta-band-content section-inner">
+      <span class="section-label" data-i18n="loans.cta.label">Start Today</span>
+      <h2 data-i18n="loans.cta.title">Not Sure Which Loan <em>Is Right for You?</em></h2>
+      <p data-i18n="loans.cta.body">Our expert brokers will walk you through every option and find the program that best fits your financial situation and goals.</p>
+      <div class="cta-band-actions">
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+        <a class="btn btn-outline-white" href="/contact-us"><span data-i18n="cta.btn.contact">Contact Us</span></a>
+      </div>
+    </div>
+  </div>
+
+</MainLayout>

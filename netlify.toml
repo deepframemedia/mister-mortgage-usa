@@ -1,0 +1,153 @@
+[build]
+  command   = "npm run build"
+  publish   = "dist"
+
+[build.environment]
+  NODE_VERSION = "20"
+
+[[redirects]]
+  from   = "/"
+  to     = "/index.html"
+  status = 200
+
+# Legacy .html → clean URL redirects (preserva bookmarks)
+[[redirects]]
+  from   = "/index.html"
+  to     = "/"
+  status = 301
+
+[[redirects]]
+  from   = "/loan-options.html"
+  to     = "/loan-options"
+  status = 301
+
+[[redirects]]
+  from   = "/about-us.html"
+  to     = "/about-us"
+  status = 301
+
+[[redirects]]
+  from   = "/our-team.html"
+  to     = "/our-team"
+  status = 301
+
+[[redirects]]
+  from   = "/contact-us.html"
+  to     = "/contact-us"
+  status = 301
+
+[[redirects]]
+  from   = "/fha-home-loan-miami.html"
+  to     = "/fha-home-loan-miami"
+  status = 301
+
+[[redirects]]
+  from   = "/va-home-loan-miami.html"
+  to     = "/va-home-loan-miami"
+  status = 301
+
+[[redirects]]
+  from   = "/usda-loan-florida.html"
+  to     = "/usda-loan-florida"
+  status = 301
+
+[[redirects]]
+  from   = "/jumbo-loans-miami.html"
+  to     = "/jumbo-loans-miami"
+  status = 301
+
+[[redirects]]
+  from   = "/fixed-rate-mortgage-miami.html"
+  to     = "/fixed-rate-mortgage-miami"
+  status = 301
+
+[[redirects]]
+  from   = "/first-time-homebuyer-miami.html"
+  to     = "/first-time-homebuyer-miami"
+  status = 301
+
+[[redirects]]
+  from   = "/investment-property-loans-miami.html"
+  to     = "/investment-property-loans-miami"
+  status = 301
+
+[[redirects]]
+  from   = "/low-down-payment-mortgage.html"
+  to     = "/low-down-payment-mortgage"
+  status = 301
+
+[[redirects]]
+  from   = "/mortgage-refinance-miami.html"
+  to     = "/mortgage-refinance-miami"
+  status = 301
+
+[[redirects]]
+  from   = "/rehab-loan-203k.html"
+  to     = "/rehab-loan-203k"
+  status = 301
+
+[[redirects]]
+  from   = "/privacy-policy.html"
+  to     = "/privacy-policy"
+  status = 301
+
+[[redirects]]
+  from   = "/cookie-policy.html"
+  to     = "/cookie-policy"
+  status = 301
+
+[[redirects]]
+  from   = "/ada-accessibility.html"
+  to     = "/ada-accessibility"
+  status = 301
+
+[[redirects]]
+  from   = "/customer-complaint-policy.html"
+  to     = "/customer-complaint-policy"
+  status = 301
+
+[[redirects]]
+  from   = "/government-disclosure.html"
+  to     = "/government-disclosure"
+  status = 301
+
+# EN clean URL redirects
+[[redirects]]
+  from   = "/our-team"
+  to     = "/our-team/index.html"
+  status = 200
+
+[[redirects]]
+  from   = "/contact-us"
+  to     = "/contact-us/index.html"
+  status = 200
+
+# ES clean URL redirects
+[[redirects]]
+  from   = "/es"
+  to     = "/es/index.html"
+  status = 200
+
+[[redirects]]
+  from   = "/es/sobre-nosotros"
+  to     = "/es/sobre-nosotros/index.html"
+  status = 200
+
+[[redirects]]
+  from   = "/es/opciones-de-prestamo"
+  to     = "/es/opciones-de-prestamo/index.html"
+  status = 200
+
+[[redirects]]
+  from   = "/es/nuestro-equipo"
+  to     = "/es/nuestro-equipo/index.html"
+  status = 200
+
+[[redirects]]
+  from   = "/es/contactenos"
+  to     = "/es/contactenos/index.html"
+  status = 200
+
+[dev]
+  command = "npm run dev"
+  port    = 4321

@@ -1,0 +1,101 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Sobre Nosotros | Mister Mortgage USA | Broker Hipotecario en Miami"
+  description="Conoce a Mister Mortgage USA — el broker hipotecario de confianza en Miami con más de 15 años de experiencia ayudando a familias a lograr ser propietarios. NMLS #2572035."
+  lang="es"
+  canonical="https://mistermortgageusa.com/es/sobre-nosotros"
+  altLang="/about-us"
+>
+
+  <section class="loan-hero" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80')">
+    <div class="loan-hero-overlay"></div>
+    <div class="loan-hero-content section-inner reveal">
+      <span class="section-label" data-i18n="about.pg.hero.label">Nuestra Historia</span>
+      <h1 data-i18n="about.pg.hero.h1">Sobre Mister<br /><em>Mortgage USA</em></h1>
+      <p data-i18n="about.pg.hero.body">El broker hipotecario de confianza en Miami — dedicado a ayudar a las familias del sur de Florida a alcanzar el sueño de ser propietarios con honestidad, experiencia y dedicación.</p>
+      <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span></a>
+    </div>
+  </section>
+
+  <section class="section about-split reveal">
+    <div class="section-inner about-split-inner">
+      <div class="about-split-img">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=80" alt="Equipo de Mister Mortgage USA ayudando a un cliente" loading="lazy" />
+      </div>
+      <div class="about-split-text">
+        <span class="section-label" data-i18n="about.pg.mission.label">Nuestra Misión</span>
+        <h2 data-i18n="about.pg.mission.title">Ayudando a Cada Familia a<br /><em>Encontrar su Hogar</em></h2>
+        <p data-i18n="about.pg.mission.p1">En Mister Mortgage USA, nuestra misión es simple: hacer que ser propietario sea accesible para todos. Creemos que cada familia merece una oportunidad justa de tener su propia casa, independientemente de su historial financiero o crediticio.</p>
+        <p data-i18n="about.pg.mission.p2">Fundados en Miami, entendemos los desafíos y oportunidades únicos del mercado inmobiliario del sur de Florida. Nuestro equipo de brokers con experiencia trabaja incansablemente para encontrar el programa de préstamo que mejor se adapte a las necesidades de cada cliente.</p>
+        <p data-i18n="about.pg.mission.p3">Con acceso a docenas de prestamistas y cientos de programas de préstamo, a menudo podemos encontrar soluciones que los grandes bancos simplemente no pueden ofrecer. Buscamos en tu nombre para que obtengas la mejor tasa y condiciones posibles — sin costo adicional.</p>
+        <a class="btn btn-red" href="/es/contactenos" data-i18n="about.pg.mission.btn">Habla con un Experto</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-light);padding:80px 0;">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="about.pg.values.label">En lo que Creemos</span>
+      <h2 class="section-title reveal" style="color:var(--navy);" data-i18n="about.pg.values.title">Nuestros Valores <em>Fundamentales</em></h2>
+      <div class="benefits-grid reveal" style="margin-top:48px;">
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+          <h3 data-i18n="about.pg.val1.title">Integridad</h3>
+          <p data-i18n="about.pg.val1.body">Creemos en la transparencia total. Siempre conocerás el costo real de tu préstamo, sin tarifas ocultas ni sorpresas al cierre.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <h3 data-i18n="about.pg.val2.title">Experiencia</h3>
+          <p data-i18n="about.pg.val2.body">Nuestros brokers hipotecarios con licencia han manejado miles de transacciones en cada programa de préstamo disponible en Florida.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <h3 data-i18n="about.pg.val3.title">Comunidad</h3>
+          <p data-i18n="about.pg.val3.body">Somos miembros orgullosos de la comunidad de Miami. Cuando ayudamos a una familia a comprar una casa, invertimos en el vecindario que todos compartimos.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3 data-i18n="about.pg.val4.title">Rapidez</h3>
+          <p data-i18n="about.pg.val4.body">En un mercado competitivo, el tiempo importa. Nuestro proceso optimizado está diseñado para llevarte de la solicitud al cierre lo más rápido posible.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+          <h3 data-i18n="about.pg.val5.title">Accesibilidad</h3>
+          <p data-i18n="about.pg.val5.body">Atendemos clientes en inglés y español, reflejando las diversas comunidades del sur de Florida que nos enorgullecemos de llamar hogar.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="about.pg.val6.title">Resultados</h3>
+          <p data-i18n="about.pg.val6.body">Más de 500 familias ayudadas, decenas de reseñas de 5 estrellas y un historial de cerrar préstamos que otros decían que no era posible.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band reveal">
+    <div class="stats-band-inner">
+      <div class="stat-item"><span class="stat-num">500<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.families">Familias Ayudadas</span></div>
+      <div class="stat-item"><span class="stat-num">10<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.programs">Programas de Préstamo</span></div>
+      <div class="stat-item"><span class="stat-num">15<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.experience">Años de Experiencia</span></div>
+      <div class="stat-item"><span class="stat-num">5<span class="stat-star">★</span></span><span class="stat-label" data-i18n="stats.rating">Calificación en Google</span></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="cta-band-overlay"></div>
+    <div class="cta-band-content section-inner">
+      <span class="section-label" data-i18n="about.pg.cta.label">¿Listo para Comenzar?</span>
+      <h2 data-i18n="about.pg.cta.title">Encontremos el Préstamo Perfecto <em>para Ti</em></h2>
+      <p data-i18n="about.pg.cta.body">Únete a cientos de familias del sur de Florida que confiaron en Mister Mortgage USA para guiarlas a su hogar.</p>
+      <div class="cta-band-actions">
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span></a>
+        <a class="btn btn-outline-white" href="/es/nuestro-equipo" data-i18n="about.pg.cta.btn2">Conoce Nuestro Equipo</a>
+      </div>
+    </div>
+  </div>
+
+</MainLayout>

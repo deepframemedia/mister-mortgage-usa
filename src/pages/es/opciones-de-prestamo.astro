@@ -1,0 +1,66 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { loans } from '../../data/loans';
+---
+
+<MainLayout
+  title="Opciones de Préstamos Hipotecarios Miami | Mister Mortgage USA | NMLS #2572035"
+  description="Explora todas las opciones de préstamos en Mister Mortgage USA — FHA, VA, USDA, Jumbo, Tasa Fija, Rehabilitación y más. El broker hipotecario de confianza en Miami. NMLS #2572035."
+  lang="es"
+  canonical="https://mistermortgageusa.com/es/opciones-de-prestamo"
+  altLang="/loan-options"
+>
+
+  <section class="loan-hero" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1400&q=80')">
+    <div class="loan-hero-overlay"></div>
+    <div class="loan-hero-content section-inner reveal">
+      <span class="section-label" data-i18n="loans.hero.label">Nuestros Programas</span>
+      <h1 data-i18n="loans.hero.h1">Opciones de Préstamos<br /><em>Diseñadas para Ti</em></h1>
+      <p data-i18n="loans.hero.body">Desde compradores primerizos hasta inversores experimentados, tenemos el programa de préstamo perfecto para cada etapa de tu camino. Explora todas las opciones a continuación.</p>
+      <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span></a>
+    </div>
+  </section>
+
+  <section class="section" style="padding:80px 0;">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="loans.grid.label">Todos los Programas</span>
+      <h2 class="section-title reveal" data-i18n="loans.grid.title">Encuentra el Préstamo Correcto<br /><em>para tu Situación</em></h2>
+      <div class="loan-grid reveal" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px;margin-top:48px;">
+        {loans.map(loan => (
+          <a href={`/es/${loan.slugEs}`} class="loan-grid-card">
+            <div class="loan-grid-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={loan.icon} />
+            </div>
+            <h3>{loan.nameEs}</h3>
+            <p>{loan.descEs}</p>
+            <span class="loan-grid-cta" data-i18n="loans.card.cta">Saber Más →</span>
+          </a>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band reveal">
+    <div class="stats-band-inner">
+      <div class="stat-item"><span class="stat-num">500<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.families">Familias Ayudadas</span></div>
+      <div class="stat-item"><span class="stat-num">10<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.programs">Programas de Préstamo</span></div>
+      <div class="stat-item"><span class="stat-num">15<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.experience">Años de Experiencia</span></div>
+      <div class="stat-item"><span class="stat-num">5<span class="stat-star">★</span></span><span class="stat-label" data-i18n="stats.rating">Calificación en Google</span></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="cta-band-overlay"></div>
+    <div class="cta-band-content section-inner">
+      <span class="section-label" data-i18n="loans.cta.label">Comienza Hoy</span>
+      <h2 data-i18n="loans.cta.title">¿No Sabes Qué Préstamo <em>Es el Correcto para Ti?</em></h2>
+      <p data-i18n="loans.cta.body">Nuestros brokers expertos te guiarán a través de cada opción y encontrarán el programa que mejor se adapte a tu situación financiera y objetivos.</p>
+      <div class="cta-band-actions">
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span></a>
+        <a class="btn btn-outline-white" href="/es/contactenos"><span data-i18n="cta.btn.contact">Contáctenos</span></a>
+      </div>
+    </div>
+  </div>
+
+</MainLayout>

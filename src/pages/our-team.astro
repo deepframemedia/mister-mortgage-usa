@@ -1,0 +1,100 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Our Team | Mister Mortgage USA | Licensed Mortgage Brokers Miami"
+  description="Meet the expert team at Mister Mortgage USA — licensed mortgage brokers serving Miami and South Florida. NMLS #2572035. We're here to guide you home."
+  lang="en"
+  canonical="https://mistermortgageusa.com/our-team"
+  altLang="/es/nuestro-equipo"
+>
+
+  <section class="loan-hero" style="background-image:url('https://images.unsplash.com/photo-1497366216548-37526070297c?w=1400&q=80&fit=crop')">
+    <div class="loan-hero-overlay"></div>
+    <div class="loan-hero-content section-inner reveal">
+      <span class="section-label" data-i18n="team.hero.label">The People Behind the Promise</span>
+      <h1 data-i18n="team.hero.h1">Meet Our <em>Expert Team</em></h1>
+      <p data-i18n="team.hero.body">Our licensed mortgage professionals bring decades of combined experience and a genuine passion for helping South Florida families achieve homeownership.</p>
+      <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+    </div>
+  </section>
+
+  <section class="section" style="padding:80px 0;">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="team.grid.label">Our Professionals</span>
+      <h2 class="section-title reveal" data-i18n="team.grid.title">Experienced. Licensed.<br /><em>Dedicated to You.</em></h2>
+
+      <div class="team-grid reveal" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:40px;margin-top:56px;">
+
+        <div class="team-card">
+          <div class="team-photo">
+            <img src="https://mistermortgageusa.com/wp-content/uploads/2025/05/hislay.webp" alt="Hislay Conesa" loading="lazy" style="width:100%;height:100%;object-fit:cover;" />
+          </div>
+          <div class="team-info">
+            <h3 data-i18n="team.member1.name">Hislay Conesa</h3>
+            <span class="team-title" data-i18n="team.member1.title">President – CEO</span>
+            <p data-i18n="team.member1.body">Founder and CEO of Mister Mortgage USA, with over 20 years of experience in the South Florida mortgage market. Dedicated to helping families achieve the dream of homeownership.</p>
+            <div class="team-contact">
+              <a href="tel:+13056151515">(305) 615-1515</a>
+              <a href="https://wa.me/13056151515" target="_blank" rel="noopener">WhatsApp</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo" style="background:var(--bg-cream);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 80 80" width="80" height="80" fill="none" style="opacity:0.25;color:var(--navy);"><circle cx="40" cy="28" r="18" fill="currentColor"/><ellipse cx="40" cy="72" rx="32" ry="18" fill="currentColor"/></svg>
+          </div>
+          <div class="team-info">
+            <h3 data-i18n="team.member2.name">Patricia Calvet</h3>
+            <span class="team-title" data-i18n="team.member2.title">Broker</span>
+            <p data-i18n="team.member2.body">Licensed mortgage broker with deep expertise in FHA, VA, and conventional loan programs. Patricia is committed to finding the best solution for every client's unique financial situation.</p>
+            <div class="team-contact">
+              <a href="tel:+13056151515">(305) 615-1515</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="team-card">
+          <div class="team-photo" style="background:var(--bg-cream);display:flex;align-items:center;justify-content:center;">
+            <svg viewBox="0 0 80 80" width="80" height="80" fill="none" style="opacity:0.25;color:var(--navy);"><circle cx="40" cy="28" r="18" fill="currentColor"/><ellipse cx="40" cy="72" rx="32" ry="18" fill="currentColor"/></svg>
+          </div>
+          <div class="team-info">
+            <h3 data-i18n="team.member3.name">Luisa Taylor</h3>
+            <span class="team-title" data-i18n="team.member3.title">Loan Officer</span>
+            <p data-i18n="team.member3.body">Bilingual loan officer specializing in guiding first-time buyers and investors through the mortgage process from pre-qualification to closing. Fluent in English and Spanish.</p>
+            <div class="team-contact">
+              <a href="tel:+13056151515">(305) 615-1515</a>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--navy);padding:80px 0;text-align:center;">
+    <div class="section-inner reveal">
+      <span class="section-label" style="color:rgba(255,150,150,.9);" data-i18n="team.join.label">Careers</span>
+      <h2 class="section-title" style="color:var(--white);" data-i18n="team.join.title">Want to Join the <em>Mister Mortgage Team?</em></h2>
+      <p style="max-width:600px;margin:24px auto 40px;color:rgba(255,255,255,.7);" data-i18n="team.join.body">We're always looking for talented, licensed mortgage professionals who share our values of integrity, expertise, and community. Reach out to us to learn about current openings.</p>
+      <a class="btn btn-red" href="/contact-us" data-i18n="team.join.btn">Get in Touch</a>
+    </div>
+  </section>
+
+  <div class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="cta-band-overlay"></div>
+    <div class="cta-band-content section-inner">
+      <span class="section-label" data-i18n="team.cta.label">Work With Us</span>
+      <h2 data-i18n="team.cta.title">Ready to Work with <em>Our Team?</em></h2>
+      <p data-i18n="team.cta.body">Our mortgage experts are available to answer your questions and guide you through every step of the home buying process.</p>
+      <div class="cta-band-actions">
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+        <a class="btn btn-outline-white" href="/contact-us"><span data-i18n="cta.btn.contact">Contact Us</span></a>
+      </div>
+    </div>
+  </div>
+
+</MainLayout>

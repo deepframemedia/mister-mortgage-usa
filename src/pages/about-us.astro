@@ -1,0 +1,101 @@
+---
+import MainLayout from '../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="About Us | Mister Mortgage USA | Miami Mortgage Broker"
+  description="Learn about Mister Mortgage USA — Miami's trusted mortgage broker with 15+ years of experience helping families achieve homeownership. NMLS #2572035."
+  lang="en"
+  canonical="https://mistermortgageusa.com/about-us"
+  altLang="/es/sobre-nosotros"
+>
+
+  <section class="loan-hero" style="background-image:url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80')">
+    <div class="loan-hero-overlay"></div>
+    <div class="loan-hero-content section-inner reveal">
+      <span class="section-label" data-i18n="about.pg.hero.label">Our Story</span>
+      <h1 data-i18n="about.pg.hero.h1">About Mister<br /><em>Mortgage USA</em></h1>
+      <p data-i18n="about.pg.hero.body">Miami's trusted mortgage broker — dedicated to helping families across South Florida achieve the dream of homeownership with honesty, expertise, and care.</p>
+      <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+    </div>
+  </section>
+
+  <section class="section about-split reveal">
+    <div class="section-inner about-split-inner">
+      <div class="about-split-img">
+        <img src="https://images.unsplash.com/photo-1521791136064-7986c2920216?w=700&q=80" alt="Mister Mortgage USA team helping a client" loading="lazy" />
+      </div>
+      <div class="about-split-text">
+        <span class="section-label" data-i18n="about.pg.mission.label">Our Mission</span>
+        <h2 data-i18n="about.pg.mission.title">Helping Every Family<br /><em>Find Their Home</em></h2>
+        <p data-i18n="about.pg.mission.p1">At Mister Mortgage USA, our mission is simple: make homeownership accessible to everyone. We believe that every family deserves a fair shot at owning their home, regardless of their financial background or credit history.</p>
+        <p data-i18n="about.pg.mission.p2">Founded in Miami, we understand the unique challenges and opportunities of the South Florida real estate market. Our team of experienced brokers works tirelessly to match each client with the loan program that best fits their needs, budget, and long-term goals.</p>
+        <p data-i18n="about.pg.mission.p3">With access to dozens of lenders and hundreds of loan programs, we can often find solutions that big banks simply cannot offer. We shop on your behalf so you get the best possible rate and terms — at no extra cost to you.</p>
+        <a class="btn btn-red" href="/contact-us" data-i18n="about.pg.mission.btn">Talk to an Expert</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" style="background:var(--bg-light);padding:80px 0;">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="about.pg.values.label">What We Stand For</span>
+      <h2 class="section-title reveal" style="color:var(--navy);" data-i18n="about.pg.values.title">Our Core <em>Values</em></h2>
+      <div class="benefits-grid reveal" style="margin-top:48px;">
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div>
+          <h3 data-i18n="about.pg.val1.title">Integrity</h3>
+          <p data-i18n="about.pg.val1.body">We believe in complete transparency. You'll always know the true cost of your loan, with no hidden fees or surprises at closing.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg></div>
+          <h3 data-i18n="about.pg.val2.title">Expertise</h3>
+          <p data-i18n="about.pg.val2.body">Our licensed mortgage brokers have navigated thousands of transactions across every loan program available in Florida.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div>
+          <h3 data-i18n="about.pg.val3.title">Community</h3>
+          <p data-i18n="about.pg.val3.body">We're proud members of the Miami community. When we help a family buy a home, we're investing in the neighborhood we all share.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+          <h3 data-i18n="about.pg.val4.title">Speed</h3>
+          <p data-i18n="about.pg.val4.body">In a competitive market, timing matters. Our streamlined process is designed to get you from application to closing as quickly as possible.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 014 10 15.3 15.3 0 01-4 10 15.3 15.3 0 01-4-10 15.3 15.3 0 014-10z"/></svg></div>
+          <h3 data-i18n="about.pg.val5.title">Accessibility</h3>
+          <p data-i18n="about.pg.val5.body">We serve clients in English and Spanish, reflecting the diverse communities we're proud to call home in South Florida.</p>
+        </div>
+        <div class="benefit-card">
+          <div class="benefit-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+          <h3 data-i18n="about.pg.val6.title">Results</h3>
+          <p data-i18n="about.pg.val6.body">Over 500 families helped, dozens of 5-star reviews, and a track record of closing loans that others said couldn't be done.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="stats-band reveal">
+    <div class="stats-band-inner">
+      <div class="stat-item"><span class="stat-num">500<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.families">Families Helped</span></div>
+      <div class="stat-item"><span class="stat-num">10<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.programs">Loan Programs</span></div>
+      <div class="stat-item"><span class="stat-num">15<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.experience">Years Experience</span></div>
+      <div class="stat-item"><span class="stat-num">5<span class="stat-star">★</span></span><span class="stat-label" data-i18n="stats.rating">Google Rating</span></div>
+    </div>
+  </div>
+
+  <div class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="cta-band-overlay"></div>
+    <div class="cta-band-content section-inner">
+      <span class="section-label" data-i18n="about.pg.cta.label">Ready to Begin?</span>
+      <h2 data-i18n="about.pg.cta.title">Let's Find the Right Loan <em>for You</em></h2>
+      <p data-i18n="about.pg.cta.body">Join hundreds of South Florida families who trusted Mister Mortgage USA to guide them home.</p>
+      <div class="cta-band-actions">
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">GET PRE-QUALIFIED NOW</span></a>
+        <a class="btn btn-outline-white" href="/our-team" data-i18n="about.pg.cta.btn2">Meet Our Team</a>
+      </div>
+    </div>
+  </div>
+
+</MainLayout>

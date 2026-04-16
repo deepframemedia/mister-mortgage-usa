@@ -1,6 +1,11 @@
 # Local Netlify folder
 .netlify
 
+# Astro
+dist/
+.astro/
+node_modules/
+
 # Desktop / OS files (no son parte del proyecto)
 desktop.ini
 *.url

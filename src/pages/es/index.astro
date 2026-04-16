@@ -1,0 +1,180 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+---
+
+<MainLayout
+  title="Broker de Hipotecas en Miami | Mister Mortgage USA | NMLS #2572035"
+  description="Mister Mortgage USA — el broker hipotecario de confianza en Miami. FHA, VA, USDA, Jumbo, Tasa Fija y más. Asesoría experta, aprobaciones rápidas. NMLS #2572035. Llama (305) 615-1515."
+  lang="es"
+  canonical="https://mistermortgageusa.com/es"
+  altLang="/"
+  hasMap={true}
+>
+
+  <!-- HERO -->
+  <section id="hero" aria-label="Hero">
+    <div class="hero-bg" id="hero-bg">
+      <img class="hero-slide active" src="https://images.unsplash.com/photo-1533395427226-788cee25cc7b?w=1600&q=80&fit=crop" alt="Skyline de Miami Brickell" loading="eager" />
+      <img class="hero-slide" src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=1600&q=80&fit=crop" alt="Casa de lujo moderna en Miami" loading="lazy" />
+      <img class="hero-slide" src="https://images.unsplash.com/photo-1605146769289-440113cc3d00?w=1600&q=80&fit=crop" alt="Arquitectura moderna de Miami" loading="lazy" />
+      <img class="hero-slide" src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=1600&q=80&fit=crop" alt="Casa en el sur de Florida" loading="lazy" />
+    </div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-left">
+        <div class="hero-badge"><span class="hero-badge-dot"></span><span data-i18n="hero.badge">El Broker Hipotecario de Confianza en Miami</span></div>
+        <h1 class="hero-h1" data-i18n="hero.h1">Obtén las mejores<br/><em>tasas hipotecarias</em><br/>hoy</h1>
+        <p class="hero-sub" data-i18n="hero.sub">Antes de comenzar a buscar tu primera casa — déjanos ayudarte a precalificarte para tu hipoteca. Asesoría experta, aprobaciones rápidas y servicio personalizado.</p>
+        <div class="hero-actions">
+          <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">
+            <span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span>
+          </a>
+          <a class="btn btn-outline-white" href="/es/opciones-de-prestamo">
+            <span data-i18n="hero.btn.loans">Ver Opciones de Préstamo</span>
+          </a>
+        </div>
+        <div class="hero-trust">
+          <span data-i18n="hero.trust.nmls">NMLS #2572035</span>
+          <span class="hero-trust-sep">|</span>
+          <span data-i18n="hero.trust.licensed">Con Licencia en Florida</span>
+          <span class="hero-trust-sep">|</span>
+          <span data-i18n="hero.trust.rating">★★★★★ en Google</span>
+        </div>
+      </div>
+      <div class="hero-right" id="hero-calc-wrap">
+        <div class="hero-calc" id="hero-calc">
+          <div class="hero-calc-header">
+            <span class="hero-calc-icon">🏠</span>
+            <div>
+              <p class="hero-calc-title" data-i18n="calc.title">Calculadora de Hipoteca</p>
+              <p class="hero-calc-sub" data-i18n="calc.sub">Estima tu pago mensual</p>
+            </div>
+          </div>
+          <div class="hero-calc-field">
+            <label data-i18n="calc.price">Precio de la Casa</label>
+            <div class="hero-calc-input-wrap">
+              <span>$</span>
+              <input type="number" id="calc-price" value="400000" min="50000" max="5000000" step="5000" />
+            </div>
+          </div>
+          <div class="hero-calc-field">
+            <label data-i18n="calc.down">Pago Inicial (<span id="down-pct">20</span>%)</label>
+            <input type="range" id="calc-down" min="3" max="50" value="20" step="1" class="hero-calc-range" />
+          </div>
+          <div class="hero-calc-field">
+            <label data-i18n="calc.rate">Tasa de Interés</label>
+            <div class="hero-calc-input-wrap">
+              <input type="number" id="calc-rate" value="7.0" min="2" max="15" step="0.1" />
+              <span>%</span>
+            </div>
+          </div>
+          <div class="hero-calc-field">
+            <label data-i18n="calc.term">Plazo</label>
+            <select id="calc-term">
+              <option value="30">30 años</option>
+              <option value="15">15 años</option>
+              <option value="20">20 años</option>
+            </select>
+          </div>
+          <div class="hero-calc-result">
+            <span data-i18n="calc.monthly">Pago Mensual Estimado</span>
+            <strong id="calc-result">$2,314</strong>
+          </div>
+          <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;" style="width:100%;text-align:center;justify-content:center;">
+            <span data-i18n="calc.cta">Precalificarme Ahora</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOAN CARDS -->
+  <section class="section loans-section" aria-label="Loan Options">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="loans.label">Nuestros Programas</span>
+      <h2 class="section-title reveal" data-i18n="loans.title">Soluciones Hipotecarias<br /><em>para Cada Familia</em></h2>
+      <div class="loans-grid reveal" id="loans-grid"></div>
+    </div>
+  </section>
+
+  <!-- STATS BAND -->
+  <div class="stats-band reveal">
+    <div class="stats-band-inner">
+      <div class="stat-item"><span class="stat-num">500<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.families">Familias Ayudadas</span></div>
+      <div class="stat-item"><span class="stat-num">10<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.programs">Programas de Préstamo</span></div>
+      <div class="stat-item"><span class="stat-num">15<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.experience">Años de Experiencia</span></div>
+      <div class="stat-item"><span class="stat-num">5<span class="stat-star">★</span></span><span class="stat-label" data-i18n="stats.rating">Calificación en Google</span></div>
+    </div>
+  </div>
+
+  <!-- WHY US -->
+  <section class="section" aria-label="Why Choose Us">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="why.label">¿Por Qué Nosotros?</span>
+      <h2 class="section-title reveal" data-i18n="why.title">La Diferencia de Mister<br /><em>Mortgage USA</em></h2>
+      <div class="benefits-grid reveal">
+        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3 data-i18n="why.b1.title">Aprobaciones Rápidas</h3><p data-i18n="why.b1.body">La mayoría de los clientes reciben aprobación en días, no semanas. Nuestro proceso simplificado elimina los retrasos.</p></div>
+        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3 data-i18n="why.b2.title">Las Mejores Tasas</h3><p data-i18n="why.b2.body">Comparamos docenas de prestamistas para encontrarte la tasa más competitiva disponible en el mercado.</p></div>
+        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3 data-i18n="why.b3.title">Expertos Bilingües</h3><p data-i18n="why.b3.body">Nuestro equipo habla inglés y español, asegurándonos de que nunca pierdas nada en la traducción.</p></div>
+        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 data-i18n="why.b4.title">Todos los Programas</h3><p data-i18n="why.b4.body">FHA, VA, USDA, Jumbo, Convencional y más — un solo lugar para todas tus necesidades hipotecarias.</p></div>
+        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3 data-i18n="why.b5.title">20+ Años de Experiencia</h3><p data-i18n="why.b5.body">Décadas de experiencia en el mercado inmobiliario del sur de Florida. Sabemos lo que funciona aquí.</p></div>
+        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><h3 data-i18n="why.b6.title">Servicio sin Costo</h3><p data-i18n="why.b6.body">Como broker, buscamos por ti — sin costo adicional. Nos pagan los prestamistas, no tú.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS TIMELINE -->
+  <section class="section timeline-section" style="background:var(--bg-light);" aria-label="Process">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="timeline.label">Cómo Funciona</span>
+      <h2 class="section-title reveal" data-i18n="timeline.title">Tu Camino hacia la <em>Casa Propia</em></h2>
+      <p class="section-sub reveal" data-i18n="timeline.subtitle">Desde la primera llamada hasta el cierre — te guiamos en cada paso del proceso hipotecario.</p>
+      <div class="timeline reveal">
+        <div class="timeline-item"><div class="timeline-num">1</div><div class="timeline-body"><strong data-i18n="timeline.step1.title">Precalificación</strong><p data-i18n="timeline.step1.body">Evaluamos tu perfil financiero y te decimos exactamente para qué calificas — sin sorpresas.</p></div></div>
+        <div class="timeline-item"><div class="timeline-num">2</div><div class="timeline-body"><strong data-i18n="timeline.step2.title">Solicitud</strong><p data-i18n="timeline.step2.body">Envía tu solicitud con nuestro proceso guiado. Lo hacemos simple y sin estrés.</p></div></div>
+        <div class="timeline-item"><div class="timeline-num">3</div><div class="timeline-body"><strong data-i18n="timeline.step3.title">Aprobación Rápida</strong><p data-i18n="timeline.step3.body">Nuestro equipo trabaja rápido. La mayoría de los clientes recibe aprobación en días.</p></div></div>
+        <div class="timeline-item"><div class="timeline-num">4</div><div class="timeline-body"><strong data-i18n="timeline.step4.title">Día de Cierre</strong><p data-i18n="timeline.step4.body">Firma los documentos y recibe las llaves. Estaremos a tu lado hasta que seas oficialmente propietario.</p></div></div>
+      </div>
+      <div style="text-align:center;margin-top:48px;">
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="timeline.cta">Comienza Tu Camino Hoy</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- TESTIMONIALS -->
+  <section class="section testimonials-section" aria-label="Testimonials">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="testimonials.label">Lo Que Dicen Nuestros Clientes</span>
+      <h2 class="section-title reveal" data-i18n="testimonials.title">Historias Reales de <em>Propietarios Reales</em></h2>
+      <div class="testimonials-carousel reveal" id="testimonials-track"></div>
+    </div>
+  </section>
+
+  <!-- MAP -->
+  <section class="section map-section" id="map-section" aria-label="Service Area">
+    <div class="section-inner">
+      <span class="section-label reveal" data-i18n="neighborhoods.label">Área de Servicio</span>
+      <h2 class="section-title reveal" data-i18n="neighborhoods.title">Vecindarios que <em>Servimos</em></h2>
+      <p class="section-sub reveal" data-i18n="neighborhoods.subtitle">Conocemos el sur de Florida — desde condominios en Brickell hasta compradores primerizos en Homestead, tenemos un préstamo para cada vecindario.</p>
+      <div class="map-wrap reveal">
+        <div id="map" style="height:420px;border-radius:16px;"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA BAND -->
+  <div class="cta-band">
+    <div class="cta-band-bg"></div>
+    <div class="cta-band-overlay"></div>
+    <div class="cta-band-content section-inner">
+      <span class="section-label" data-i18n="cta.label">Comienza Hoy</span>
+      <h2 data-i18n="cta.title">Asegura tu Hipoteca <em>¡con Facilidad!</em></h2>
+      <p data-i18n="cta.body">Habla con un experto de Mister Mortgage USA Inc. — te ayudaremos a precalificarte y avanzar hacia la compra de tu hogar.</p>
+      <div class="cta-band-actions">
+        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span></a>
+        <a class="btn btn-outline-white" href="tel:+13056151515"><span data-i18n="cta.btn.call">Llámanos: (305) 615-1515</span></a>
+      </div>
+    </div>
+  </div>
+
+</MainLayout>
