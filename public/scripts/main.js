@@ -48,6 +48,22 @@ function initReveal() {
 window.addEventListener('load', initReveal);
 window.addEventListener('scroll', initReveal, { passive: true });
 
+// ─── GALLERY IN-VIEW ───
+(function() {
+  function initGallery() {
+    var items = document.querySelectorAll('.gallery-item');
+    if (!items.length) return;
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(e) {
+        if (e.isIntersecting) { e.target.classList.add('in-view'); observer.unobserve(e.target); }
+      });
+    }, { threshold: 0.1 });
+    items.forEach(function(el) { observer.observe(el); });
+  }
+  if (document.readyState === 'loading') window.addEventListener('load', initGallery);
+  else initGallery();
+})();
+
 // ─── CUSTOM CURSOR ───
 (function() {
   var dot = document.getElementById('cursor-dot');

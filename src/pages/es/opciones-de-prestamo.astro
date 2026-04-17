@@ -25,15 +25,16 @@ import { loans } from '../../data/loans';
     <div class="section-inner">
       <span class="section-label reveal" data-i18n="loans.grid.label">Todos los Programas</span>
       <h2 class="section-title reveal" data-i18n="loans.grid.title">Encuentra el Préstamo Correcto<br /><em>para tu Situación</em></h2>
-      <div class="loan-grid reveal" style="display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:32px;margin-top:48px;">
+      <div class="lp-grid reveal">
         {loans.map(loan => (
-          <a href={`/es/${loan.slugEs}`} class="loan-grid-card">
-            <div class="loan-grid-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" set:html={loan.icon} />
+          <a href={`/es/${loan.slugEs}`} class="lp-card">
+            <div class="lp-card-img" style={`background-image:url('${loan.heroImg.startsWith('/') ? loan.heroImg : loan.heroImg + '?w=600&q=80'}')`}></div>
+            <span class="lp-chip">{loan.chipEs}</span>
+            <div class="lp-card-body">
+              <h3>{loan.nameEs}</h3>
+              <p>{loan.descEs}</p>
+              <span class="lp-card-cta">Saber Más →</span>
             </div>
-            <h3>{loan.nameEs}</h3>
-            <p>{loan.descEs}</p>
-            <span class="loan-grid-cta" data-i18n="loans.card.cta">Saber Más →</span>
           </a>
         ))}
       </div>

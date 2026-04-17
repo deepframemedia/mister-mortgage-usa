@@ -27,137 +27,224 @@ import MainLayout from '../../layouts/MainLayout.astro';
         <p class="hero-sub" data-i18n="hero.sub">Antes de comenzar a buscar tu primera casa — déjanos ayudarte a precalificarte para tu hipoteca. Asesoría experta, aprobaciones rápidas y servicio personalizado.</p>
         <div class="hero-actions">
           <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;">
-            <span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span>
+            <span data-i18n="hero.btn.prequal">PRECALIFÍQUESE AHORA</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
           </a>
-          <a class="btn btn-outline-white" href="/es/opciones-de-prestamo">
-            <span data-i18n="hero.btn.loans">Ver Opciones de Préstamo</span>
-          </a>
+          <a class="btn btn-outline" href="/es/opciones-de-prestamo"><span data-i18n="hero.btn.explore">Ver Opciones de Préstamo</span></a>
         </div>
         <div class="hero-trust">
-          <span data-i18n="hero.trust.nmls">NMLS #2572035</span>
-          <span class="hero-trust-sep">|</span>
-          <span data-i18n="hero.trust.licensed">Con Licencia en Florida</span>
-          <span class="hero-trust-sep">|</span>
-          <span data-i18n="hero.trust.rating">★★★★★ en Google</span>
+          <div class="hero-trust-item"><div class="hero-trust-num">20+</div><div class="hero-trust-label" data-i18n="hero.trust.exp">Años de Experiencia</div></div>
+          <div class="hero-trust-item"><div class="hero-trust-num">NMLS</div><div class="hero-trust-label">#2572035</div></div>
         </div>
       </div>
-      <div class="hero-right" id="hero-calc-wrap">
-        <div class="hero-calc" id="hero-calc">
-          <div class="hero-calc-header">
-            <span class="hero-calc-icon">🏠</span>
-            <div>
-              <p class="hero-calc-title" data-i18n="calc.title">Calculadora de Hipoteca</p>
-              <p class="hero-calc-sub" data-i18n="calc.sub">Estima tu pago mensual</p>
-            </div>
-          </div>
-          <div class="hero-calc-field">
-            <label data-i18n="calc.price">Precio de la Casa</label>
-            <div class="hero-calc-input-wrap">
-              <span>$</span>
-              <input type="number" id="calc-price" value="400000" min="50000" max="5000000" step="5000" />
-            </div>
-          </div>
-          <div class="hero-calc-field">
-            <label data-i18n="calc.down">Pago Inicial (<span id="down-pct">20</span>%)</label>
-            <input type="range" id="calc-down" min="3" max="50" value="20" step="1" class="hero-calc-range" />
-          </div>
-          <div class="hero-calc-field">
-            <label data-i18n="calc.rate">Tasa de Interés</label>
-            <div class="hero-calc-input-wrap">
-              <input type="number" id="calc-rate" value="7.0" min="2" max="15" step="0.1" />
-              <span>%</span>
-            </div>
-          </div>
-          <div class="hero-calc-field">
-            <label data-i18n="calc.term">Plazo</label>
-            <select id="calc-term">
-              <option value="30">30 años</option>
-              <option value="15">15 años</option>
-              <option value="20">20 años</option>
-            </select>
-          </div>
-          <div class="hero-calc-result">
-            <span data-i18n="calc.monthly">Pago Mensual Estimado</span>
-            <strong id="calc-result">$2,314</strong>
-          </div>
-          <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;" style="width:100%;text-align:center;justify-content:center;">
-            <span data-i18n="calc.cta">Precalificarme Ahora</span>
-          </a>
+      <div class="hero-right">
+        <div class="hero-img-wrap">
+          <img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&q=80&fit=crop" alt="Casa moderna en Miami" />
+          <div class="hero-img-badge"><span>$1B+</span><span>In Loans Closed</span></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- LOAN CARDS -->
-  <section class="section loans-section" aria-label="Loan Options">
+  <!-- LOANS CAROUSEL -->
+  <section id="loans-preview" aria-label="Loan programs">
     <div class="section-inner">
-      <span class="section-label reveal" data-i18n="loans.label">Nuestros Programas</span>
-      <h2 class="section-title reveal" data-i18n="loans.title">Soluciones Hipotecarias<br /><em>para Cada Familia</em></h2>
-      <div class="loans-grid reveal" id="loans-grid"></div>
+      <div class="section-header">
+        <span class="section-label reveal" data-i18n="loans.label">Programas de Préstamo</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="loans.title">Encuentra el Préstamo <em>Correcto para Ti</em></h2>
+        <div class="red-line" style="margin:1.25rem auto;"></div>
+        <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;" data-i18n="loans.subtitle">Desde compradores primerizos hasta inversores experimentados, ofrecemos 10 programas adaptados a tu situación financiera.</p>
+      </div>
+      <div class="loans-carousel-wrap">
+        <div class="loans-carousel">
+          <div class="loans-track" id="loans-track">
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(0)"><div class="loan-card-img"><img src="/images/loans/fixed-rate.jpg" alt="Hipoteca de Tasa Fija" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.popular">Más Popular</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg></div><h3 data-i18n="loans.card.fixed.title">Hipoteca de Tasa Fija</h3><p data-i18n="loan.short.fixed">Asegura un pago constante que nunca cambia. Ideal para compradores que valoran la estabilidad.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(1)"><div class="loan-card-img"><img src="/images/loans/fha.jpg" alt="Préstamo FHA" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.lowdown">Bajo Pago Inicial</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M3 10.5L12 3l9 7.5V21H15v-6H9v6H3V10.5z"/></svg></div><h3 data-i18n="loans.card.fha.title">Préstamo FHA</h3><p data-i18n="loan.short.fha">Financiamiento respaldado por el gobierno con pagos iniciales desde 3.5%. Perfecto para puntajes de crédito moderados.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(2)"><div class="loan-card-img"><img src="/images/loans/va.jpg" alt="Préstamo VA" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.zerodown">Sin Pago Inicial</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 data-i18n="loans.card.va.title">Préstamo VA</h3><p data-i18n="loan.short.va">Beneficios exclusivos para veteranos y militares en servicio activo — sin pago inicial, sin PMI.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(3)"><div class="loan-card-img"><img src="/images/loans/usda.jpg" alt="Préstamo USDA Florida" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.zerodown">Sin Pago Inicial</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div><h3 data-i18n="loans.card.usda.title">Préstamo USDA Florida</h3><p data-i18n="loan.short.usda">Financiamiento al 100% para propiedades rurales y suburbanas elegibles. Sin pago inicial.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(4)"><div class="loan-card-img"><img src="/images/loans/jumbo.jpg" alt="Préstamos Jumbo Miami" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.luxury">Lujo</span><div class="loan-icon"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><h3 data-i18n="loans.card.jumbo.title">Préstamos Jumbo Miami</h3><p data-i18n="loan.short.jumbo">Financiamiento para propiedades de alto valor que superan los límites de préstamos convencionales.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(5)"><div class="loan-card-img"><img src="/images/loans/first-time-buyer.jpg" alt="Primer Comprador de Casa" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.ftb">Primer Comprador</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3 data-i18n="loans.card.ftb.title">Primer Comprador de Casa</h3><p data-i18n="loan.short.ftb">Orientación especializada y programas para compradores primerizos, incluyendo asistencia para el pago inicial.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(6)"><div class="loan-card-img"><img src="/images/loans/low-down-payment.jpg" alt="Bajo Pago Inicial" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.3down">Desde 3% de Entrada</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg></div><h3 data-i18n="loans.card.lowdown.title">Bajo Pago Inicial</h3><p data-i18n="loan.short.lowdown">Opciones de compra con tan solo 3% de entrada. Te ayudamos a navegar todos los programas disponibles.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(7)"><div class="loan-card-img"><img src="/images/loans/rehab-203k.jpg" alt="Préstamo Rehab 203k" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.renovate">Compra &amp; Renueva</span><div class="loan-icon"><svg viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg></div><h3 data-i18n="loans.card.rehab.title">Préstamos Rehab (203k)</h3><p data-i18n="loan.short.rehab">Financia la compra de tu casa y los costos de renovación en una sola hipoteca.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(8)"><div class="loan-card-img"><img src="/images/loans/investment.jpg" alt="Préstamos para Inversión" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.wealth">Construye Riqueza</span><div class="loan-icon"><svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><path d="M8 21h8M12 17v4"/></svg></div><h3 data-i18n="loans.card.invest.title">Préstamos para Inversión</h3><p data-i18n="loan.short.invest">Construye independencia financiera a través del mercado inmobiliario del sur de Florida.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+            <div class="loan-slide"><div class="loan-card" onclick="openLoanModal(9)"><div class="loan-card-img"><img src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=75&fit=crop" alt="Refinanciamiento de Hipoteca" loading="lazy" /></div><span class="loan-chip" data-i18n="loan.chip.rate">Baja Tu Tasa</span><div class="loan-icon"><svg viewBox="0 0 24 24"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.61"/></svg></div><h3 data-i18n="loans.card.refi.title">Refinanciamiento</h3><p data-i18n="loan.short.refi">Reduce tu pago, accede a tu capital o acorta el plazo de tu préstamo.</p><div class="loan-cta-hint"><span data-i18n="loan.cta.learn">Más información</span> <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></div></div></div>
+          </div>
+        </div>
+        <div class="carousel-nav">
+          <button class="carousel-btn" id="carousel-prev" onclick="carouselPrev()" aria-label="Anterior"><svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <div class="carousel-dots" id="carousel-dots"></div>
+          <button class="carousel-btn" id="carousel-next" onclick="carouselNext()" aria-label="Siguiente"><svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+      </div>
+      <div class="loans-cta" style="margin-top:2.5rem;">
+        <a class="btn btn-red" href="/es/opciones-de-prestamo">
+          <span data-i18n="loans.view.all">Ver las 10 Opciones de Préstamo</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
   </section>
 
-  <!-- STATS BAND -->
-  <div class="stats-band reveal">
-    <div class="stats-band-inner">
-      <div class="stat-item"><span class="stat-num">500<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.families">Familias Ayudadas</span></div>
-      <div class="stat-item"><span class="stat-num">10<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.programs">Programas de Préstamo</span></div>
-      <div class="stat-item"><span class="stat-num">15<span class="stat-plus">+</span></span><span class="stat-label" data-i18n="stats.experience">Años de Experiencia</span></div>
-      <div class="stat-item"><span class="stat-num">5<span class="stat-star">★</span></span><span class="stat-label" data-i18n="stats.rating">Calificación en Google</span></div>
+  <!-- LOAN PROCESS TIMELINE -->
+  <section id="loan-timeline" aria-label="Loan Process">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label reveal" data-i18n="timeline.label">Cómo Funciona</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="timeline.title">Tu Camino hacia la <em>Casa Propia</em></h2>
+        <div class="red-line" style="margin:1.25rem auto;"></div>
+        <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;" data-i18n="timeline.subtitle">Desde la primera llamada hasta el cierre — te guiamos en cada paso del proceso hipotecario.</p>
+      </div>
+      <div class="timeline-steps">
+        <div class="timeline-step reveal">
+          <div class="timeline-num"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
+          <span class="timeline-step-label" data-i18n="timeline.step1.label">Paso 1</span>
+          <h4 data-i18n="timeline.step1.title">Precalificación</h4>
+          <p data-i18n="timeline.step1.body">Evaluamos tu perfil financiero y te decimos exactamente para qué calificas — sin sorpresas.</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-1">
+          <div class="timeline-num"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></div>
+          <span class="timeline-step-label" data-i18n="timeline.step2.label">Paso 2</span>
+          <h4 data-i18n="timeline.step2.title">Solicitud</h4>
+          <p data-i18n="timeline.step2.body">Envía tu solicitud con nuestro proceso guiado. Lo hacemos simple y sin estrés.</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-2">
+          <div class="timeline-num"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+          <span class="timeline-step-label" data-i18n="timeline.step3.label">Paso 3</span>
+          <h4 data-i18n="timeline.step3.title">Aprobación Rápida</h4>
+          <p data-i18n="timeline.step3.body">Nuestro equipo trabaja rápido. La mayoría de los clientes recibe aprobación en días.</p>
+        </div>
+        <div class="timeline-step reveal reveal-delay-3">
+          <div class="timeline-num"><svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 10.5L12 3l9 7.5V21H15v-6H9v6H3V10.5z"/></svg></div>
+          <span class="timeline-step-label" data-i18n="timeline.step4.label">Paso 4</span>
+          <h4 data-i18n="timeline.step4.title">Día de Cierre</h4>
+          <p data-i18n="timeline.step4.body">Firma los documentos y recibe las llaves. Estaremos a tu lado hasta que seas oficialmente propietario.</p>
+        </div>
+      </div>
+      <div style="text-align:center;margin-top:3rem;">
+        <a class="btn btn-red reveal reveal-delay-4" href="#" onclick="openPrequalModal();return false;">
+          <span data-i18n="timeline.cta">Comienza Tu Camino Hoy</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:inline-block;vertical-align:middle;"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+      </div>
     </div>
+  </section>
+
+  <!-- NEIGHBORHOODS MAP -->
+  <section id="neighborhoods" aria-label="Neighborhoods We Serve">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label reveal" data-i18n="neighborhoods.label">Área de Servicio</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="neighborhoods.title">Vecindarios que <em>Servimos</em></h2>
+        <div class="red-line" style="margin:1.25rem auto;"></div>
+        <p class="section-subtitle reveal reveal-delay-2" style="margin:0 auto;" data-i18n="neighborhoods.subtitle">Conocemos el sur de Florida — desde condominios en Brickell hasta compradores primerizos en Homestead, tenemos un préstamo para cada vecindario.</p>
+      </div>
+      <div class="neighborhoods-grid reveal reveal-delay-2">
+        <div id="neighborhoods-map"></div>
+        <div class="neighborhoods-list" id="neighborhoods-list">
+          <div class="neighborhood-chip" onclick="focusNeighborhood(0)"><span class="neighborhood-chip-dot"></span><span><strong>Brickell</strong><span class="neighborhood-chip-type">Condos &amp; Inversión</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(1)"><span class="neighborhood-chip-dot"></span><span><strong>Coral Gables</strong><span class="neighborhood-chip-type">Residencial Premium</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(2)"><span class="neighborhood-chip-dot"></span><span><strong>Doral</strong><span class="neighborhood-chip-type">Primer Comprador</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(3)"><span class="neighborhood-chip-dot"></span><span><strong>Hialeah</strong><span class="neighborhood-chip-type">Programas FHA</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(4)"><span class="neighborhood-chip-dot"></span><span><strong>Kendall</strong><span class="neighborhood-chip-type">Familias Suburbanas</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(5)"><span class="neighborhood-chip-dot"></span><span><strong>Coconut Grove</strong><span class="neighborhood-chip-type">Propiedades de Lujo</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(6)"><span class="neighborhood-chip-dot"></span><span><strong>Aventura</strong><span class="neighborhood-chip-type">Condos &amp; Inversión</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(7)"><span class="neighborhood-chip-dot"></span><span><strong>Miami Beach</strong><span class="neighborhood-chip-type">Lujo e Internacional</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(8)"><span class="neighborhood-chip-dot"></span><span><strong>Homestead</strong><span class="neighborhood-chip-type">USDA &amp; FHA</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(9)"><span class="neighborhood-chip-dot"></span><span><strong>Pinecrest</strong><span class="neighborhood-chip-type">Casas de Alto Valor</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(10)"><span class="neighborhood-chip-dot"></span><span><strong>Westchester</strong><span class="neighborhood-chip-type">FHA &amp; Familias</span></span></div>
+          <div class="neighborhood-chip" onclick="focusNeighborhood(11)"><span class="neighborhood-chip-dot"></span><span><strong>South Miami</strong><span class="neighborhood-chip-type">Residencial Mixto</span></span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider"></div>
+
+  <!-- ABOUT SNIPPET -->
+  <section id="about-snippet" aria-label="About us">
+    <div class="about-grid">
+      <div class="about-img-wrap reveal">
+        <img src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=1000&q=80&fit=crop" alt="Consulta hipotecaria profesional" />
+        <div class="about-img-badge"><strong>20+</strong><span>Años de Confianza</span></div>
+      </div>
+      <div class="about-copy">
+        <span class="section-label reveal" data-i18n="about.label">Sobre Nosotros</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="about.title">Hacemos de tu sueño de casa propia <em>nuestra prioridad</em></h2>
+        <div class="red-line reveal reveal-delay-2"></div>
+        <p class="reveal reveal-delay-2" data-i18n="about.p1">Con más de 20 años de experiencia, Mister Mortgage USA Inc. se ha establecido como un destacado prestamista hipotecario, sirviendo las necesidades de financiamiento de agentes inmobiliarios, constructores y compradores individuales.</p>
+        <p class="reveal reveal-delay-3" data-i18n="about.p2">Nuestro equipo está comprometido a brindar servicio personalizado, tasas competitivas y aprobaciones rápidas — porque entendemos que comprar una casa no es solo una transacción, es un hito en la vida.</p>
+        <div class="about-pillars reveal reveal-delay-3">
+          <div class="about-pillar"><strong data-i18n="about.pillar1.title">Servicio Personalizado</strong><span data-i18n="about.pillar1.body">Cada cliente tiene un oficial de préstamo dedicado</span></div>
+          <div class="about-pillar"><strong data-i18n="about.pillar2.title">Aprobaciones Rápidas</strong><span data-i18n="about.pillar2.body">Proceso simplificado, decisiones rápidas</span></div>
+          <div class="about-pillar"><strong data-i18n="about.pillar3.title">Tasas Competitivas</strong><span data-i18n="about.pillar3.body">Las mejores tasas para tu situación única</span></div>
+          <div class="about-pillar"><strong data-i18n="about.pillar4.title">Confianza &amp; Transparencia</strong><span data-i18n="about.pillar4.body">Orientación honesta en cada paso</span></div>
+        </div>
+        <a class="btn btn-red reveal reveal-delay-4" href="/es/sobre-nosotros" data-i18n="about.btn">Conoce Más Sobre Nosotros</a>
+      </div>
+    </div>
+  </section>
+
+  <div class="section-divider-wave"></div>
+
+  <!-- SCROLL GALLERY -->
+  <section id="scroll-gallery" aria-label="Galería de propiedades en Miami">
+    <div class="section-inner">
+      <div class="section-header">
+        <span class="section-label" data-i18n="gallery.label">Nuestro Portafolio</span>
+        <h2 class="section-title" data-i18n="gallery.title">Propiedades en <em>Miami</em></h2>
+        <div class="red-line" style="margin:1.25rem auto;"></div>
+        <p class="section-sub" data-i18n="gallery.sub">Desde condominios de lujo frente al mar hasta casas familiares — los financiamos todos.</p>
+      </div>
+      <div class="gallery-grid" id="gallery-grid">
+        <div class="gallery-item gallery-tall" data-index="0"><img src="https://images.unsplash.com/photo-1533395427226-788cee25cc7b?w=900&q=80" alt="Casa de lujo en Miami" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+        <div class="gallery-item" data-index="1"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80" alt="Residencia moderna en Miami" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+        <div class="gallery-item" data-index="2"><img src="https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=80" alt="Propiedad frente al agua en Miami" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+        <div class="gallery-item gallery-tall" data-index="3"><img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?w=900&q=80" alt="Condo en Brickell Miami" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+        <div class="gallery-item" data-index="4"><img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?w=900&q=80" alt="Casa suburbana en Miami" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+        <div class="gallery-item" data-index="5"><img src="https://images.unsplash.com/photo-1416331108676-a22ccb276e35?w=900&q=80" alt="Casa en Coral Gables" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+        <div class="gallery-item" data-index="6"><img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?w=900&q=80" alt="Propiedad en Miami Beach" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+        <div class="gallery-item" data-index="7"><img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=900&q=80" alt="Mansión de lujo en el sur de Florida" loading="lazy"><div class="gallery-item-overlay"><svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/><line x1="11" y1="8" x2="11" y2="14"/><line x1="8" y1="11" x2="14" y2="11"/></svg></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- GALLERY LIGHTBOX -->
+  <div class="gallery-lightbox" id="gallery-lightbox" role="dialog" aria-modal="true" aria-label="Visor de imágenes">
+    <button class="gallery-lb-btn gallery-lb-close" id="gallery-lb-close" aria-label="Cerrar"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></button>
+    <button class="gallery-lb-btn gallery-lb-prev" id="gallery-lb-prev" aria-label="Anterior"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+    <img id="gallery-lb-img" src="" alt="Imagen de galería">
+    <button class="gallery-lb-btn gallery-lb-next" id="gallery-lb-next" aria-label="Siguiente"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+    <div class="gallery-lb-counter" id="gallery-lb-counter"></div>
   </div>
 
-  <!-- WHY US -->
-  <section class="section" aria-label="Why Choose Us">
-    <div class="section-inner">
-      <span class="section-label reveal" data-i18n="why.label">¿Por Qué Nosotros?</span>
-      <h2 class="section-title reveal" data-i18n="why.title">La Diferencia de Mister<br /><em>Mortgage USA</em></h2>
-      <div class="benefits-grid reveal">
-        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></div><h3 data-i18n="why.b1.title">Aprobaciones Rápidas</h3><p data-i18n="why.b1.body">La mayoría de los clientes reciben aprobación en días, no semanas. Nuestro proceso simplificado elimina los retrasos.</p></div>
-        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg></div><h3 data-i18n="why.b2.title">Las Mejores Tasas</h3><p data-i18n="why.b2.body">Comparamos docenas de prestamistas para encontrarte la tasa más competitiva disponible en el mercado.</p></div>
-        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg></div><h3 data-i18n="why.b3.title">Expertos Bilingües</h3><p data-i18n="why.b3.body">Nuestro equipo habla inglés y español, asegurándonos de que nunca pierdas nada en la traducción.</p></div>
-        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div><h3 data-i18n="why.b4.title">Todos los Programas</h3><p data-i18n="why.b4.body">FHA, VA, USDA, Jumbo, Convencional y más — un solo lugar para todas tus necesidades hipotecarias.</p></div>
-        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div><h3 data-i18n="why.b5.title">20+ Años de Experiencia</h3><p data-i18n="why.b5.body">Décadas de experiencia en el mercado inmobiliario del sur de Florida. Sabemos lo que funciona aquí.</p></div>
-        <div class="benefit-card"><div class="benefit-icon"><svg viewBox="0 0 24 24"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg></div><h3 data-i18n="why.b6.title">Servicio sin Costo</h3><p data-i18n="why.b6.body">Como broker, buscamos por ti — sin costo adicional. Nos pagan los prestamistas, no tú.</p></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- PROCESS TIMELINE -->
-  <section class="section timeline-section" style="background:var(--bg-light);" aria-label="Process">
-    <div class="section-inner">
-      <span class="section-label reveal" data-i18n="timeline.label">Cómo Funciona</span>
-      <h2 class="section-title reveal" data-i18n="timeline.title">Tu Camino hacia la <em>Casa Propia</em></h2>
-      <p class="section-sub reveal" data-i18n="timeline.subtitle">Desde la primera llamada hasta el cierre — te guiamos en cada paso del proceso hipotecario.</p>
-      <div class="timeline reveal">
-        <div class="timeline-item"><div class="timeline-num">1</div><div class="timeline-body"><strong data-i18n="timeline.step1.title">Precalificación</strong><p data-i18n="timeline.step1.body">Evaluamos tu perfil financiero y te decimos exactamente para qué calificas — sin sorpresas.</p></div></div>
-        <div class="timeline-item"><div class="timeline-num">2</div><div class="timeline-body"><strong data-i18n="timeline.step2.title">Solicitud</strong><p data-i18n="timeline.step2.body">Envía tu solicitud con nuestro proceso guiado. Lo hacemos simple y sin estrés.</p></div></div>
-        <div class="timeline-item"><div class="timeline-num">3</div><div class="timeline-body"><strong data-i18n="timeline.step3.title">Aprobación Rápida</strong><p data-i18n="timeline.step3.body">Nuestro equipo trabaja rápido. La mayoría de los clientes recibe aprobación en días.</p></div></div>
-        <div class="timeline-item"><div class="timeline-num">4</div><div class="timeline-body"><strong data-i18n="timeline.step4.title">Día de Cierre</strong><p data-i18n="timeline.step4.body">Firma los documentos y recibe las llaves. Estaremos a tu lado hasta que seas oficialmente propietario.</p></div></div>
-      </div>
-      <div style="text-align:center;margin-top:48px;">
-        <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="timeline.cta">Comienza Tu Camino Hoy</span></a>
-      </div>
-    </div>
-  </section>
-
   <!-- TESTIMONIALS -->
-  <section class="section testimonials-section" aria-label="Testimonials">
+  <section id="testimonials" aria-label="Testimonios de clientes">
     <div class="section-inner">
-      <span class="section-label reveal" data-i18n="testimonials.label">Lo Que Dicen Nuestros Clientes</span>
-      <h2 class="section-title reveal" data-i18n="testimonials.title">Historias Reales de <em>Propietarios Reales</em></h2>
-      <div class="testimonials-carousel reveal" id="testimonials-track"></div>
-    </div>
-  </section>
-
-  <!-- MAP -->
-  <section class="section map-section" id="map-section" aria-label="Service Area">
-    <div class="section-inner">
-      <span class="section-label reveal" data-i18n="neighborhoods.label">Área de Servicio</span>
-      <h2 class="section-title reveal" data-i18n="neighborhoods.title">Vecindarios que <em>Servimos</em></h2>
-      <p class="section-sub reveal" data-i18n="neighborhoods.subtitle">Conocemos el sur de Florida — desde condominios en Brickell hasta compradores primerizos en Homestead, tenemos un préstamo para cada vecindario.</p>
-      <div class="map-wrap reveal">
-        <div id="map" style="height:420px;border-radius:16px;"></div>
+      <div class="section-header">
+        <span class="section-label reveal" data-i18n="testimonials.label">Testimonios</span>
+        <h2 class="section-title reveal reveal-delay-1" data-i18n="testimonials.title">Lo Que Están <em>Diciendo</em></h2>
+        <div class="red-line" style="margin:1.25rem auto;"></div>
+      </div>
+      <div class="testimonials-carousel-wrap reveal reveal-delay-2">
+        <button class="testimonials-arrow testimonials-prev" onclick="testimonialsPrev()" aria-label="Testimonio anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+        <div class="testimonials-carousel-viewport">
+          <div class="testimonials-track" id="testimonials-track">
+            <div class="testimonial-card"><div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p data-i18n="testimonials.t1.body">"El personal es amable, accesible y siempre dispuesto a ayudarte según tus necesidades específicas."</p><div class="testimonial-author"><div class="testimonial-avatar">S</div><div class="testimonial-author-info"><strong>Samantha A.</strong><span data-i18n="testimonials.t1.role">Compradora Feliz</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p data-i18n="testimonials.t2.body">"¡El servicio fue excelente! Su profesionalismo y actitud amable hicieron la experiencia fluida y agradable."</p><div class="testimonial-author"><div class="testimonial-avatar">A</div><div class="testimonial-author-info"><strong>Andrea Valles</strong><span data-i18n="testimonials.t2.role">Inversora Satisfecha</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p data-i18n="testimonials.t3.body">"El personal es absolutamente maravilloso — amable, paciente y siempre listo para ayudar. ¡Muy recomendado!"</p><div class="testimonial-author"><div class="testimonial-avatar">E</div><div class="testimonial-author-info"><strong>Ernesto S. Cachan</strong><span data-i18n="testimonials.t3.role">Vendedor Encantado</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p data-i18n="testimonials.t4.body">"Me guiaron en cada paso y todo el proceso fue claro y sin estrés. ¡No puedo creer que finalmente soy propietaria!"</p><div class="testimonial-author"><div class="testimonial-avatar">M</div><div class="testimonial-author-info"><strong>Maria Rodriguez</strong><span data-i18n="testimonials.t4.role">Primera Compradora</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p data-i18n="testimonials.t5.body">"Me encontraron una mejor tasa y ahora estoy ahorrando cientos de dólares al mes. ¡Un servicio verdaderamente excepcional!"</p><div class="testimonial-author"><div class="testimonial-avatar">C</div><div class="testimonial-author-info"><strong>Carlos Mendez</strong><span data-i18n="testimonials.t5.role">Cliente de Refinanciamiento</span></div></div></div>
+            <div class="testimonial-card"><div class="testimonial-stars"><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg><svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><p data-i18n="testimonials.t6.body">"Mister Mortgage USA nos ayudó a obtener aprobación para un préstamo FHA cuando pensábamos que no era posible. ¡Ahora somos orgullosos propietarios!"</p><div class="testimonial-author"><div class="testimonial-avatar">J</div><div class="testimonial-author-info"><strong>Jessica Torres</strong><span data-i18n="testimonials.t6.role">Cliente de Préstamo FHA</span></div></div></div>
+          </div>
+        </div>
+        <button class="testimonials-arrow testimonials-next" onclick="testimonialsNext()" aria-label="Siguiente testimonio"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      </div>
+      <div class="testimonials-footer">
+        <div class="testimonials-dots" id="testimonials-dots"></div>
+        <a href="https://search.google.com/local/writereview?placeid=PLACEHOLDER" target="_blank" rel="noopener" class="google-review-btn">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+          <span data-i18n="testimonials.reviewBtn">Dejar una Reseña en Google</span>
+        </a>
       </div>
     </div>
   </section>
@@ -172,9 +259,73 @@ import MainLayout from '../../layouts/MainLayout.astro';
       <p data-i18n="cta.body">Habla con un experto de Mister Mortgage USA Inc. — te ayudaremos a precalificarte y avanzar hacia la compra de tu hogar.</p>
       <div class="cta-band-actions">
         <a class="btn btn-red" href="#" onclick="openPrequalModal();return false;"><span data-i18n="nav.cta">PRECALIFÍQUESE AHORA</span></a>
-        <a class="btn btn-outline-white" href="tel:+13056151515"><span data-i18n="cta.btn.call">Llámanos: (305) 615-1515</span></a>
+        <a class="btn btn-outline-white" href="/es/contactenos"><span data-i18n="cta.btn.contact">Contáctenos</span></a>
       </div>
     </div>
   </div>
+
+  <script is:inline>
+(function() {
+  var neighborhoods = [
+    { name: 'Brickell',      lat: 25.7617, lng: -80.1918, type: 'Condos & Inversión' },
+    { name: 'Coral Gables',  lat: 25.7215, lng: -80.2684, type: 'Residencial Premium' },
+    { name: 'Doral',         lat: 25.8195, lng: -80.3418, type: 'Primer Comprador' },
+    { name: 'Hialeah',       lat: 25.8576, lng: -80.2781, type: 'Programas FHA' },
+    { name: 'Kendall',       lat: 25.6795, lng: -80.3569, type: 'Familias Suburbanas' },
+    { name: 'Coconut Grove', lat: 25.7269, lng: -80.2397, type: 'Propiedades de Lujo' },
+    { name: 'Aventura',      lat: 25.9565, lng: -80.1393, type: 'Condos & Inversión' },
+    { name: 'Miami Beach',   lat: 25.7907, lng: -80.1300, type: 'Lujo e Internacional' },
+    { name: 'Homestead',     lat: 25.4687, lng: -80.4776, type: 'USDA & FHA' },
+    { name: 'Pinecrest',     lat: 25.6650, lng: -80.3046, type: 'Casas de Alto Valor' },
+    { name: 'Westchester',   lat: 25.7465, lng: -80.3310, type: 'FHA & Familias' },
+    { name: 'South Miami',   lat: 25.7050, lng: -80.2916, type: 'Residencial Mixto' }
+  ];
+
+  var mapInstance, markers = [];
+
+  function initMap() {
+    if (typeof L === 'undefined' || !document.getElementById('neighborhoods-map')) return;
+    if (mapInstance) return;
+
+    mapInstance = L.map('neighborhoods-map', { scrollWheelZoom: false }).setView([25.7617, -80.2918], 11);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+      maxZoom: 18
+    }).addTo(mapInstance);
+
+    var icon = L.divIcon({
+      className: '',
+      html: '<div style="width:14px;height:14px;background:#D72A31;border:2px solid #fff;border-radius:50%;box-shadow:0 2px 6px rgba(0,0,0,.4);"></div>',
+      iconSize: [14, 14],
+      iconAnchor: [7, 7],
+      popupAnchor: [0, -10]
+    });
+
+    neighborhoods.forEach(function(n, i) {
+      var m = L.marker([n.lat, n.lng], { icon: icon })
+        .addTo(mapInstance)
+        .bindPopup('<strong>' + n.name + '</strong><br><span style="font-size:.8rem;color:#888;">' + n.type + '</span>');
+      markers.push(m);
+    });
+  }
+
+  window.focusNeighborhood = function(idx) {
+    if (!mapInstance) return;
+    var n = neighborhoods[idx];
+    mapInstance.setView([n.lat, n.lng], 14, { animate: true });
+    markers[idx].openPopup();
+    document.querySelectorAll('.neighborhood-chip').forEach(function(c, i) {
+      c.classList.toggle('active', i === idx);
+    });
+  };
+
+  if (document.readyState === 'loading') {
+    window.addEventListener('load', initMap);
+  } else {
+    initMap();
+  }
+})();
+</script>
 
 </MainLayout>

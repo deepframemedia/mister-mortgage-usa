@@ -42,7 +42,7 @@ var I18N = {
     'footer.link.govdisc': 'Government Disclosure',
     'footer.link.complaint': 'Customer Complaint Policy',
     'footer.link.ada':     'ADA Accessibility',
-    'footer.copyright':    '© 2025 Mister Mortgage USA Inc. All rights reserved. NMLS #2572035 | 6030 Bird Rd, Miami, FL 33155 | (305) 615-1515',
+    'footer.copyright':    '© 2026 Mister Mortgage USA Inc. All rights reserved. NMLS #2572035 | 6030 Bird Rd, Miami, FL 33155 | (305) 615-1515',
     'footer.eho':          'Equal Housing Opportunity',
     /* ---- SHARED CTA BAND ---- */
     'cta.label':       'Start Today',
@@ -697,7 +697,7 @@ var I18N = {
     'footer.link.govdisc': 'Divulgación Gubernamental',
     'footer.link.complaint': 'Política de Quejas',
     'footer.link.ada':     'Accesibilidad ADA',
-    'footer.copyright':    '© 2025 Mister Mortgage USA Inc. Todos los derechos reservados. NMLS #2572035 | 6030 Bird Rd, Miami, FL 33155 | (305) 615-1515',
+    'footer.copyright':    '© 2026 Mister Mortgage USA Inc. Todos los derechos reservados. NMLS #2572035 | 6030 Bird Rd, Miami, FL 33155 | (305) 615-1515',
     'footer.eho':          'Igualdad de Oportunidades de Vivienda',
     /* ---- SHARED CTA BAND ---- */
     'cta.label':       'Empieza Hoy',
@@ -1372,16 +1372,32 @@ var I18N = {
   function toggleLang() {
     var btn = document.getElementById('lang-toggle');
     var current = (btn && btn.getAttribute('data-current-lang')) || getSavedLang();
-    applyLang(current === 'en' ? 'es' : 'en');
+    var newLang = current === 'en' ? 'es' : 'en';
+
+    /* Try to navigate to the alternate-language page */
+    var altLink = document.querySelector('link[rel="alternate"][hreflang="' + newLang + '"]');
+    if (altLink) {
+      var href = altLink.getAttribute('href');
+      try { var u = new URL(href); href = u.pathname; } catch(e) {}
+      if (href && href !== window.location.pathname) {
+        try { localStorage.setItem(STORAGE_KEY, newLang); } catch(e) {}
+        window.location.href = href;
+        return;
+      }
+    }
+    /* Fallback: translate in place (for pages without an alternate URL) */
+    applyLang(newLang);
   }
 
   function getSavedLang() {
+    /* Page lang attribute always wins — Astro SSR already decided the language */
+    var htmlLang = document.documentElement.lang;
+    if (htmlLang && I18N[htmlLang]) return htmlLang;
     try {
       var stored = localStorage.getItem(STORAGE_KEY);
       if (stored && I18N[stored]) return stored;
     } catch (e) {}
-    var htmlLang = document.documentElement.lang;
-    return (htmlLang && I18N[htmlLang]) ? htmlLang : DEFAULT_LANG;
+    return DEFAULT_LANG;
   }
 
   /* Expose globally */
