@@ -1075,8 +1075,10 @@ body.has-ticker .contact-ticker { position: fixed; top: 0; left: 0; right: 0; z-
 
   .section-header .red-line { margin-left: 0; }
   .about-copy .red-line { margin-left: 0; }
+  #loan-timeline .red-line { display: none; }
 
   .timeline-num { margin-left: 0; margin-right: auto; }
+  .timeline-step p { max-width: none; margin: 0; }
 
   .team-info { align-items: flex-start; }
   .team-contact { justify-content: flex-start; }
