@@ -600,6 +600,89 @@ window.addEventListener('load', initCarousel);
   document.addEventListener('i18nApplied', run);
 })();
 
+// ─── WHATSAPP CHAT WIDGET ───
+(function() {
+  var WA_NUMBER = '13052141515';
+
+  var PAGE_MESSAGES = {
+    en: {
+      default:     'Hi! I found you online and would like to learn more about your mortgage services at Mister Mortgage USA.',
+      contact:     'Hi! I\'m reaching out from your Contact page. I\'d like to know more about my mortgage options.',
+      prequal:     'Hi! I\'d like to get pre-qualified for a mortgage at Mister Mortgage USA.',
+      'fixed-rate':     'Hi! I\'m interested in a Fixed Rate Mortgage. Can you help me?',
+      'fha':             'Hi! I\'m interested in an FHA Home Loan. Can you tell me more?',
+      'low-down':        'Hi! I\'m interested in Low Down Payment mortgage options.',
+      'rehab':           'Hi! I\'m interested in a Rehab / 203k Loan. Can you help me?',
+      'usda':            'Hi! I\'m interested in a USDA Loan in Florida.',
+      'jumbo':           'Hi! I\'m interested in Jumbo Loan options in Miami.',
+      'va':              'Hi! I\'m interested in a VA Home Loan.',
+      'first-time':      'Hi! I\'m a first-time homebuyer and would like guidance on my mortgage options.',
+      'investment':      'Hi! I\'m interested in Investment Property Loans.',
+      'refinance':       'Hi! I\'m interested in refinancing my current mortgage.',
+    },
+    es: {
+      default:     '¡Hola! Los encontré en línea y me gustaría saber más sobre sus servicios hipotecarios en Mister Mortgage USA.',
+      contact:     '¡Hola! Me comunico desde su página de Contacto. Me gustaría conocer mis opciones hipotecarias.',
+      prequal:     '¡Hola! Me gustaría pre-calificarme para una hipoteca en Mister Mortgage USA.',
+    }
+  };
+
+  function getContextMessage() {
+    var path = window.location.pathname;
+    var lang = path.startsWith('/es') ? 'es' : 'en';
+    var msgs = PAGE_MESSAGES[lang];
+    var msg = msgs.default;
+    if (/contact/i.test(path))        msg = msgs.contact;
+    else if (/fixed-rate/i.test(path)) msg = msgs['fixed-rate'];
+    else if (/fha/i.test(path))        msg = msgs['fha'];
+    else if (/low-down/i.test(path))   msg = msgs['low-down'];
+    else if (/rehab|203k/i.test(path)) msg = msgs['rehab'];
+    else if (/usda/i.test(path))       msg = msgs['usda'];
+    else if (/jumbo/i.test(path))      msg = msgs['jumbo'];
+    else if (/\bva\b/i.test(path))     msg = msgs['va'];
+    else if (/first-time|primer/i.test(path)) msg = msgs['first-time'];
+    else if (/investment|inversion/i.test(path)) msg = msgs['investment'];
+    else if (/refinanc/i.test(path))   msg = msgs['refinance'];
+    return msg;
+  }
+
+  function initWaWidget() {
+    var btn    = document.getElementById('wa-chat-btn');
+    var popup  = document.getElementById('wa-chat-popup');
+    var closeB = document.getElementById('wa-chat-close');
+    var input  = document.getElementById('wa-chat-input');
+    var send   = document.getElementById('wa-chat-send');
+    if (!btn || !popup) return;
+
+    input.value = getContextMessage();
+
+    btn.addEventListener('click', function() {
+      popup.classList.toggle('open');
+      if (popup.classList.contains('open')) input.focus();
+    });
+    closeB.addEventListener('click', function() { popup.classList.remove('open'); });
+
+    function sendMessage() {
+      var text = input.value.trim() || getContextMessage();
+      var url = 'https://wa.me/' + WA_NUMBER + '?text=' + encodeURIComponent(text);
+      window.open(url, '_blank', 'noopener');
+    }
+
+    send.addEventListener('click', sendMessage);
+    input.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+    });
+
+    document.addEventListener('click', function(e) {
+      var widget = document.getElementById('wa-chat-widget');
+      if (widget && !widget.contains(e.target)) popup.classList.remove('open');
+    });
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', initWaWidget);
+  else initWaWidget();
+})();
+
 // ─── TICKER DUPLICATE FOR SEAMLESS LOOP ───
 (function() {
   function initTicker() {

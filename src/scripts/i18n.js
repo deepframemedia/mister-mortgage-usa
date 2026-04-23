@@ -27,6 +27,7 @@ var I18N = {
     'loan.invest':     'Investment Property',
     'loan.refi':       'Refinance',
     /* ---- FOOTER ---- */
+    'footer.review':   'Leave us a Google Review',
     'footer.tagline':  'The key to our success is to consistently offer the lowest possible price and, above all, to provide excellent customer service. We pride ourselves on treating our customers with honesty and integrity.',
     'footer.col.loans':    'Loan Options',
     'footer.col.company':  'Company',
@@ -254,7 +255,7 @@ var I18N = {
     'contact.wa.label':      'WhatsApp',
     'contact.wa.link':       'Chat with us on WhatsApp',
     'contact.hours.label':   'Business Hours',
-    'contact.hours.body':    'Monday – Friday: 9:00 AM – 6:00 PM<br/>Saturday: 10:00 AM – 3:00 PM<br/>Sunday: By appointment',
+    'contact.hours.body':    'Monday – Friday: 9:00 AM – 6:00 PM<br/>Saturday – Sunday: By appointment only',
     'contact.license.label': 'License',
     'contact.cta.label':     'Fast-Track Your Approval',
     'contact.cta.title':     'Start Your Pre-Qualification <em>in Minutes</em>',
@@ -682,6 +683,7 @@ var I18N = {
     'loan.invest':     'Propiedad de Inversión',
     'loan.refi':       'Refinanciamiento',
     /* ---- FOOTER ---- */
+    'footer.review':   'Déjanos una Reseña en Google',
     'footer.tagline':  'La clave de nuestro éxito es ofrecer siempre el precio más bajo posible y, sobre todo, brindar un excelente servicio al cliente. Nos enorgullece tratar a nuestros clientes con honestidad e integridad.',
     'footer.col.loans':    'Opciones de Préstamo',
     'footer.col.company':  'Empresa',
@@ -912,7 +914,7 @@ var I18N = {
     'contact.wa.label':      'WhatsApp',
     'contact.wa.link':       'Chatear por WhatsApp',
     'contact.hours.label':   'Horario de Atención',
-    'contact.hours.body':    'Lunes – Viernes: 9:00 AM – 6:00 PM<br/>Sábado: 10:00 AM – 3:00 PM<br/>Domingo: Con cita previa',
+    'contact.hours.body':    'Lunes – Viernes: 9:00 AM – 6:00 PM<br/>Sábado – Domingo: Solo con cita previa',
     'contact.license.label': 'Licencia',
     'contact.cta.label':     'Aprobación Rápida',
     'contact.cta.title':     'Inicia Tu Precalificación <em>en Minutos</em>',
