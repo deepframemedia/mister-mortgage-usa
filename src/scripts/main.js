@@ -656,11 +656,28 @@ window.addEventListener('load', initCarousel);
 
     input.value = getContextMessage();
 
+    function openPopup() {
+      popup.style.display = 'block';
+      requestAnimationFrame(function() {
+        requestAnimationFrame(function() {
+          popup.classList.add('open');
+          input.focus();
+        });
+      });
+    }
+    function closePopup() {
+      popup.classList.remove('open');
+      popup.addEventListener('transitionend', function hide() {
+        popup.style.display = 'none';
+        popup.removeEventListener('transitionend', hide);
+      });
+    }
+
     btn.addEventListener('click', function() {
-      popup.classList.toggle('open');
-      if (popup.classList.contains('open')) input.focus();
+      if (popup.classList.contains('open')) closePopup();
+      else openPopup();
     });
-    closeB.addEventListener('click', function() { popup.classList.remove('open'); });
+    closeB.addEventListener('click', closePopup);
 
     function sendMessage() {
       var text = input.value.trim() || getContextMessage();
@@ -675,7 +692,7 @@ window.addEventListener('load', initCarousel);
 
     document.addEventListener('click', function(e) {
       var widget = document.getElementById('wa-chat-widget');
-      if (widget && !widget.contains(e.target)) popup.classList.remove('open');
+      if (widget && !widget.contains(e.target) && popup.classList.contains('open')) closePopup();
     });
   }
 

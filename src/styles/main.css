@@ -210,7 +210,7 @@ body.has-ticker #navbar { top: 36px; }
 
 /* ── WHATSAPP CHAT WIDGET ── */
 .wa-chat-widget { position: fixed; bottom: 2rem; right: 2rem; z-index: 9000; display: flex; flex-direction: column; align-items: flex-end; gap: .75rem; }
-.wa-chat-popup { background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.18); width: 320px; overflow: hidden; transform-origin: bottom right; transform: scale(0.85); opacity: 0; pointer-events: none; transition: transform .25s cubic-bezier(.34,1.56,.64,1), opacity .2s; }
+.wa-chat-popup { display: none; background: #fff; border-radius: 16px; box-shadow: 0 8px 40px rgba(0,0,0,.18); width: 320px; overflow: hidden; transform-origin: bottom right; transform: scale(0.85); opacity: 0; pointer-events: none; transition: transform .25s cubic-bezier(.34,1.56,.64,1), opacity .2s; }
 .wa-chat-popup.open { transform: scale(1); opacity: 1; pointer-events: all; }
 .wa-chat-header { background: #075E54; padding: 1rem 1.1rem; display: flex; align-items: center; gap: .75rem; }
 .wa-chat-avatar { width: 42px; height: 42px; border-radius: 50%; overflow: hidden; flex-shrink: 0; background: #fff; display: flex; align-items: center; justify-content: center; }
