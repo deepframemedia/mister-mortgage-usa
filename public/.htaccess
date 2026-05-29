@@ -65,6 +65,17 @@ DirectoryIndex index.html
   RewriteRule ^wp-content/(.*)$   /                [R=301,L]
 </IfModule>
 
+# ── CLEAN URLS: servir /pagina desde pagina.html (Astro build.format:'file') ──
+# MultiViews está desactivado arriba, así que esta regla es la que hace que las
+# URLs limpias resuelvan. El check del archivo .html va PRIMERO, de modo que
+# /es sirve es.html aunque también exista la carpeta es/.
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME}\.html -f
+  RewriteRule ^(.+?)/?$ /$1.html [L]
+</IfModule>
+
 # ── CACHING ───────────────────────────────────────────────────────────────────
 <IfModule mod_expires.c>
   ExpiresActive On

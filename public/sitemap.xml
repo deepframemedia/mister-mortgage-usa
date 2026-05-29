@@ -1,107 +1,249 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
+  <!-- ── English ───────────────────────────────────────────────────────── -->
   <url>
     <loc>https://mistermortgageusa.com/</loc>
-    <lastmod>2025-06-01</lastmod>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/loan-options.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/loan-options</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/fixed-rate-mortgage-miami.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/fixed-rate-mortgage-miami</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/fha-home-loan-miami.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/fha-home-loan-miami</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/low-down-payment-mortgage.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/va-home-loan-miami</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/rehab-loan-203k.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/usda-loan-florida</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/usda-loan-florida.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/jumbo-loans-miami</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/jumbo-loans-miami.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/low-down-payment-mortgage</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/va-home-loan-miami.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/first-time-homebuyer-miami</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/first-time-homebuyer-miami.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/investment-property-loans-miami</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/investment-property-loans-miami.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/mortgage-refinance-miami</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/mortgage-refinance-miami.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/rehab-loan-203k</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.85</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/about-us.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/about-us</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/our-team</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/our-team.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/contact-us</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/privacy-policy</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/cookie-policy</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/government-disclosure</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/customer-complaint-policy</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/ada-accessibility</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.4</priority>
+  </url>
+
+  <!-- ── Español ───────────────────────────────────────────────────────── -->
+  <url>
+    <loc>https://mistermortgageusa.com/es</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/opciones-de-prestamo</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/hipoteca-tasa-fija-miami</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/prestamo-fha-miami</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/prestamo-va-miami</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/prestamo-usda-florida</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/prestamos-jumbo-miami</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/hipoteca-bajo-enganche</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/primer-comprador-miami</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/prestamos-propiedad-inversion</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/refinanciar-hipoteca-miami</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/prestamo-rehabilitacion-203k</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.85</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/sobre-nosotros</loc>
+    <lastmod>2026-05-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.75</priority>
+  </url>
+
+  <url>
+    <loc>https://mistermortgageusa.com/es/nuestro-equipo</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
   <url>
-    <loc>https://mistermortgageusa.com/contact-us.html</loc>
-    <lastmod>2025-06-01</lastmod>
+    <loc>https://mistermortgageusa.com/es/contactenos</loc>
+    <lastmod>2026-05-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
