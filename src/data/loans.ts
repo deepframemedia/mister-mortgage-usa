@@ -484,7 +484,7 @@ export const loans: Loan[] = [
     descEs:  'Reduce tu tasa, baja tu pago o accede al capital de tu hogar con un refinanciamiento.',
     chip:    'Lower Your Rate',
     chipEs:  'Reduce Tu Tasa',
-    heroImg: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f',
+    heroImg: '/images/properties/photo-1554224155-6726b3ff858f.jpg',
     heroBody:   "Lower your rate, reduce your payment, or access your home's equity. We find the best refinance option for your goals.",
     heroBodyEs: 'Reduce tu tasa, baja tu pago o accede al capital de tu hogar. Encontramos la mejor opción de refinanciamiento para tus metas.',
     detailLabel:   'Optimize Your Mortgage',
