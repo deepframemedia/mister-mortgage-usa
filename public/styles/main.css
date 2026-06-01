@@ -30,7 +30,7 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; font-size: 16px; }
+html { scroll-behavior: smooth; scroll-padding-top: 160px; font-size: 16px; }
 body { font-family: 'Poppins', sans-serif; color: var(--text); background: var(--white); overflow-x: hidden; cursor: none; }
 body.menu-open { overflow: hidden; }
 img { max-width: 100%; height: auto; display: block; }
@@ -77,6 +77,11 @@ body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: var(--
 .reveal-delay-2 { transition-delay: .2s; }
 .reveal-delay-3 { transition-delay: .3s; }
 .reveal-delay-4 { transition-delay: .4s; }
+/* Progressive enhancement: sin JS, nada queda invisible (no depende del scroll). */
+.no-js .reveal,
+.no-js .gallery-item,
+.no-js .parallax-slide,
+.no-js .hero-bg .hero-slide { opacity: 1 !important; transform: none !important; }
 
 /* NAVBAR */
 #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.1rem 0; transition: box-shadow .4s, padding .4s, top .4s; background: #fff; box-shadow: 0 1px 8px rgba(0,38,84,.08); }
@@ -200,7 +205,7 @@ body.has-ticker #navbar { top: 36px; }
 .nav-mega-wrap:hover .nav-dropdown-arrow { transform: rotate(180deg); }
 
 /* ── WHATSAPP BUTTON ── */
-.whatsapp-btn { width: 60px; height: 60px; background: #25D366; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,.45); transition: transform .25s, box-shadow .25s; cursor: pointer; text-decoration: none; flex-shrink: 0; }
+.whatsapp-btn { position: fixed; bottom: 2rem; right: 2rem; z-index: 9000; width: 60px; height: 60px; background: #25D366; border: none; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 6px 24px rgba(37,211,102,.45); transition: transform .25s, box-shadow .25s; cursor: pointer; text-decoration: none; flex-shrink: 0; }
 .whatsapp-btn:hover { transform: scale(1.12); box-shadow: 0 10px 32px rgba(37,211,102,.6); }
 .whatsapp-btn svg { width: 30px; height: 30px; fill: #fff; }
 .wa-chat-widget .whatsapp-btn::before { content: 'Chat with us!'; position: absolute; right: 72px; background: var(--navy); color: #fff; font-size: .78rem; font-weight: 600; padding: .4rem .9rem; border-radius: 6px; white-space: nowrap; opacity: 0; pointer-events: none; transition: opacity .2s; font-family: 'Poppins', sans-serif; }

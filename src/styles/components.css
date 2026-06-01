@@ -33,7 +33,7 @@
 
 /* CTA BAND */
 .cta-band { position: relative; padding: 8rem 0; text-align: center; overflow: hidden; }
-.cta-band-bg { position: absolute; inset: 0; background: url('https://images.unsplash.com/photo-1560185127-6a7b527e7b8f?w=1600&q=80') center/cover no-repeat; }
+.cta-band-bg { position: absolute; inset: 0; background: url('/images/properties/cta-band.jpg') center/cover no-repeat; }
 .cta-band-overlay { position: absolute; inset: 0; background: linear-gradient(135deg, rgba(0,22,60,.92) 0%, rgba(0,38,84,.85) 100%); }
 .cta-band-content { position: relative; z-index: 1; }
 .cta-band-content .section-label { color: #ff3333; }

@@ -3,6 +3,7 @@
 
 Options -Indexes -MultiViews
 DirectoryIndex index.html
+DirectorySlash Off
 
 # ── HTTPS redirect ────────────────────────────────────────────────────────────
 <IfModule mod_rewrite.c>
@@ -32,28 +33,13 @@ DirectoryIndex index.html
 </IfModule>
 
 # ── LEGACY .html → CLEAN URL REDIRECTS (301) ─────────────────────────────────
+# REDIRECT_STATUS check prevents loop: only fire on direct external requests,
+# not on internal rewrites from the clean-URL rule below.
 <IfModule mod_rewrite.c>
   RewriteEngine On
-  RewriteRule ^index\.html$                        /                                      [R=301,L]
-  RewriteRule ^loan-options\.html$                 /loan-options                          [R=301,L]
-  RewriteRule ^about-us\.html$                     /about-us                              [R=301,L]
-  RewriteRule ^our-team\.html$                     /our-team                              [R=301,L]
-  RewriteRule ^contact-us\.html$                   /contact-us                            [R=301,L]
-  RewriteRule ^fha-home-loan-miami\.html$          /fha-home-loan-miami                   [R=301,L]
-  RewriteRule ^va-home-loan-miami\.html$           /va-home-loan-miami                    [R=301,L]
-  RewriteRule ^usda-loan-florida\.html$            /usda-loan-florida                     [R=301,L]
-  RewriteRule ^jumbo-loans-miami\.html$            /jumbo-loans-miami                     [R=301,L]
-  RewriteRule ^fixed-rate-mortgage-miami\.html$    /fixed-rate-mortgage-miami             [R=301,L]
-  RewriteRule ^first-time-homebuyer-miami\.html$   /first-time-homebuyer-miami            [R=301,L]
-  RewriteRule ^investment-property-loans-miami\.html$ /investment-property-loans-miami   [R=301,L]
-  RewriteRule ^low-down-payment-mortgage\.html$    /low-down-payment-mortgage             [R=301,L]
-  RewriteRule ^mortgage-refinance-miami\.html$     /mortgage-refinance-miami              [R=301,L]
-  RewriteRule ^rehab-loan-203k\.html$              /rehab-loan-203k                       [R=301,L]
-  RewriteRule ^privacy-policy\.html$               /privacy-policy                        [R=301,L]
-  RewriteRule ^cookie-policy\.html$                /cookie-policy                         [R=301,L]
-  RewriteRule ^ada-accessibility\.html$            /ada-accessibility                     [R=301,L]
-  RewriteRule ^customer-complaint-policy\.html$    /customer-complaint-policy             [R=301,L]
-  RewriteRule ^government-disclosure\.html$        /government-disclosure                 [R=301,L]
+  RewriteRule ^index\.html$ / [R=301,L]
+  RewriteCond %{ENV:REDIRECT_STATUS} ^$
+  RewriteRule ^(.+)\.html$ /$1 [R=301,L]
 </IfModule>
 
 # ── WORDPRESS LEGACY REDIRECT (if old WP URLs still get traffic) ──────────────

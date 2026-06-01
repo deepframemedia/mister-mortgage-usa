@@ -16,7 +16,7 @@ const {
   description,
   lang = 'en',
   canonical,
-  ogImage = 'https://mistermortgageusa.com/wp-content/uploads/2025/05/PNG-02.webp',
+  ogImage = 'https://mistermortgageusa.com/images/logo-color.png',
   altLang,
   hasTicker = true,
 } = Astro.props;
@@ -28,8 +28,9 @@ const selfLang     = lang === 'en' ? 'en' : 'es';
 const otherLang    = lang === 'en' ? 'es' : 'en';
 ---
 <!DOCTYPE html>
-<html lang={lang}>
+<html lang={lang} class="no-js">
 <head>
+  <script is:inline>document.documentElement.classList.remove('no-js')</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="description" content={description} />
@@ -73,6 +74,20 @@ const otherLang    = lang === 'en' ? 'es' : 'en';
   <script is:inline src="/scripts/i18n.js"></script>
   <script is:inline src="/scripts/main.js"></script>
   <script is:inline src="/scripts/nav.js"></script>
+
+  <!-- Red de seguridad: si el reveal JS no llegó a correr, mostrar el contenido
+       igualmente (las imágenes/secciones nunca quedan invisibles por el scroll). -->
+  <script is:inline>
+    window.addEventListener('load', function () {
+      setTimeout(function () {
+        if (window.__revealReady) return; // main.js corrió bien → animación normal
+        document.querySelectorAll('.reveal').forEach(function (e) { e.classList.add('visible'); });
+        document.querySelectorAll('.gallery-item').forEach(function (e) { e.classList.add('in-view'); });
+        var slide = document.querySelector('.hero-bg .hero-slide'); if (slide) slide.classList.add('active');
+        document.querySelectorAll('.parallax-slide')[0] && document.querySelectorAll('.parallax-slide')[0].classList.add('active');
+      }, 2500);
+    });
+  </script>
 
   <slot name="scripts" />
 </body>
