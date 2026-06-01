@@ -77,6 +77,11 @@ body.cursor-hover #cursor-ring { width: 52px; height: 52px; border-color: var(--
 .reveal-delay-2 { transition-delay: .2s; }
 .reveal-delay-3 { transition-delay: .3s; }
 .reveal-delay-4 { transition-delay: .4s; }
+/* Progressive enhancement: sin JS, nada queda invisible (no depende del scroll). */
+.no-js .reveal,
+.no-js .gallery-item,
+.no-js .parallax-slide,
+.no-js .hero-bg .hero-slide { opacity: 1 !important; transform: none !important; }
 
 /* NAVBAR */
 #navbar { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 1.1rem 0; transition: box-shadow .4s, padding .4s, top .4s; background: #fff; box-shadow: 0 1px 8px rgba(0,38,84,.08); }

@@ -35,6 +35,7 @@ if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
 
 // ─── SCROLL REVEAL ───
 function initReveal() {
+  window.__revealReady = true; // señal para la red de seguridad (Base.astro)
   var reveals = document.querySelectorAll('.reveal');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
