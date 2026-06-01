@@ -34,16 +34,26 @@ function closeMobileMenu() {
 if (mobileClose) mobileClose.addEventListener('click', closeMobileMenu);
 
 // ─── SCROLL REVEAL ───
+// Revela .reveal (visible), .gallery-item (in-view) y .parallax-slide (active)
+// al entrar en viewport. Antes la galería y el parallax no tenían trigger y
+// quedaban en opacity:0 (las fotos no salían).
 function initReveal() {
   window.__revealReady = true; // señal para la red de seguridad (Base.astro)
-  var reveals = document.querySelectorAll('.reveal');
+  var targets = document.querySelectorAll('.reveal, .gallery-item, .parallax-slide');
   var observer = new IntersectionObserver(function(entries) {
     entries.forEach(function(e) {
-      if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');   // .reveal
+        e.target.classList.add('in-view');   // .gallery-item
+        e.target.classList.add('active');    // .parallax-slide
+        observer.unobserve(e.target);
+      }
     });
   }, { threshold: 0.1 });
-  reveals.forEach(function(el) {
-    if (!el.classList.contains('visible')) observer.observe(el);
+  targets.forEach(function(el) {
+    if (!el.classList.contains('visible') && !el.classList.contains('in-view') && !el.classList.contains('active')) {
+      observer.observe(el);
+    }
   });
 }
 window.addEventListener('load', initReveal);

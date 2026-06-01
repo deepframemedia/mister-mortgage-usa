@@ -1,0 +1,40 @@
+name: Deploy to IONOS
+
+# Despliega automáticamente a producción (IONOS webspace) en cada push a master.
+# Netlify ya auto-despliega del mismo push, así que ambos quedan en sync.
+on:
+  push:
+    branches: [master]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-ionos
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build
+
+      - name: Subir dist/ a IONOS por SFTP
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          lftp -c "
+            set sftp:auto-confirm yes;
+            set net:timeout 20;
+            set net:max-retries 3;
+            set mirror:parallel-transfer-count 4;
+            open -u '${{ secrets.IONOS_SFTP_USER }}','${{ secrets.IONOS_SFTP_PASS }}' sftp://${{ secrets.IONOS_SFTP_HOST }};
+            mirror -R --verbose --only-newer dist/ /;
+          "
+        # Nota: sin --delete para no tocar carpetas de sistema de IONOS
+        # (clickandbuilds, *_LOCK, logs, .opcache).
