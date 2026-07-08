@@ -5,6 +5,11 @@ Options -Indexes -MultiViews
 DirectoryIndex index.html
 DirectorySlash Off
 
+# Astro builds directory-format pages (about-us/index.html) but uses
+# trailingSlash:'never' for links/canonicals. Disable Apache's automatic
+# /about-us → /about-us/ redirect and serve the index internally instead.
+DirectorySlash Off
+
 # ── HTTPS redirect ────────────────────────────────────────────────────────────
 <IfModule mod_rewrite.c>
   RewriteEngine On
@@ -16,6 +21,11 @@ DirectorySlash Off
   # Force non-www (adjust if client prefers www)
   RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
   RewriteRule ^ https://%1%{REQUEST_URI} [L,R=301]
+
+  # Serve directory index for clean URLs without a trailing-slash redirect
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteCond %{REQUEST_FILENAME}/index.html -f
+  RewriteRule ^(.*)$ /$1/index.html [L]
 </IfModule>
 
 # ── SECURITY HEADERS ──────────────────────────────────────────────────────────
